@@ -1,0 +1,12 @@
+.container
+  %input{type: "text", id: "location"}
+  %button{id: "submit"} "Submit"
+
+#map-canvas
+
+%p=link_to "Signup", '#', remote: true, class: "btn btn-primary", id: "signup-link"
+%p=link_to "Login", '#', remote: true, class: "btn btn-primary", id:"login-link"
+
+=render partial:"shared/signupmodal", locals: {user: @user}
+=render partial:"shared/loginmodal", locals: {user: @user}
+=render partial:"shared/error"

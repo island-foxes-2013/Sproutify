@@ -1,0 +1,15 @@
+.modal.fade#signup-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+        %h4.modal-title Create an account
+      
+      =simple_form_for user do |f|
+        .modal-body
+          =f.input :first_name
+          =f.input :last_name
+          =f.input :email
+          =f.input :password
+        .modal-footer
+          =f.button :submit
