@@ -11,11 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130816005702) do
+ActiveRecord::Schema.define(:version => 20130816013853) do
 
-  create_table "users", :force => true do |t|
+  create_table "geocodes", :force => true do |t|
+    t.integer  "user_id"
+    t.decimal  "lat"
+    t.decimal  "lng"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "password_digest"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
 end
