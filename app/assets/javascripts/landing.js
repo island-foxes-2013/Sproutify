@@ -1,10 +1,24 @@
-///////////////////
-// DOCUMENT READY
-$(function() {
-  $('#location').val(geoplugin_city());
-  var landingManager = new LandingManager();
-});
+function Marker(map, lat, lng) {
+  var self = this;
+  var latLng = new google.maps.LatLng(lat,lng);
+  var map = map;
 
+  function initialize(map, latLng) {
+    self.placeMarker(map, latLng);
+  }
+  initialize(map, latLng);
+}
+
+Marker.prototype = {
+  placeMarker: function(map, latLng) {
+    var map = map;
+    var marker = new google.maps.Marker({
+        map: map,
+        position: latLng,
+        title: "Dev Bootcamp"
+    });
+  }
+}
 
 ////////////////////
 // LANDING MANAGER
@@ -61,5 +75,13 @@ Map.prototype = {
     var info_window = new google.maps.InfoWindow({
       content: "placeholder"
     });
+    var marker = new Marker(map, 37.794152, -122.406195);;
   }
 }
+
+///////////////////
+// DOCUMENT READY
+$(function() {
+  $('#location').val(geoplugin_city());
+  var landingManager = new LandingManager();
+});
