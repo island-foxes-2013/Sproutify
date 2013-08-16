@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :crop do
-    name "MyString"
+    name "Corn"
   end
 end

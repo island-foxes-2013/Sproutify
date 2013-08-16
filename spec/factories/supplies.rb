@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :supply do
-    references ""
-    references ""
-    references ""
+    user nil
+    crop nil
+    status nil
   end
 end
