@@ -38,6 +38,8 @@
         1,
         1,
         1,
+        1,
+        1,
         null
       ],
       "/Users/colepilegard/Dev Bootcamp/sproutify/app/models/demand.rb": [
@@ -77,6 +79,6 @@
         null
       ]
     },
-    "timestamp": 1376679870
+    "timestamp": 1376680033
   }
 }

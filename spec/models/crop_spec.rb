@@ -3,6 +3,8 @@ require 'spec_helper'
 describe Crop do
   
   it {should respond_to(:name)}
+  it {should respond_to(:supplies)}
+  it {should respond_to(:demands)}
 
   let(:crop) {Crop.new}
   let(:crop2) {Crop.new}
