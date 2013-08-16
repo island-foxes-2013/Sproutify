@@ -1,16 +1,16 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/apprentice/Desktop/Sproutify/app/controllers/application_controller.rb": [
+      "/Users/colepilegard/Dev Bootcamp/sproutify/app/controllers/application_controller.rb": [
         1,
         1,
         null
       ],
-      "/Users/apprentice/Desktop/Sproutify/app/helpers/application_helper.rb": [
+      "/Users/colepilegard/Dev Bootcamp/sproutify/app/helpers/application_helper.rb": [
         1,
         null
       ],
-      "/Users/apprentice/Desktop/Sproutify/app/controllers/geocodes_controller.rb": [
+      "/Users/colepilegard/Dev Bootcamp/sproutify/app/controllers/geocodes_controller.rb": [
         1,
         null,
         1,
@@ -19,13 +19,13 @@
         null,
         null
       ],
-      "/Users/apprentice/Desktop/Sproutify/app/models/geocode.rb": [
+      "/Users/colepilegard/Dev Bootcamp/sproutify/app/models/geocode.rb": [
         1,
         1,
         1,
         null
       ],
-      "/Users/apprentice/Desktop/Sproutify/app/controllers/home_controller.rb": [
+      "/Users/colepilegard/Dev Bootcamp/sproutify/app/controllers/home_controller.rb": [
         1,
         null,
         1,
@@ -33,7 +33,7 @@
         null,
         null
       ],
-      "/Users/apprentice/Desktop/Sproutify/app/models/user.rb": [
+      "/Users/colepilegard/Dev Bootcamp/sproutify/app/models/user.rb": [
         1,
         null,
         1,
@@ -44,6 +44,6 @@
         null
       ]
     },
-    "timestamp": 1376623554
+    "timestamp": 1376667736
   }
 }
