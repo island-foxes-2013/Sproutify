@@ -7,6 +7,7 @@ describe User do
   it {should respond_to(:password_digest)}
   it {should respond_to(:password)}
   it {should have_one(:geocode)}
+  it {should respond_to(:geocode)}
 
   let(:user) {User.new(first_name: "Chuck", last_name: "Norris", email: "chuck@texas.com", password: "ilovebeards")}
   let(:baduser) {User.new}

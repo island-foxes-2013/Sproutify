@@ -35,7 +35,7 @@ group :development, :test do
   gem 'guard'
   gem 'guard-rspec'
   # gem 'capybara-webkit', '~> 1.0.0'
-  # gem 'selenium-webdriver'
+  gem 'selenium-webdriver'
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'shoulda-matchers'
@@ -43,6 +43,9 @@ group :development, :test do
   gem 'launchy'
   gem 'simplecov', require: false
 end
+
+gem 'sunspot_rails'
+gem 'sunspot_solr'
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
