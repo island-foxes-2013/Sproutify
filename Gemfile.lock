@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/thomas-mcdonald/bootstrap-sass.git
+  revision: 5bf533b803e92042c846dbf80faa4411951bb890
+  branch: 3
+  specs:
+    bootstrap-sass (3.0.0.0)
+      sass (~> 3.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -190,6 +198,7 @@ DEPENDENCIES
   annotate
   awesome_print
   bcrypt-ruby (~> 3.0.0)
+  bootstrap-sass!
   capybara
   coffee-rails (~> 3.2.1)
   database_cleaner
