@@ -1,11 +1,10 @@
-.modal.fade
+.modal.fade#modal_template
   .modal-dialog
     .modal-content
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-        %h4.modal-title Modal title
+        %h4.modal-title 
       .modal-body
-        %p One fine body…
+        %p
       .modal-footer
-        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
-        %button.btn.btn-primary{:type => "button"} Save changes
+        %button.btn.btn-primary{:type => "button"}
