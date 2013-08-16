@@ -6,22 +6,18 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by_email(params[:user][:email])
+    @user = User.find_by_email(params[:session][:email])
     if @user
-      @authenticated_user = @user.authenticate(params[:user][:password])
+      @authenticated_user = @user.authenticate(params[:session][:password])
       if @authenticated_user
         self.current_user = @authenticated_user
-        redirect_to root_path
+        render "home/main"
       else
-        flash.now[:error] = "Invalid email/password combo"
-        render :new
+        render json: {session: params[:session], error: "Invalid password"}
       end
     else
-      @user = User.new(params[:user])
-      flash.now[:error] = "Can't find that email!"
-      render :new
-    end
-    
+      render json: {session: params[:session], error: "Invalid email"}
+    end  
   end
 
   def destroy

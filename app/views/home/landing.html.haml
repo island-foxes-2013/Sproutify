@@ -1,2 +1,6 @@
-%p=link_to "Signup", new_user_path, class: "btn btn-primary", id: "signup-link"
-%p=link_to "Login", new_session_path, class: "btn btn-primary", id:"login-link"
+%p=link_to "Signup", '#', remote: true, class: "btn btn-primary", id: "signup-link"
+%p=link_to "Login", '#', remote: true, class: "btn btn-primary", id:"login-link"
+
+=render partial:"shared/signupmodal", locals: {user: @user}
+=render partial:"shared/loginmodal", locals: {user: @user}
+=render partial:"shared/error"
