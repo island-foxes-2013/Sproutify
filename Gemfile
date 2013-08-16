@@ -33,7 +33,7 @@ group :development, :test do
   gem 'guard'
   gem 'guard-rspec'
   # gem 'capybara-webkit', '~> 1.0.0'
-  # gem 'selenium-webdriver'
+  gem 'selenium-webdriver'
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'shoulda-matchers'
