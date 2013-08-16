@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       render landing_path
     else
       self.current_user = @user
-      redirect_to home_path
+      render home_path
     end
   end
 
