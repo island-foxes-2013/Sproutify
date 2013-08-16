@@ -1,15 +1,35 @@
-function Geocoder(input) {
+///////////////////
+// DOCUMENT READY
+$(function() {
+  $('#location').val(geoplugin_city());
+  var landingManager = new LandingManager();
+});
+
+
+////////////////////
+// LANDING MANAGER
+function LandingManager() {
+  $('#submit').on('click', function(event) {
+    event.preventDefault();
+    var user_location = $("#location").val();
+    var geocoder_obj = new Geocoder(user_location);
+  });
+}
+
+/////////////
+// GEOCODER
+function Geocoder(user_location) {
   var self = this;
   var geocoder = new google.maps.Geocoder();
-  function initialize(geocoder, input) {
-    self.fetch(geocoder, input);
+  function initialize(geocoder, user_location) {
+    self.fetch(geocoder, user_location);
   }
-  initialize(geocoder, input);
+  initialize(geocoder, user_location);
 }
 
 Geocoder.prototype = {
-  fetch: function(geocoder, input) {
-    geocoder.geocode({'address': input}, function(results, status) {
+  fetch: function(geocoder, user_location) {
+    geocoder.geocode({'address': user_location}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         var lat = results[0].geometry.location.lat();
         var lng = results[0].geometry.location.lng();
@@ -19,6 +39,8 @@ Geocoder.prototype = {
   }
 }
 
+////////
+// MAP
 function Map(lat, lng) {
   var self = this;
   function initialize(lat, lng) {
@@ -41,15 +63,3 @@ Map.prototype = {
     });
   }
 }
-
-function LandingManager() {
-  $('#submit').on('click', function(event) {
-    event.preventDefault();
-    var input = $("#location").val();
-    var geocoder_obj = new Geocoder(input);
-  });
-}
-
-$(function() {
-  var landingManager = new LandingManager();
-});
