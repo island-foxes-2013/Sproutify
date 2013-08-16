@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :demand do
-    references ""
-    references ""
+    user nil
+    crop nil
   end
 end

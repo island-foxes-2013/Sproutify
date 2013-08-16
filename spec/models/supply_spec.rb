@@ -28,7 +28,7 @@ describe Supply do
         supply.save.should eq false
       end
 
-      it "should only allow duplicate entries" do
+      it "should not allow duplicate entries" do
         supply.user = user
         supply.crop = crop
         supply.status = status
