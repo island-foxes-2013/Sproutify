@@ -9,10 +9,10 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     @user.save
     if @user.errors.any?
-      render landing_path
+      render "home/landing"
     else
       self.current_user = @user
-      render home_path
+      render "home/main"
     end
   end
 

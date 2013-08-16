@@ -1,10 +1,10 @@
-class SessionsController < ApplicationController
+class HomeController < ApplicationController
 
   def index
     if logged_in?
-      render :main
+      render "home/main"
     else
-      render :landing
+      render "home/landing"
     end
   end
 
