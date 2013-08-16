@@ -20,4 +20,5 @@ function bindEvents(){
     }
     
   });
-}
+
+});
