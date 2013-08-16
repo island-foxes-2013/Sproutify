@@ -1,7 +1,17 @@
 %h1 What produce do you have available?
 
-.container
-  %input{type: "text", class: "add-supplies"}
-  %button{class: "btn btn-primary"} "Add Crop"
+/ .container
+/   %input{type: "text", class: "add-supplies"}
+/   %button{class: "btn btn-primary"} "Add Crop"
+
+/ %br
+/ %br
+
+%form{action: 'supplies/create', method: 'POST', remote:true}
+	%label{for: 'crop_name'} Crop:
+	%input{type: 'text', name: 'crop_name'}
+	%label{for: 'status'} Status:
+	%input{type: 'text', name: 'status'}
+	%input{type: 'submit', class: 'submit-button'}
 
 .user-supplies

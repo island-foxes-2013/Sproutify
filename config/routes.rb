@@ -4,6 +4,8 @@ Sproutify::Application.routes.draw do
 
   match 'main' => 'home#main'
 
+  match 'supplies/create' => 'supplies#create'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

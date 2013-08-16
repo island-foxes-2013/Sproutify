@@ -8,7 +8,13 @@ $(function() {
 	  var crop_name = $('.add-supplies').val();
 		console.log(crop_name);
 		$('.user-supplies').append(crop_name);
-  });	
+  });
+
+  $('.submit-button').on('ajax:success', function(e, data){
+  	e.preventDefault();
+  	console.log(data);
+  	// $('.user-supplies').append()
+  });
 });
 
 // $('.comment_form').on('ajax:success', function(e, data){
@@ -17,14 +23,3 @@ $(function() {
 // 	$(this).parent().find('.comment_append').last().append('<hr />');
 // 	$('.comment_form textarea').val('');
 // });
-
-
-
-
-// USER
-
-// CROP
-
-// SUPPLY
-
-// STATUS
