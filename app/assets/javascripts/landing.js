@@ -1,3 +1,5 @@
+//////////
+// MARKER
 function Marker(map, lat, lng) {
   var self = this;
   var latLng = new google.maps.LatLng(lat,lng);
@@ -20,38 +22,32 @@ Marker.prototype = {
   }
 }
 
-////////////////////
-// LANDING MANAGER
-function LandingManager() {
-  $('#submit').on('click', function(event) {
-    event.preventDefault();
-    var user_location = $("#location").val();
-    var geocoder_obj = new Geocoder(user_location);
-  });
-}
-
-/////////////
-// GEOCODER
-function Geocoder(user_location) {
+////////////////
+//GARDENERCODER
+function GardenerCoder(lat, lng) {
+  var lat = lat;
+  var lng = lng;
   var self = this;
-  var geocoder = new google.maps.Geocoder();
-  function initialize(geocoder, user_location) {
-    self.fetch(geocoder, user_location);
+  var matches = [];
+
+  function initialize(lat, lng) {
+    self.fetch(lat, lng);
   }
-  initialize(geocoder, user_location);
+  initialize(lat, lng);
 }
 
-Geocoder.prototype = {
-  fetch: function(geocoder, user_location) {
-    geocoder.geocode({'address': user_location}, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-        var lat = results[0].geometry.location.lat();
-        var lng = results[0].geometry.location.lng();
-        var map = new Map(lat, lng);
-      }
+GardenerCoder.prototype = {
+  fetch: function(lat, lng) {
+    //Some code that turns lat, lng into sunspot-accepting data
+    $.ajax({
+      url: '/fetch',
+      type: 'get'
+    }).done(function(response) {
+      console.log(response);
     });
   }
 }
+
 
 ////////
 // MAP
@@ -77,6 +73,40 @@ Map.prototype = {
     });
     var marker = new Marker(map, 37.794152, -122.406195);;
   }
+}
+
+/////////////
+// GEOCODER
+function Geocoder(user_location) {
+  var self = this;
+  var geocoder = new google.maps.Geocoder();
+  function initialize(geocoder, user_location) {
+    self.fetch(geocoder, user_location);
+  }
+  initialize(geocoder, user_location);
+}
+
+Geocoder.prototype = {
+  fetch: function(geocoder, user_location) {
+    geocoder.geocode({'address': user_location}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        var lat = results[0].geometry.location.lat();
+        var lng = results[0].geometry.location.lng();
+        var map = new Map(lat, lng);
+        var gardenerCoder = new GardenerCoder(lat, lng);
+      }
+    });
+  }
+}
+
+////////////////////
+// LANDING MANAGER
+function LandingManager() {
+  $('#submit').on('click', function(event) {
+    event.preventDefault();
+    var user_location = $("#location").val();
+    var geocoder_obj = new Geocoder(user_location);
+  });
 }
 
 ///////////////////

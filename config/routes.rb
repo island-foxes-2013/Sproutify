@@ -2,6 +2,7 @@ Sproutify::Application.routes.draw do
 
   root :to => 'home#index'
 
+  get 'fetch', to: 'home#fetch'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
