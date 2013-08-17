@@ -28,10 +28,10 @@ function getLocalInfo(location) {
   }).done(function(result) {
     $('#hidden_lat').attr("value", location.lat);
     $('#hidden_lng').attr("value", location.lng);
-    $('.container').append("<p>There are "+ result.count +" gardeners in your area!</p>")
-    $('.container').append("<ul>These are some crops available in your area!</ul>")
-    for (var i in result.crops_available) {
-      $('.container ul').append("<li>"+ result.crops_available[i] +"</li>")
+    $('.container').append("<p>There are "+ result.user_count +" gardeners in your area!</p>")
+    $('.container').append("<ul>In your area,</ul>")
+    for (var i = 0; i < 5; i++) {
+      $('.container ul').append("<li>"+ result.crops_available[i].count+ " people have " + result.crops_available[i].name.toLowerCase() +" available!</li>")
     }
     
   });
