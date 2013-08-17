@@ -1,9 +1,7 @@
 .container
-  =simple_form_for :landing do |f|
-    =f.text_field(:location, id:'location')
-    =f.button :submit, "Submit", id: "submit"
-  / %input{type: "text", id: "location"}
-  / %button.btn.btn-primary#submit "Submit"
+  =form_for :landing, html:{role: "form"} do |f|
+    .form-group=f.text_field(:location, placeholder: "Your Location", class: "form-control", id:'location')
+    =f.submit "Submit", class: "btn btn-primary", id: "submit"
 
 
 %p=link_to "Signup", '#', remote: true, class: "btn btn-primary signup-link"
@@ -11,3 +9,5 @@
 
 =render partial:"shared/signupmodal", locals: {user: @user}
 =render partial:"shared/loginmodal", locals: {user: @user}
+
+

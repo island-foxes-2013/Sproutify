@@ -1,18 +1,20 @@
 Sproutify::Application.routes.draw do
 
   root :to => 'home#index'
+
   resources :users, :only => [:new, :create] do
+    resources :supplies, :only => [:index, :create, :destroy]
     resources :demands, only: [:index]
   end
 
-  resources :sessions, only: [:new, :create, :destroy]
-
+  resources :supplies, :only => [:index, :create, :destroy]
   resources :demands, only: [:create, :index, :destroy]
 
-  # resources :demands, only: 
+
+  resources :sessions, only: [:new, :create, :destroy]
+
 
   get 'fetch', to: 'home#fetch'
-  match 'main' => 'home#main'
-  match 'supplies/create' => 'supplies#create' 
+
 
 end

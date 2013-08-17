@@ -1,11 +1,24 @@
-html, body, #map-canvas {
+html, body {
   width: 100%;
   height: 100%;
   padding: 0px;
 }
 
-#map-canvas {
-  height: 500px;
-  width: 100%;
-  margin: 20px auto;
+#signup-modal, #login-modal{
+  .modal-dialog{
+    width: 300px;
+  }
+  .modal-content{
+    width: 300px;
+
+    .modal-header{
+      border-bottom: none;
+      padding-bottom: 0px;
+    }
+    .modal-footer{
+      border-top: none;
+      margin-top: 0px;
+      padding-top: 0px;
+    }
+  }
 }
