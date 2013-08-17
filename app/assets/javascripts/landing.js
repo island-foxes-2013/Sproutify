@@ -1,49 +1,64 @@
-//////////
-// MARKER
-function Marker(map, lat, lng) {
-  var self = this;
-  var latLng = new google.maps.LatLng(lat,lng);
-  var map = map;
-
-  function initialize(map, latLng) {
-    self.placeMarker(map, latLng);
-  }
-  initialize(map, latLng);
+function Garden(gardenAttributes) {
+  this.attrs = gardenAttributes;
+  this.attrs.demandedCrops = gardenAttributes.demanded_crops.map(function(k, crop){
+    return new Crop(crop);
+  })
+  this.attrs.suppliedCrops = gardenAttributes.demanded_crops.map(function(k, crop){
+    return new Crop(crop);
+  })
 }
 
-Marker.prototype = {
-  placeMarker: function(map, latLng) {
-    var map = map;
+Garden.prototype.lat = function() {
+  this.attrs.latitude
+}
+
+Garden.prototype.lng = function() {
+  this.attrs.longitude
+}
+
+Garden.prototype.demandedCrops = function() {
+  this.attrs.demandedCrops;
+}
+
+function Crop(cropAttributes) {
+  this.attrs = cropAttributes;
+}
+
+//////////
+// MARKER
+function GardenMarker(map, garden) {
+  this.map = map;
+  this.garden = garden;
+  this.place(map, garden.lat, garden.lng)
+}
+
+GardenMarker.prototype = {
+  place: function(map, lat, lng) {
+    var latLng = new google.maps.LatLng(lat,lng);
     var marker = new google.maps.Marker({
         map: map,
         position: latLng,
-        title: "Dev Bootcamp"
+        title: this.garden.title
     });
   }
 }
 
 ////////////////
 //GARDENERCODER
-function GardenerCoder(lat, lng) {
-  var lat = lat;
-  var lng = lng;
-  var self = this;
-  var matches = [];
-
-  function initialize(lat, lng) {
-    self.fetch(lat, lng);
-  }
-  initialize(lat, lng);
+function GardenSearcher() {
 }
 
-GardenerCoder.prototype = {
-  fetch: function(lat, lng) {
+GardenSearcher.prototype = {
+  fetch: function(lat, lng, successCallback, failureCallback) {
     //Some code that turns lat, lng into sunspot-accepting data
     $.ajax({
       url: '/fetch',
       type: 'get'
-    }).done(function(response) {
-      console.log(response);
+    }).done(function(gardens) {
+      gardens = $.map(gardens, function(k, garden){
+        return new Garden(garden);
+      });
+      successCallback(gardens);
     });
   }
 }
@@ -51,49 +66,50 @@ GardenerCoder.prototype = {
 
 ////////
 // MAP
-function Map(lat, lng) {
-  var self = this;
-  function initialize(lat, lng) {
-    self.generate(lat, lng);
-  }
-  initialize(lat, lng);
+function Map(element, lat, lng) {
+  this.element = element;
+  this.lat = lat;
+  this.lng = lng;
+  this.markers = [];
+  this.generate();
 }
 
 Map.prototype = {
-  generate: function(lat, lng) {
-    var latLng = new google.maps.LatLng(lat, lng);
+  generate: function() {
+    var latLng = new google.maps.LatLng(this.lat, this.lng);
     var mapOptions = {
       zoom: 12,
       center: latLng,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     }
-    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-    var info_window = new google.maps.InfoWindow({
+    this.map = new google.maps.Map(element, mapOptions);
+    this.info_window = new google.maps.InfoWindow({
       content: "placeholder"
     });
-    var marker = new Marker(map, 37.794152, -122.406195);;
+  }
+  placeGarden: function(garden) {
+    var gardenMarker = new GardenMarker(this.map, garden)
+    this.markers.push(gardenMarker);
   }
 }
 
 /////////////
 // GEOCODER
-function Geocoder(user_location) {
-  var self = this;
-  var geocoder = new google.maps.Geocoder();
-  function initialize(geocoder, user_location) {
-    self.fetch(geocoder, user_location);
-  }
-  initialize(geocoder, user_location);
+function Geocoder() {
+  this.geocoder = new google.maps.Geocoder();
 }
 
 Geocoder.prototype = {
-  fetch: function(geocoder, user_location) {
-    geocoder.geocode({'address': user_location}, function(results, status) {
+  fetch: function(user_location, successCallback, failureCallback) {
+    this.geocoder.geocode({'address': user_location}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         var lat = results[0].geometry.location.lat();
         var lng = results[0].geometry.location.lng();
-        var map = new Map(lat, lng);
-        var gardenerCoder = new GardenerCoder(lat, lng);
+        successCallback(lat, lng);
+      } else {
+        if (failureCallback) {
+          failureCallback("Unable to find the given location");
+        }
       }
     });
   }
@@ -102,16 +118,34 @@ Geocoder.prototype = {
 ////////////////////
 // LANDING MANAGER
 function LandingManager() {
+  var map = new Map(document.getElementById('map-canvas'), 37, -120);
+  var searcher = new GardenSearcher();
+
+  map.onMove(function(lat, lng) {
+    search(lat, lng);
+  });
+
   $('#submit').on('click', function(event) {
     event.preventDefault();
-    var user_location = $("#location").val();
-    var geocoder_obj = new Geocoder(user_location);
+    var geocoder = new Geocoder();
+    geocoder.fetch(getLocation(), function(lat, lng) {
+      map.setLocation(lat, lng);
+    });
   });
+
+  function search(lat, lng) {
+    searcher.search(lat, lng, function(gardens) {
+      $.each(gardens, function(garden) {
+        map.placeGarden(garden)
+      });
+    });
+  }
 }
 
-///////////////////
-// DOCUMENT READY
-$(function() {
+function getLocation(){
+  return $("#location").val();
+}
+
+function setLocationFromPlugin(){
   $('#location').val(geoplugin_city());
-  var landingManager = new LandingManager();
-});
+}

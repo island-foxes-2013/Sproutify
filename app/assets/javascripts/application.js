@@ -13,3 +13,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+
+///////////////////
+// DOCUMENT READY
+$(function() {
+  setLocationFromPlugin()
+  new LandingManager();
+});
