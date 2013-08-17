@@ -4,18 +4,26 @@
 // Supplies belongs to User, Crop, Status
 
 $(function() {
-  $('button').on('click', function(){
-	  var crop_name = $('.add-supplies').val();
-		console.log(crop_name);
-		$('.user-supplies').append(crop_name);
-  });
+  // $('button').on('click', function(){
+	 //  var crop_name = $('.add-supplies').val();
+		// console.log(crop_name);
+		// $('.user-supplies').append(crop_name);
+  // });
 
-  $('.submit-button').on('ajax:success', function(e, data){
+  $('.add-supplies-form').on('ajax:success', function(e, data){
   	e.preventDefault();
   	console.log(data);
-  	// $('.user-supplies').append()
   });
 });
+
+
+
+
+
+
+
+
+
 
 // $('.comment_form').on('ajax:success', function(e, data){
 // 	var comment = $('.comment_append').last().clone();		
