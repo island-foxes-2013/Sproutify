@@ -24,7 +24,7 @@ class HomeController < ApplicationController
         crops_available << supply.crop.name
       end
     end
-
+    
     render json: { count: search.results.count, crops_available: crops_available }
   end
   
