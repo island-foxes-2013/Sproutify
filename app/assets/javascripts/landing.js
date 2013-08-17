@@ -1,5 +1,6 @@
 function bindEvents(){
   $("#signup-link").on("ajax:beforeSend", function(){
+    console.log("hello world");
     $("#signup-modal").modal();
     return false;
   });
@@ -18,6 +19,7 @@ function bindEvents(){
   });
 
 };
+
 function Marker(map, lat, lng) {
   var self = this;
   var latLng = new google.maps.LatLng(lat,lng);
@@ -102,7 +104,7 @@ Map.prototype = {
 ///////////////////
 // DOCUMENT READY
 $(function() {
-  $('#location').val(geoplugin_city());
-  var landingManager = new LandingManager();
+  // $('#location').val(geoplugin_city());
+  // var landingManager = new LandingManager();
   bindEvents();
 });
