@@ -1,1 +1,5 @@
-%p.alert.alert-danger{style: "display:none"}
+.alert.alert-danger
+  -if error_messages
+    %ul
+      -error_messages.each do |message|
+        %li=message

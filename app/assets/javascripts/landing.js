@@ -3,6 +3,15 @@ function bindEvents(){
     $("#signup-modal").modal();
     return false;
   });
+  $("#new_user").on("ajax:success", function(event, response, xhr, element){
+    if (response.hasOwnProperty("errorElem")){
+      $("#new_user").find('.alert').remove();
+      $("#new_user").find(".modal-body").append(response.errorElem);
+    };
+    // if (response.hasOwnProperty("pageElem")){
+    //   $("body").empty().append(response.pageElem);
+    // };
+  });
   $("#login-link").on("ajax:beforeSend", function(){
     $("#login-modal").modal();
     return false;
@@ -18,6 +27,7 @@ function bindEvents(){
   });
 
 };
+
 function Marker(map, lat, lng) {
   var self = this;
   var latLng = new google.maps.LatLng(lat,lng);

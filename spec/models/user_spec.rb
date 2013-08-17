@@ -1,15 +1,22 @@
 require 'spec_helper'
 
 describe User do
+  it {should validate_presence_of(:first_name)}
+  it {should validate_presence_of(:last_name)}
+  it {should validate_presence_of(:email)}
+  it {should validate_presence_of(:password)}
+  it {should validate_presence_of(:password_confirmation)}
+  it { should validate_uniqueness_of(:email) }
   it {should respond_to(:first_name)}
   it {should respond_to(:last_name)}
   it {should respond_to(:email)}
   it {should respond_to(:password_digest)}
   it {should respond_to(:password)}
+
   it {should have_one(:geocode)}
   it {should respond_to(:geocode)}
 
-  let(:user) {User.new(first_name: "Chuck", last_name: "Norris", email: "chuck@texas.com", password: "ilovebeards")}
+  let(:user) {build(:user)}
   let(:baduser) {User.new}
 
   describe "#initialize" do
