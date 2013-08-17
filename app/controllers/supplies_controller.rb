@@ -7,6 +7,7 @@ class SuppliesController < ApplicationController
 		@supplies = current_user.supplies
     # respond_with @supplies
     render json: {title: "Hi iam Michael."}
+		@supplies = User.find(params[:user_id]).supplies.all
 	end
 
 

@@ -1,5 +1,5 @@
 .container
-  .h1 Find Gardeners near you
+  %h3 Find Gardeners near you
   =form_for :landing, html:{role: "form"} do |f|
     .form-group=f.text_field(:location, placeholder: "Street Address", class: "form-control", id:'address')
     .form-group=f.text_field(:location, placeholder: "Zip Code", class: "form-control", id:'zip')
