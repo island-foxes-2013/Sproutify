@@ -11,12 +11,24 @@ class SessionsController < ApplicationController
       @authenticated_user = @user.authenticate(params[:session][:password])
       if @authenticated_user
         self.current_user = @authenticated_user
-        render "home/main"
+        render json:{
+          pageElem: render_to_string(partial: "shared/main")
+        }
       else
-        render json: {session: params[:session], error: "Invalid password"}
+        errors = {password: "invalid"}
+        error_messages = ["Invalid password"]
+        render json: {
+          errors: errors,
+          errorElem: render_to_string(partial:"shared/error", locals: { error_messages: error_messages })
+        }
       end
     else
-      render json: {session: params[:session], error: "Invalid email"}
+      errors = {email: "unrecognized"}
+      error_messages = ["Unrecognized email"]
+      render json: {
+        errors: errors,
+        errorElem: render_to_string(partial:"shared/error", locals: { error_messages: error_messages })
+      }
     end  
   end
 

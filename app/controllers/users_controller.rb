@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     @user.save
     if @user.errors.any?
       render json: {
-        session: params[:session],
+        errors: @user.errors,
         errorElem: render_to_string(partial:"shared/error", locals: { error_messages: @user.errors.full_messages })
       }
     else
