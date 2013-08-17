@@ -22,6 +22,7 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
   gem 'handlebars_assets'
+  gem 'hamlbars', '~> 2.0'
 end
 
 gem 'jquery-rails'
