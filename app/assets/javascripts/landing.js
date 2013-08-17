@@ -13,7 +13,7 @@ function LandingManager() {
 }
 
 function getLocation(){
-  return $("#location").val();
+  return $("#address").val() +', '+ $("#zip").val();
 }
 
 function setLocationFromPlugin(){
