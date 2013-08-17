@@ -1,0 +1,8 @@
+%h1 Current Supply
+
+-@supplies.each do |supply|
+	%li
+		-crop = Crop.find(supply.crop_id).name
+		-status = Status.find_by_id(supply.status_id)
+		#{crop}'s current status is #{status ? status.name : 'empty'}
+	%br

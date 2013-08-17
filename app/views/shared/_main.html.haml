@@ -1,10 +1,8 @@
 %h1 What produce do you have available?
 
-%form{action: 'supplies/create', method: 'POST', remote: true, id: 'add-supplies-form'}
-	%label{for: 'crop_name'} Crop:
-	%input{type: 'text', name: 'crop_name'}
-	%label{for: 'status'} Status:
-	%input{type: 'text', name: 'status'}
-	%input{type: 'submit', class: 'submit-button'}
+=form_tag supplies_path, method: 'post', remote: true, html:{role: "form"}, id: 'add-supplies-form' do
+  .form-group=text_field :crop_name, nil, placeholder: "Crop name", class: "form-control"
+  .form-group=text_field :status, nil, placeholder: "Status", class: "form-control"
+  =submit_tag "Add Supply", class: "btn btn-primary"
 
 .user-supplies
