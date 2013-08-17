@@ -36,7 +36,7 @@ function getLocalInfo(location) {
 }
 
 function bindEvents(){
-  $("#signup-link").on("ajax:beforeSend", function(){
+  $(".signup-link").on("ajax:beforeSend", function(){
     $("#signup-modal").modal();
     return false;
   });
@@ -51,14 +51,21 @@ function bindEvents(){
       }
 
       $("#new_user").find('.alert').remove();
-      $("#new_user").find(".modal-body").append(response.errorElem);
+      $("#new_user").find(".modal-body").prepend(response.errorElem);
     }
     if (response.hasOwnProperty("pageElem")){
-      $("body").empty().append(response.pageElem);
+      $("#signup-modal").modal('hide');
+      $("#signup-modal").on('hidden.bs.modal', function(){
+        $("#main-body").empty().append(response.pageElem);
+      }); 
     }
   });
 
-  $("#login-link").on("ajax:beforeSend", function(){
+  $("#signup-modal").on('hidden.bs.modal', function(){
+    $(this).find('.alert').remove();
+  });
+
+  $(".login-link").on("ajax:beforeSend", function(){
     $("#login-modal").modal();
     return false;
   });
@@ -69,12 +76,22 @@ function bindEvents(){
       }
 
       $("#new_session").find('.alert').remove();
-      $("#new_session").find(".modal-body").append(response.errorElem);
+      $("#new_session").find(".modal-body").prepend(response.errorElem);
     }
     if (response.hasOwnProperty("pageElem")){
-      $("body").empty().append(response.pageElem);
+      $("#login-modal").modal('hide');
+      $("#login-modal").on('hidden.bs.modal', function(){
+        $("#main-body").empty().append(response.pageElem);
+        $(".navbar-right").empty();
+      });
+      
     }
     
   });
 
+  $("#login-modal").on('hidden.bs.modal', function(){
+    $(this).find('.alert').remove();
+  });
+
 };
+

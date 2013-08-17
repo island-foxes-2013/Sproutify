@@ -1,16 +1,16 @@
-.modal.fade#signup-modal
+.modal.fade#signup-modal{role: "dialog"}
   .modal-dialog
     .modal-content
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-        %h4.modal-title Create an account
-      
-      =simple_form_for user, remote: true do |f|
+        %h4.modal-title Become a gardener on Sproutify!
+
+      =form_for @user, remote: true, html:{role: "form"} do |f|
         .modal-body
-          =f.input :first_name
-          =f.input :last_name
-          =f.input :email
-          =f.input :password
-          =f.input :password_confirmation
+          .form-group=f.text_field :first_name, placeholder: "First Name", class: "form-control"
+          .form-group=f.text_field :last_name, placeholder: "Last Name", class: "form-control"
+          .form-group=f.text_field :email, placeholder: "Email", class: "form-control"
+          .form-group=f.password_field :password, placeholder: "Password", class: "form-control"
+          .form-group=f.password_field :password_confirmation, placeholder: "Confirm Password", class: "form-control"
         .modal-footer
-          =f.button :submit
+          =f.submit "Signup", class: "btn btn-primary"

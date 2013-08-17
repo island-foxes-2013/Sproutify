@@ -10,18 +10,6 @@
   .collapse.navbar-collapse.navbar-ex1-collapse
     %ul.nav.navbar-nav.navbar-right
       %li
-        %a{href: "#"} Link
-      %li.dropdown
-        %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-          Dropdown
-          %b.caret
-        %ul.dropdown-menu
-          %li
-            %a{:href => "#"} Action
-          %li
-            %a{:href => "#"} Another action
-          %li
-            %a{:href => "#"} Something else here
-          %li
-            %a{:href => "#"} Separated link
-      / /.navbar-collapse
+        =link_to "Signup", '#', remote: true, class: "signup-link"
+      %li
+        =link_to "Login", '#', remote: true, class: "login-link"

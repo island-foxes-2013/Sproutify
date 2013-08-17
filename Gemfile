@@ -21,7 +21,6 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
-  gem 'simple_form'
 end
 
 gem 'jquery-rails'
