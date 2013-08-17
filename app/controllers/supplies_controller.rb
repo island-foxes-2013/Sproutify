@@ -5,7 +5,7 @@ class SuppliesController < ApplicationController
 		user = !params[:user_id].nil? ? User.find_by_id(params[:user_id]) : current_user
 		@supplies = user.supplies.all
 		render json: {
-		  supply_partial: render_to_string(partial:"shared/current_supply", locals: { current_supply: @supplies })
+		  supply_partial: render_to_string(partial:"shared/current_supply", locals: { current_supply: @supplies, user: user })
 		}
 	end
 
@@ -15,7 +15,6 @@ class SuppliesController < ApplicationController
   	status = Status.create(name: params[:status])
   	supply = current_user.supplies.create(crop: crop, status: status)
 
-  	puts "*" * 50
   	render json: { supply: supply, crop: crop.name, status: status.name }
   end
 
