@@ -13,7 +13,7 @@ function LandingManager() {
 }
 
 function getLocation(){
-  return $("#location").val();
+  return $("#address").val() +', '+ $("#zip").val();
 }
 
 function setLocationFromPlugin(){
@@ -26,6 +26,8 @@ function getLocalInfo(location) {
     type: "get",
     data: { lat: location.lat, lng: location.lng}
   }).done(function(result) {
+    $('#hidden_lat').attr("value", location.lat);
+    $('#hidden_lng').attr("value", location.lng);
     $('.container').append("<p>There are "+ result.count +" gardeners in your area!</p>")
     $('.container').append("<ul>These are some crops available in your area:</ul>")
     for (var i in result.crops_available) {
@@ -36,9 +38,14 @@ function getLocalInfo(location) {
 }
 
 function bindEvents(){
-  $(".signup-link").on("ajax:beforeSend", function(){
+  $(".signup-link").on("ajax:beforeSend", function(event, xhr, settings){
     $("#signup-modal").modal();
     return false;
+  });
+
+  $("#new_user").on("ajax:beforeSend", function(event, xhr, settings) {
+    settings.data += "&lat="+$('#hidden_lat').val();
+    settings.data += "&lng="+$('#hidden_lng').val();
   });
 
   $("#new_user").on("ajax:success", function(event, response, xhr, element){

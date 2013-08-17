@@ -21,7 +21,7 @@
 ///////////////////
 // DOCUMENT READY
 $(function() {
-  setLocationFromPlugin();
+  // setLocationFromPlugin();
   new LandingManager();
   bindEvents();
 });
