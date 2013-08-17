@@ -2,7 +2,7 @@ class SuppliesController < ApplicationController
 	skip_before_filter :require_login
 
 	def index
-		@supplies = User.find(params[:user_id].supplies.all
+		@supplies = User.find(params[:user_id]).supplies.all
 	end
 
 
