@@ -31,7 +31,7 @@ function getLocalInfo(location) {
 }
 
 function bindEvents(){
-  $("#signup-link").on("ajax:beforeSend", function(){
+  $(".signup-link").on("ajax:beforeSend", function(){
     $("#signup-modal").modal();
     return false;
   });
@@ -53,7 +53,7 @@ function bindEvents(){
     }
   });
 
-  $("#login-link").on("ajax:beforeSend", function(){
+  $(".login-link").on("ajax:beforeSend", function(){
     $("#login-modal").modal();
     return false;
   });
