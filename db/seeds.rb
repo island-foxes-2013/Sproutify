@@ -8,6 +8,20 @@
 
 require 'faker'
 
+crops = ["Corn", "Cucumber", "Eggplant", "Muskmelon", "Pepper", "Tomatoe", "Watermelon", "Zucchini", "Cilantro", "Basil", "Mint", "Sage", "Blueberry", "Strawberry", "Lemon", "Lettuce", "Radish", "Chard", "Pea", "Kale", "Chicken Nugget", "Orange", ]
+
+crops = crops.sort
+
+crops.each do |crop|
+  Crop.create(name: crop)
+end
+
+status = ["Growing", "Harvested", "Dead"]
+
+status.each do |status|
+  Status.create(name: status)
+end
+
 min_lat = 37.789981
 max_lat = 37.740313
 min_lng = -122.479416
@@ -17,9 +31,12 @@ max_lng = -122.401825
   user = User.create(first_name: Faker::Name.first_name,
               last_name:  Faker::Name.last_name,
               email: Faker::Internet.email,
-              password: "test")
+              password: "test",
+              password_confirmation: "test")
   lat = (max_lat - min_lat) * rand() + min_lat
   lng = (max_lng - min_lng) * rand() + min_lng
   user.create_geocode(lat: lat, lng: lng)
+  status = Status.all.sample
+  crop = Crop.all.sample
+  user.supplies.create(crop: crop, status: status)
 end
-
