@@ -1,7 +1,8 @@
 .container
+  %h3 How many gardeners are in your neighborhood?
   =form_for :landing, html:{role: "form"} do |f|
     .form-group=f.text_field(:location, placeholder: "Your Location", class: "form-control", id:'location')
-    =f.submit "Submit", class: "btn btn-primary", id: "submit"
+    =f.submit "Check!", class: "btn btn-primary", id: "submit"
 
 
 %p=link_to "Signup", '#', remote: true, class: "btn btn-primary signup-link"
