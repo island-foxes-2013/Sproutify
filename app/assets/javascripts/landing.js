@@ -46,11 +46,15 @@ function bindEvents(){
       }
 
       $("#new_user").find('.alert').remove();
-      $("#new_user").find(".modal-body").append(response.errorElem);
+      $("#new_user").find(".modal-body").prepend(response.errorElem);
     }
     if (response.hasOwnProperty("pageElem")){
       $("body").empty().append(response.pageElem);
     }
+  });
+
+  $("#signup-modal").on('hidden.bs.modal', function(){
+    $(this).find('.alert').remove();
   });
 
   $(".login-link").on("ajax:beforeSend", function(){
@@ -64,12 +68,16 @@ function bindEvents(){
       }
 
       $("#new_session").find('.alert').remove();
-      $("#new_session").find(".modal-body").append(response.errorElem);
+      $("#new_session").find(".modal-body").prepend(response.errorElem);
     }
     if (response.hasOwnProperty("pageElem")){
       $("body").empty().append(response.pageElem);
     }
     
+  });
+
+  $("#login-modal").on('hidden.bs.modal', function(){
+    $(this).find('.alert').remove();
   });
 
 };

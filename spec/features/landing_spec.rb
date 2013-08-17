@@ -1,14 +1,15 @@
 require 'spec_helper'
 
-describe "map generation" do
+describe "Location hook" do
   before :each do
     visit root_path
   end
 
-  context "valid location", js:true do
+  context "valid location" do
 
     describe "feed" do
       it "should list number of users in that area" do
+
         pending "can't implement without routes and DB"
       end
 
