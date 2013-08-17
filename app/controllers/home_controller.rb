@@ -3,10 +3,10 @@ class HomeController < ApplicationController
 
   def index
     if logged_in?
-      render "home/main"
+      render partial: "shared/main", layout: "application"
     else
       @user = User.new
-      render "home/landing"
+      render partial: "shared/landing", layout: "application"
     end
   end
 

@@ -15,7 +15,9 @@ class UsersController < ApplicationController
       }
     else
       self.current_user = @user
-      render "home/main"
+      render json:{
+        pageElem: render_to_string(partial: "shared/main")
+      }
     end
   end
 

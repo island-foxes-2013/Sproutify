@@ -1,6 +1,5 @@
 function bindEvents(){
   $("#signup-link").on("ajax:beforeSend", function(){
-    console.log("hello world");
     $("#signup-modal").modal();
     return false;
   });
@@ -8,10 +7,11 @@ function bindEvents(){
     if (response.hasOwnProperty("errorElem")){
       $("#new_user").find('.alert').remove();
       $("#new_user").find(".modal-body").append(response.errorElem);
-    } else{
-      console.log("hello");
-    }
-  })
+    };
+    // if (response.hasOwnProperty("pageElem")){
+    //   $("body").empty().append(response.pageElem);
+    // };
+  });
   $("#login-link").on("ajax:beforeSend", function(){
     $("#login-modal").modal();
     return false;
