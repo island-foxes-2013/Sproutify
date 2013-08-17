@@ -30,10 +30,14 @@ function getLocalInfo(location) {
     $('#hidden_lng').attr("value", location.lng);
     $('.container').append("<p>There are "+ result.user_count +" gardeners in your area!</p>")
     $('.container').append("<ul>In your area,</ul>")
+
     for (var i = 0; i < 5; i++) {
       $('.container ul').append("<li>"+ result.crops_available[i].count+ " people have " + result.crops_available[i].name.toLowerCase() +" available!</li>")
     }
-    
+
+    for (var i = 0; i< 5; i++) {
+      $('.container ul').append("<li>"+ result.crops_demanded[i].count+ " people want " + result.crops_demanded[i].name.toLowerCase() + "!</li>")
+    }
   });
 }
 
