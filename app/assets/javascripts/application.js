@@ -13,7 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require handlebars.runtime
 //= require_tree .
+//= require_tree ./templates
 
 
 ///////////////////
@@ -23,4 +25,9 @@ $(function() {
   new LandingManager();
   session = new SessionManager();
   session.bindAll();
+
+  $("#testing").on("ajax:success", function(event, data, status, xhr) {
+    console.log(data)
+    $("#test").html(HandlebarsTemplates['home'](data));
+  });
 });

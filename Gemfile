@@ -21,6 +21,7 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+  gem 'handlebars_assets'
 end
 
 gem 'jquery-rails'
@@ -42,6 +43,7 @@ group :development, :test do
   gem 'launchy'
   gem 'simplecov', require: false
   gem 'debugger'
+  gem 'quiet_assets'
 end
 
 gem 'sunspot_rails'
