@@ -6,8 +6,6 @@ function LandingManager() {
     event.preventDefault();
     var geocoder = new Geocoder();
     geocoder.fetch(getLocation(), function(location) {
-      console.log(location.lat);
-      console.log(location.lng);
       getLocalInfo(location);
     });
   });
@@ -28,6 +26,6 @@ function getLocalInfo(location) {
     type: "get",
     data: { lat: location.lat, lng: location.lng}
   }).done(function(result) {
-    console.log(result);
+    $('.container').append("<p>There are "+ result.count +" gardeners in your area!</p>")
   });
 }
