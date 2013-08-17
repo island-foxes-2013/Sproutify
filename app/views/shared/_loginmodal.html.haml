@@ -1,0 +1,13 @@
+.modal.fade#login-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+        %h4.modal-title Sign in
+      
+      =simple_form_for(user, as: :session, remote: true, url: sessions_path) do |f|
+        .modal-body
+          =f.input :email
+          =f.input :password
+        .modal-footer
+          =f.button :submit

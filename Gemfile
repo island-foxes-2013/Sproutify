@@ -13,6 +13,7 @@ gem 'pg'
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
+  gem 'bootstrap-sass', :git => 'git://github.com/thomas-mcdonald/bootstrap-sass.git', :branch => '3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'haml-rails'
 
@@ -20,6 +21,7 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+  gem 'simple_form'
 end
 
 gem 'jquery-rails'
