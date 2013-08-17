@@ -38,9 +38,14 @@ function getLocalInfo(location) {
 }
 
 function bindEvents(){
-  $(".signup-link").on("ajax:beforeSend", function(){
+  $(".signup-link").on("ajax:beforeSend", function(event, xhr, settings){
     $("#signup-modal").modal();
     return false;
+  });
+
+  $("#new_user").on("ajax:beforeSend", function(event, xhr, settings) {
+    settings.data += "&lat="+$('#hidden_lat').val();
+    settings.data += "&lng="+$('#hidden_lng').val();
   });
 
   $("#new_user").on("ajax:success", function(event, response, xhr, element){
