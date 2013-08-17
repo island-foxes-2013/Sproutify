@@ -14,9 +14,9 @@ class SuppliesController < ApplicationController
   	# status = Status.create(name: params[:status])
   	# supply = current_user.supplies.create(crop: crop, status: status)
   	
-  	# render json: { supply: supply }
+  	render json: { supply: supply, crop: crop.name }
 
-  	redirect_to supply_path(supply)
+  	# redirect_to supply_path(supply)
   end
 
   def show
@@ -24,7 +24,6 @@ class SuppliesController < ApplicationController
   end
 
   def destroy
-  	# user = User.find(params[:user_id])
   	Supply.find(params[:id]).destroy
   end
 end
