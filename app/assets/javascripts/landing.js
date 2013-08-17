@@ -49,7 +49,7 @@ function bindEvents(){
       $("#new_user").find(".modal-body").prepend(response.errorElem);
     }
     if (response.hasOwnProperty("pageElem")){
-      $("body").empty().append(response.pageElem);
+      $("#main-body").empty().append(response.pageElem);
     }
   });
 
@@ -71,7 +71,7 @@ function bindEvents(){
       $("#new_session").find(".modal-body").prepend(response.errorElem);
     }
     if (response.hasOwnProperty("pageElem")){
-      $("body").empty().append(response.pageElem);
+      $("#main-body").empty().append(response.pageElem);
     }
     
   });
