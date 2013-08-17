@@ -1,0 +1,10 @@
+%h1 What produce do you have available?
+
+%form{action: 'supplies/create', method: 'POST', remote: true, id: 'add-supplies-form'}
+	%label{for: 'crop_name'} Crop:
+	%input{type: 'text', name: 'crop_name'}
+	%label{for: 'status'} Status:
+	%input{type: 'text', name: 'status'}
+	%input{type: 'submit', class: 'submit-button'}
+
+.user-supplies

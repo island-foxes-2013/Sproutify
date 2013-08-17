@@ -8,12 +8,12 @@
 
 require 'faker'
 
-min_lat = 36.740257
-max_lat = 36.824673
-min_lng = -119.728712
-max_lng = -119.897284
+min_lat = 37.789981
+max_lat = 37.740313
+min_lng = -122.479416
+max_lng = -122.401825
 
-10.times do
+50.times do
   user = User.create(first_name: Faker::Name.first_name,
               last_name:  Faker::Name.last_name,
               email: Faker::Internet.email,
