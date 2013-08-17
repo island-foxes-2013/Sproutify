@@ -15,6 +15,8 @@ class UsersController < ApplicationController
       }
     else
       self.current_user = @user
+      @user.create_geocode(lat: params[:lat].to_f,
+                           lng: params[:lng].to_f)
       render json:{
         pageElem: render_to_string(partial: "shared/main")
       }
