@@ -1,10 +1,23 @@
 Sproutify::Application.routes.draw do
 
   root :to => 'home#index'
-  resources :users, :only => [:new, :create]
+
+  resources :users, :only => [:new, :create] do
+    resources :supplies, :only => [:index, :create, :destroy]
+  end
+
+  resources :supplies, :only => [:index, :create, :destroy]
+
+
   resources :sessions, only: [:new, :create, :destroy]
 
   get 'fetch', to: 'home#fetch'
+
+
+  # match 'main' => 'home#main'
+  # match 'supplies/create' => 'supplies#create'
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -62,7 +75,6 @@ Sproutify::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 
-  match 'main' => 'home#main'
-  match 'supplies/create' => 'supplies#create'
+
 
 end
