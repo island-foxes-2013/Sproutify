@@ -19,10 +19,16 @@ class HomeController < ApplicationController
     search = Geocode.search do
       with(:location).in_radius(params[:lat], params[:lng], 10)
     end
-    p '******************************************'
-    ap search.results
 
-    render json: { count: search.results.count }
+    crops_available = []
+
+    search.results.each do |result|
+      User.find_by_id(result[:user_id]).supplies.each do |supply|
+        crops_available << supply.crop.name
+      end
+    end
+
+    render json: { count: search.results.count, crops_available: crops_available }
   end
   
 end
