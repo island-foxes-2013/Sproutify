@@ -5,7 +5,7 @@
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
         %h4.modal-title Create an account
       
-      =simple_form_for user do |f|
+      =simple_form_for user, remote: true do |f|
         .modal-body
           =f.input :first_name
           =f.input :last_name

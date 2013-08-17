@@ -4,6 +4,14 @@ function bindEvents(){
     $("#signup-modal").modal();
     return false;
   });
+  $("#new_user").on("ajax:success", function(event, response, xhr, element){
+    if (response.hasOwnProperty("errorElem")){
+      $("#new_user").find('.alert').remove();
+      $("#new_user").find(".modal-body").append(response.errorElem);
+    } else{
+      console.log("hello");
+    }
+  })
   $("#login-link").on("ajax:beforeSend", function(){
     $("#login-modal").modal();
     return false;
@@ -104,7 +112,7 @@ Map.prototype = {
 ///////////////////
 // DOCUMENT READY
 $(function() {
-  // $('#location').val(geoplugin_city());
-  // var landingManager = new LandingManager();
+  $('#location').val(geoplugin_city());
+  var landingManager = new LandingManager();
   bindEvents();
 });

@@ -9,7 +9,10 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     @user.save
     if @user.errors.any?
-      render "home/landing"
+      render json: {
+        session: params[:session],
+        errorElem: render_to_string(partial:"shared/error", locals: { error_messages: @user.errors.full_messages })
+      }
     else
       self.current_user = @user
       render "home/main"
