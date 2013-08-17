@@ -49,7 +49,10 @@ function bindEvents(){
       $("#new_user").find(".modal-body").prepend(response.errorElem);
     }
     if (response.hasOwnProperty("pageElem")){
-      $("#main-body").empty().append(response.pageElem);
+      $("#signup-modal").modal('hide');
+      $("#signup-modal").on('hidden.bs.modal', function(){
+        $("#main-body").empty().append(response.pageElem);
+      }); 
     }
   });
 
@@ -71,7 +74,12 @@ function bindEvents(){
       $("#new_session").find(".modal-body").prepend(response.errorElem);
     }
     if (response.hasOwnProperty("pageElem")){
-      $("#main-body").empty().append(response.pageElem);
+      $("#login-modal").modal('hide');
+      $("#login-modal").on('hidden.bs.modal', function(){
+        $("#main-body").empty().append(response.pageElem);
+        $(".navbar-right").empty().append(content, content, function)
+      });
+      
     }
     
   });
