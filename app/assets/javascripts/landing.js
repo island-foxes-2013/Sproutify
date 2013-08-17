@@ -1,4 +1,4 @@
-///////////////////
+////////////////////
 // LANDING MANAGER
 function LandingManager() {
 

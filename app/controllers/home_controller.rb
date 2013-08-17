@@ -10,6 +10,10 @@ class HomeController < ApplicationController
     end
   end
 
+  def main
+
+  end
+
   def fetch
     #Some code that gets lat,lng of the map and returns all results
     # respond_to do |format|
@@ -24,4 +28,5 @@ class HomeController < ApplicationController
 
     render json: { count: search.results.count }
   end
+  
 end
