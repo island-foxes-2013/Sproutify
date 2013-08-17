@@ -3,8 +3,8 @@ Sproutify::Application.routes.draw do
   root :to => 'home#index'
 
   resources :users, :only => [:new, :create] do
-    resources :supplies, :only => [:index, :create, :destroy]
-    resources :demands, only: [:index]
+    resources :supplies, :only => [:index, :create, :destroy], module: "users"
+    resources :demands, only: [:index], module: "users"
   end
 
   resources :supplies, :only => [:index, :create, :destroy]

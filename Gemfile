@@ -41,6 +41,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'launchy'
   gem 'simplecov', require: false
+  gem 'debugger'
 end
 
 gem 'sunspot_rails'

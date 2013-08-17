@@ -9,7 +9,7 @@
   / Collect the nav links, forms, and other content for toggling
   .collapse.navbar-collapse.navbar-ex1-collapse
     %ul.nav.navbar-nav.navbar-right
-      %li
-        =link_to "Signup", '#', remote: true, class: "signup-link"
-      %li
-        =link_to "Login", '#', remote: true, class: "login-link"
+      -if logged_in?
+        =render "shared/nav_loggedin"
+      -else
+        =render "shared/nav_loggedout"

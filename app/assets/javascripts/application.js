@@ -21,5 +21,6 @@
 $(function() {
   setLocationFromPlugin();
   new LandingManager();
-  bindEvents();
+  session = new SessionManager();
+  session.bindAll();
 });

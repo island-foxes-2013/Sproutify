@@ -16,7 +16,8 @@ class UsersController < ApplicationController
     else
       self.current_user = @user
       render json:{
-        pageElem: render_to_string(partial: "shared/main")
+        pageElem: render_to_string(partial: "shared/main"),
+        navElem: render_to_string(partial: "shared/nav_loggedout")
       }
     end
   end

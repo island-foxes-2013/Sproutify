@@ -7,7 +7,14 @@
 %p=link_to "Signup", '#', remote: true, class: "btn btn-primary signup-link"
 %p=link_to "Login", '#', remote: true, class: "btn btn-primary login-link"
 
-=render partial:"shared/signupmodal", locals: {user: @user}
-=render partial:"shared/loginmodal", locals: {user: @user}
+# =render partial:"shared/signupmodal", locals: {user: User.new}
+=render partial:"shared/loginmodal", locals: {user: User.new}
 
 
+=form_for user, remote: true, html:{role: "form"} do |f|
+  .form-group=f.text_field :first_name, placeholder: "First Name", class: "form-control"
+  .form-group=f.text_field :last_name, placeholder: "Last Name", class: "form-control"
+  .form-group=f.text_field :email, placeholder: "Email", class: "form-control"
+  .form-group=f.password_field :password, placeholder: "Password", class: "form-control"
+  .form-group=f.password_field :password_confirmation, placeholder: "Confirm Password", class: "form-control"
+  =f.submit "Signup", class: "btn btn-primary"
