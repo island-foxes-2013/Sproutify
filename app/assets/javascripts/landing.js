@@ -27,7 +27,7 @@ function getLocalInfo(location) {
     data: { lat: location.lat, lng: location.lng}
   }).done(function(result) {
     $('.container').append("<p>There are "+ result.count +" gardeners in your area!</p>")
-    $('.container').append("<ul>These are some crops available in your area:</ul>")
+    $('.container').append("<ul>These are some crops available in your area!</ul>")
     for (var i in result.crops_available) {
       $('.container ul').append("<li>"+ result.crops_available[i] +"</li>")
     }
