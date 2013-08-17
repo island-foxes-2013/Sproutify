@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation
   has_secure_password
   has_one :geocode
-  validates_presence_of :first_name, :last_name, :email, :password
+  validates_presence_of :first_name, :last_name, :email, :password, :password_confirmation
+  validates_uniqueness_of :email
   
 end
