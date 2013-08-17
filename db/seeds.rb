@@ -27,7 +27,7 @@ max_lat = 37.740313
 min_lng = -122.479416
 max_lng = -122.401825
 
-50.times do
+25.times do
   user = User.create(first_name: Faker::Name.first_name,
               last_name:  Faker::Name.last_name,
               email: Faker::Internet.email,
@@ -39,4 +39,18 @@ max_lng = -122.401825
   status = Status.all.sample
   crop = Crop.all.sample
   user.supplies.create(crop: crop, status: status)
+end
+
+25.times do
+  user = User.create(first_name: Faker::Name.first_name,
+              last_name:  Faker::Name.last_name,
+              email: Faker::Internet.email,
+              password: "test",
+              password_confirmation: "test")
+  lat = (max_lat - min_lat) * rand() + min_lat
+  lng = (max_lng - min_lng) * rand() + min_lng
+  user.create_geocode(lat: lat, lng: lng)
+  status = Status.all.sample
+  crop = Crop.all.sample
+  user.demands.create(crop: crop)
 end
