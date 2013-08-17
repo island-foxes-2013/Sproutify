@@ -27,6 +27,11 @@ function getLocalInfo(location) {
     data: { lat: location.lat, lng: location.lng}
   }).done(function(result) {
     $('.container').append("<p>There are "+ result.count +" gardeners in your area!</p>")
+    $('.container').append("<ul>These are some crops available in your area:</ul>")
+    for (var i in result.crops_available) {
+      $('.container ul').append("<li>"+ result.crops_available[i] +"</li>")
+    }
+    
   });
 }
 
@@ -77,7 +82,7 @@ function bindEvents(){
       $("#login-modal").modal('hide');
       $("#login-modal").on('hidden.bs.modal', function(){
         $("#main-body").empty().append(response.pageElem);
-        $(".navbar-right").empty().append(content, content, function)
+        $(".navbar-right").empty();
       });
       
     }
@@ -89,3 +94,4 @@ function bindEvents(){
   });
 
 };
+
