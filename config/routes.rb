@@ -6,4 +6,5 @@ Sproutify::Application.routes.draw do
 
   match 'main' => 'home#main'
   match 'supplies/create' => 'supplies#create'
+  get 'fetch', to: 'home#fetch'
 end
