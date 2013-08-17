@@ -3,7 +3,7 @@
     .modal-content
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-        %h4.modal-title Create an account
+        %h4.modal-title Become a gardener on Sproutify!
       
       =simple_form_for user, remote: true do |f|
         .modal-body
@@ -13,4 +13,4 @@
           =f.input :password
           =f.input :password_confirmation
         .modal-footer
-          =f.button :submit
+          =f.button :submit, "Signup"

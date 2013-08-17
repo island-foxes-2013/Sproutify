@@ -1,8 +1,10 @@
 .container
-  %input{type: "text", id: "location"}
-  %button{id: "submit"} "Submit"
+  =simple_form_for :landing do |f|
+    =f.text_field(:location, id:'location')
+    =f.button :submit, "Submit", id: "submit"
+  / %input{type: "text", id: "location"}
+  / %button.btn.btn-primary#submit "Submit"
 
-#map-canvas
 
 %p=link_to "Signup", '#', remote: true, class: "btn btn-primary signup-link"
 %p=link_to "Login", '#', remote: true, class: "btn btn-primary login-link"
