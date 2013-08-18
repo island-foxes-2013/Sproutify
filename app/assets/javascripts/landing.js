@@ -10,6 +10,8 @@ function LandingManager() {
     });
   });
 
+
+
 }
 
 function getLocation(){
@@ -63,7 +65,8 @@ function bindEvents(){
     if (response.hasOwnProperty("pageElem")){
       $("#signup-modal").modal('hide');
       $("#signup-modal").on('hidden.bs.modal', function(){
-        $("#main-body").empty().append(response.pageElem);
+      $("#main-body").empty();
+      new MainManager();
       }); 
     }
   });

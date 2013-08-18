@@ -64,34 +64,35 @@
 // }
 
 
-// ////////
-// // MAP
-// function Map(element, lat, lng) {
-//   this.element = element;
-//   this.lat = lat;
-//   this.lng = lng;
-//   this.markers = [];
-//   this.generate();
-// }
+////////
+// MAP
+function Map(element, lat, lng) {
+  this.element = element;
+  this.lat = lat;
+  this.lng = lng;
+  this.markers = [];
+  this.generate();
+}
 
-// Map.prototype = {
-//   generate: function() {
-//     var latLng = new google.maps.LatLng(this.lat, this.lng);
-//     var mapOptions = {
-//       zoom: 12,
-//       center: latLng,
-//       mapTypeId: google.maps.MapTypeId.ROADMAP
-//     }
-//     this.map = new google.maps.Map(element, mapOptions);
-//     this.info_window = new google.maps.InfoWindow({
-//       content: "placeholder"
-//     });
-//   },
-//   placeGarden: function(garden) {
-//     var gardenMarker = new GardenMarker(this.map, garden)
-//     this.markers.push(gardenMarker);
-//   }
-// }
+Map.prototype = {
+  generate: function() {
+    var latLng = new google.maps.LatLng(this.lat, this.lng);
+    var mapOptions = {
+      zoom: 12,
+      center: latLng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    this.map = new google.maps.Map(this.element, mapOptions);
+    console.log('made it here');
+    this.info_window = new google.maps.InfoWindow({
+      content: "placeholder"
+    });
+  },
+  placeGarden: function(garden) {
+    var gardenMarker = new GardenMarker(this.map, garden)
+    this.markers.push(gardenMarker);
+  }
+}
 
 /////////////
 // GEOCODER
@@ -101,28 +102,25 @@ function Geocoder() {
 }
 
 Geocoder.prototype.fetch = function(user_location, successCallback) {
-  // var this.users_location;
-  // console.log(self);
   self = this;
   this.geocoder.geocode({'address': user_location}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
       var lat = results[0].geometry.location.lat();
       var lng = results[0].geometry.location.lng();
       self.users_location = {lat: lat, lng: lng};
-      // console.log(users_location);
-      // return users_location;
-      // return location;
       successCallback(self.users_location);
-    // } else {
-    //   if (failureCallback) {
-    //     failureCallback("Unable to find the given location");
-    //   }
     }
   });
-  // console.log(this.users_location);
-  // return this.users_location;
-  // console.log(users_location);
-  // return self.users_location;
+}
+
+// MAIN MANAGER
+function MainManager() {
+  this.showMap();
+  var map = new Map(document.getElementById('map-canvas'), 37, -120);
+}
+
+MainManager.prototype.showMap = function() {
+  $('#main-body').append(HandlebarsTemplates['map']);
 }
 
 //////////////////
