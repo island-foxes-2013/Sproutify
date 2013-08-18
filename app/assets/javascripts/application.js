@@ -64,7 +64,7 @@ SessionManager.prototype = {
       // after modal hidden, render handlebar templates
       $("#signup-modal").on('hidden.bs.modal', function(){
         $("#main-body").html(HandlebarsTemplates['main']());
-        $(".navbar-right").html(HandlebarsTemplates['nav_loggedout'](response));
+        $(".navbar-right").html(HandlebarsTemplates['nav_loggedin'](response));
       }); 
     } else {
 
