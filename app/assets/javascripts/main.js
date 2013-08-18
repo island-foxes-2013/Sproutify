@@ -32,6 +32,7 @@ MainManager.prototype.showMap = function() {
   $('#main-body').append(HandlebarsTemplates['map']);
 }
 
+// CURRENT SUPPLY
 MainManager.prototype.showAddSupply = function() {
   $('#main-body').append(HandlebarsTemplates['add_supply']);
 }
@@ -42,6 +43,8 @@ MainManager.prototype.getCurrentSupply = function() {
     type: 'GET'
   }).done(function(response){
     $('.user-supplies').html(HandlebarsTemplates['current_supply'](response));
+    $('.crop-field').val('');
+    $('.drop-down').prop('selectedIndex',0);
   });
 }
 
@@ -51,6 +54,15 @@ MainManager.prototype.bindCurrentSupply = function (){
     self.getCurrentSupply();
   });
 }
+
+// // CURRENT DEMAND  return to this after finishing User methods 'growing', 'harvesting'
+// MainManager.prototype.showAddDemand = function() {
+//   $('#main-body').append(HandlebarsTemplates['add_demand']);
+// }
+
+
+
+
 
 
 
