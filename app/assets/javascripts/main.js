@@ -1,20 +1,24 @@
-// function Garden(gardenAttributes) {
-//   this.attrs = gardenAttributes;
-//   this.attrs.demandedCrops = gardenAttributes.demanded_crops.map(function(k, crop){
-//     return new Crop(crop);
-//   })
-//   this.attrs.suppliedCrops = gardenAttributes.demanded_crops.map(function(k, crop){
-//     return new Crop(crop);
-//   })
-// }
+function Garden(gardenAttributes) {
+  this.attrs = gardenAttributes;
+  // this.attrs.demandedCrops = gardenAttributes.demanded_crops.map(function(k, crop){
+  //   return new Crop(crop);
+  // })
+  // this.attrs.suppliedCrops = gardenAttributes.demanded_crops.map(function(k, crop){
+  //   return new Crop(crop);
+  // })
+}
 
-// Garden.prototype.lat = function() {
-//   this.attrs.latitude
-// }
+Garden.prototype.lat = function() {
+  return this.attrs.lat;
+}
 
-// Garden.prototype.lng = function() {
-//   this.attrs.longitude
-// }
+Garden.prototype.lng = function() {
+  return this.attrs.lng;
+}
+
+Garden.prototype.username = function() {
+  return this.attrs.user.first_name +' '+ this.attrs.user.last_name;
+}
 
 // Garden.prototype.demandedCrops = function() {
 //   this.attrs.demandedCrops;
@@ -24,24 +28,24 @@
 //   this.attrs = cropAttributes;
 // }
 
-// //////////
-// // MARKER
-// function GardenMarker(map, garden) {
-//   this.map = map;
-//   this.garden = garden;
-//   this.place(map, garden.lat, garden.lng)
-// }
+//////////
+// MARKER
+function GardenMarker(map, garden) {
+  this.map = map;
+  this.garden = garden;
+  this.place(map, garden.lat(), garden.lng());
+}
 
-// GardenMarker.prototype = {
-//   place: function(map, lat, lng) {
-//     var latLng = new google.maps.LatLng(lat,lng);
-//     var marker = new google.maps.Marker({
-//         map: map,
-//         position: latLng,
-//         title: this.garden.title
-//     });
-//   }
-// }
+GardenMarker.prototype = {
+  place: function(map, lat, lng) {
+    var latLng = new google.maps.LatLng(lat,lng);
+    var marker = new google.maps.Marker({
+        map: map,
+        position: latLng,
+        title: this.garden.username()
+    });
+  }
+}
 
 ////////////////
 //GARDENERCODER
@@ -57,11 +61,11 @@ GardenSearcher.prototype = {
       type: 'get',
       data: {lat: lat, lng: lng}
     }).done(function(gardens) {
-      console.log("hi", gardens);
-      // gardens = $.map(gardens, function(k, garden){
-      //   return new Garden(garden);
+      gardens = $.map(gardens, function(garden){
+        return new Garden(garden);
+      });
+      successCallback(gardens);
     });
-      // successCallback(gardens);
   }
 }
 
@@ -121,44 +125,15 @@ function MainManager(user_data) {
   console.log(user_data);
   var map = new Map(document.getElementById('map-canvas'), user_data.user_lat, user_data.user_lng);
   var searcher = new GardenSearcher();
-  searcher.fetch(user_data.user_lat, user_data.user_lng);
+  var lat = user_data.user_lat;
+  var lng = user_data.user_lng;
+  searcher.fetch(lat, lng, function(gardens) {
+    $.each(gardens, function(index) {
+      map.placeGarden(gardens[index]);
+    });
+  });
 }
 
 MainManager.prototype.showMap = function() {
   $('#main-body').append(HandlebarsTemplates['map']);
 }
-
-//////////////////
-// LANDING MANAGER
-// function LandingManager() {
-//   var map = new Map(document.getElementById('map-canvas'), 37, -120);
-//   var searcher = new GardenSearcher();
-
-//   map.onMove(function(lat, lng) {
-//     search(lat, lng);
-//   });
-
-//   $('#submit').on('click', function(event) {
-//     event.preventDefault();
-//     var geocoder = new Geocoder();
-//     geocoder.fetch(getLocation(), function(lat, lng) {
-//       map.setLocation(lat, lng);
-//     });
-//   });
-
-//   function search(lat, lng) {
-//     searcher.search(lat, lng, function(gardens) {
-//       $.each(gardens, function(garden) {
-//         map.placeGarden(garden)
-//       });
-//     });
-//   }
-// }
-
-// function getLocation(){
-//   return $("#location").val();
-// }
-
-// function setLocationFromPlugin(){
-//   $('#location').val(geoplugin_city());
-// }

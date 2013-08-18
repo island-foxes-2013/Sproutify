@@ -10,8 +10,6 @@ function LandingManager() {
     });
   });
 
-
-
 }
 
 function getLocation(){
