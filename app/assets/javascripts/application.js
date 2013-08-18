@@ -36,7 +36,7 @@ $(function() {
   $.get('/sessions').done(function(data){
     $("body").html(HandlebarsTemplates['static']());
     if (data.logged_in){
-      $(".navbar-right").html(HandlebarsTemplates['nav_loggedin']());
+      $(".navbar-right").html(HandlebarsTemplates['nav_loggedin'](data));
       $("#main-body").html(HandlebarsTemplates['main']());
     } else {
       $(".navbar-right").html(HandlebarsTemplates['nav_loggedout']());
@@ -63,8 +63,8 @@ SessionManager.prototype = {
 
       // after modal hidden, render handlebar templates
       $("#signup-modal").on('hidden.bs.modal', function(){
-        $("#main-body").html(HandlebarsTemplates['_main']());
-        $(".navbar-right").html(HandlebarsTemplates['nav_loggedout']());
+        $("#main-body").html(HandlebarsTemplates['main']());
+        $(".navbar-right").html(HandlebarsTemplates['nav_loggedout'](response));
       }); 
     } else {
 
@@ -78,7 +78,7 @@ SessionManager.prototype = {
 
       // show alert message
       $("#new_user").find('.alert').remove();
-      $("#new_user").find(".modal-body").prepend(HandlebarsTemplates['_error'](response));
+      $("#new_user").find(".modal-body").prepend(HandlebarsTemplates['error'](response));
     }
   },
   login: function(response){
@@ -88,8 +88,8 @@ SessionManager.prototype = {
 
       // after modal hidden, render handlebar templates
       $("#login-modal").on('hidden.bs.modal', function(){
-        $("#main-body").html(HandlebarsTemplates['_main']());
-        $(".navbar-right").html(HandlebarsTemplates['_nav_loggedout']());
+        $("#main-body").html(HandlebarsTemplates['main']());
+        $(".navbar-right").html(HandlebarsTemplates['nav_loggedin'](response));
       }); 
     } else {
       // empty fields where there is an error
@@ -105,8 +105,8 @@ SessionManager.prototype = {
   logout: function(response){
     // render handlebar templates
     if (response.success === true){
-      $("#main-body").html(HandlebarsTemplates['_landing']());
-      $(".navbar-right").html(HandlebarsTemplates['_nav_loggedout']());
+      $("#main-body").html(HandlebarsTemplates['landing']());
+      $(".navbar-right").html(HandlebarsTemplates['nav_loggedout']());
     }
   },
   bindEvents: function(){

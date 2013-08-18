@@ -3,7 +3,8 @@ class SessionsController < ApplicationController
 
   def index
     render json: {
-      logged_in: logged_in?
+      logged_in: logged_in?,
+      current_user: current_user
     }
   end
 
@@ -18,23 +19,23 @@ class SessionsController < ApplicationController
       if @authenticated_user
         self.current_user = @authenticated_user
         render json:{
-          pageElem: render_to_string(partial: "shared/main"),
-          navElem: render_to_string(partial: "shared/nav_loggedin")
+          success: true,
+          current_user: current_user
         }
       else
         errors = {password: "invalid"}
         error_messages = ["Invalid password"]
         render json: {
-          errors: errors,
-          errorElem: render_to_string(partial:"shared/error", locals: { error_messages: error_messages })
+          success: false,
+          errors: errors
         }
       end
     else
       errors = {email: "unrecognized"}
       error_messages = ["Unrecognized email"]
       render json: {
-        errors: errors,
-        errorElem: render_to_string(partial:"shared/error", locals: { error_messages: error_messages })
+        success: false,
+        errors: errors
       }
     end  
   end
@@ -42,9 +43,7 @@ class SessionsController < ApplicationController
   def destroy
     session.clear
     render json:{
-      success: true,
-      pageElem: render_to_string(partial: "shared/landing"),
-      navElem: render_to_string(partial: "shared/nav_loggedout")
+      success: true
     }
   end
 

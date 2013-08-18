@@ -18,7 +18,8 @@ class UsersController < ApplicationController
       @user.create_geocode(lat: params[:lat].to_f,
                            lng: params[:lng].to_f)
       render json:{
-        success: true
+        success: true,
+        current_user: current_user
       }
     end
   end
