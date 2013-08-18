@@ -12,7 +12,7 @@ Map.prototype = {
   generate: function() {
     var latLng = new google.maps.LatLng(this.lat, this.lng);
     var mapOptions = {
-      zoom: 12,
+      zoom: 13,
       center: latLng,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       scrollwheel: false
