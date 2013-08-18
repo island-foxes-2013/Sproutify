@@ -1,9 +1,7 @@
 require 'spec_helper'
 
 feature 'Login', js: true do
-  before(:all) {
-    @user = create(:user)
-  }
+  before(:all) { @user = create(:user) }
 
   context "from the landing page" do
     before(:each) {visit root_path}
