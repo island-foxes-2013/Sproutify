@@ -54,10 +54,11 @@ class HomeController < ApplicationController
   end
 
   def find_users
-    ap params
 
     search = Geocode.search do
-      with(:location).in_radius(params[:lat], params[:lng], 10)
+      with(:location).in_bounding_box([params[:ulat], params[:ulng]],
+                                      [params[:blat], params[:blng]])
+      paginate :page => 1, :per_page => 100
     end
 
     local_users = []

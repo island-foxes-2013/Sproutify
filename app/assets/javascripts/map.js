@@ -27,10 +27,10 @@ Map.prototype = {
     var self = this;
     map = this.map;
     google.maps.event.addListener(map, 'idle', function() {
-      var center = map.getCenter();
-      lat = center.mb;
-      lng = center.nb;
-      searcher.fetch(lat, lng, function(gardens) {
+      var bounds = map.getBounds();
+      var boundary = {ulat: bounds.ea.b, ulng: bounds.ia.b, blat: bounds.ea.d, blng: bounds.ia.d}
+      console.log(boundary);
+      searcher.fetch(boundary, function(gardens) {
         $.each(gardens, function(index) {
           self.placeGarden(gardens[index]);
         });
