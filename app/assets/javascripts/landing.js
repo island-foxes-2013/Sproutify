@@ -45,11 +45,11 @@ function getLocalInfo(location, callBack) {
     if (result.user_count !== 0) {
       $('.user_count').append("<h4>In your area,</h4>").hide().fadeIn();
 
-      for (var i = 0; i < 5; i++) {
+      for (var i = 0; i < result.crops_available.length; i++) {
         $('.available').append("<p>"+ result.crops_available[i].count+ " people have " + result.crops_available[i].name.toLowerCase() +" available!</p>").hide().fadeIn();
       }
 
-      for (var i = 0; i< 5; i++) {
+      for (var i = 0; i< result.crops_demanded.length; i++) {
         $('.demanded').append("<p>"+ result.crops_demanded[i].count+ " people want " + result.crops_demanded[i].name.toLowerCase() + "!</p>").hide().fadeIn();
       }
     }
