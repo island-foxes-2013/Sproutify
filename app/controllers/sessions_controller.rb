@@ -44,7 +44,7 @@ class SessionsController < ApplicationController
   def destroy
     session.clear
     render json:{
-      status: true,
+      success: true,
       pageElem: render_to_string(partial: "shared/landing"),
       navElem: render_to_string(partial: "shared/nav_loggedout")
     }

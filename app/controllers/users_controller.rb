@@ -10,16 +10,15 @@ class UsersController < ApplicationController
     @user.save
     if @user.errors.any?
       render json: {
-        errors: @user.errors,
-        errorElem: render_to_string(partial:"shared/error", locals: { error_messages: @user.errors.full_messages })
+        success: false,
+        errors: @user.errors
       }
     else
       self.current_user = @user
       @user.create_geocode(lat: params[:lat].to_f,
                            lng: params[:lng].to_f)
       render json:{
-        pageElem: render_to_string(partial: "shared/main"),
-        navElem: render_to_string(partial: "shared/nav_loggedout")
+        success: true
       }
     end
   end
