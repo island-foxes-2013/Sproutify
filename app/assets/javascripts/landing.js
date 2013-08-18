@@ -43,14 +43,14 @@ function getLocalInfo(location, callBack) {
     $('.user_count').append("<h3>There are "+ result.user_count +" gardeners near you!</h3>")
     $('.user_count').hide().fadeIn();
     if (result.user_count !== 0) {
-      $('.user_count').append("<h4>In your area,</h4>").hide().fadeIn(1000);
+      $('.user_count').append("<h4>In your area,</h4>").hide().fadeIn();
 
       for (var i = 0; i < 5; i++) {
-        $('.available').append("<p>"+ result.crops_available[i].count+ " people have " + result.crops_available[i].name.toLowerCase() +" available!</p>").hide().fadeIn(2000);
+        $('.available').append("<p>"+ result.crops_available[i].count+ " people have " + result.crops_available[i].name.toLowerCase() +" available!</p>").hide().fadeIn();
       }
 
       for (var i = 0; i< 5; i++) {
-        $('.demanded').append("<p>"+ result.crops_demanded[i].count+ " people want " + result.crops_demanded[i].name.toLowerCase() + "!</p>").hide().fadeIn(2000);
+        $('.demanded').append("<p>"+ result.crops_demanded[i].count+ " people want " + result.crops_demanded[i].name.toLowerCase() + "!</p>").hide().fadeIn();
       }
     }
     callBack();

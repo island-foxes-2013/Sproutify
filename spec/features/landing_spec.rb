@@ -22,6 +22,7 @@ describe "Landing Page", js:true do
     describe "feed" do
       include SolrSpecHelper
       let(:user) { FactoryGirl.create(:user) }
+      let(:crop) { Crop.new(name: "Corn")}
 
       before { solr_setup }
 
@@ -35,7 +36,12 @@ describe "Landing Page", js:true do
       end
 
       it "should list what users in that area are growing" do
-        pending "need solr rspec connection"
+        user.supplies.create(crop: crop)
+        Sunspot.commit
+        fill_in "zip", with: "94122"
+        click_button "Check"
+        sleep(4)
+        expect(page).to have_content "corn available"
       end
 
       it "should list 0 users when no matches" do
