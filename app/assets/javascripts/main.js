@@ -114,9 +114,10 @@ Geocoder.prototype.fetch = function(user_location, successCallback) {
 }
 
 // MAIN MANAGER
-function MainManager() {
+function MainManager(user_data) {
   this.showMap();
-  var map = new Map(document.getElementById('map-canvas'), 37, -120);
+  console.log(user_data);
+  var map = new Map(document.getElementById('map-canvas'), user_data.user_lat, user_data.user_lng);
 }
 
 MainManager.prototype.showMap = function() {

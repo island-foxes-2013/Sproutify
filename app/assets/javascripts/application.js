@@ -21,6 +21,10 @@
 ///////////////////
 // DOCUMENT READY
 $(function() {
+
+  // JUST FOR NOW
+  // $('body').append("<div id='main-body'></div>");
+
   // setLocationFromPlugin();
 
   // new LandingManager();
@@ -34,7 +38,17 @@ $(function() {
 
   // Begin handlebars
   $.get('/sessions').done(function(data){
+    console.log(data);
     $("body").html(HandlebarsTemplates['static'](data));
-  })
+    $('body').append("<div id='main-body'></div>");
+    if (data.logged_in == false) {
+      console.log('true');
+      new MainManager(data);
+    }
+    else {
+      console.log('false');
+      new LandingManager();
+    }
+  });
   
 });
