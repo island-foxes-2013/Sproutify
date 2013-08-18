@@ -23,6 +23,11 @@ html, body {
   }
 }
 
+#map-canvas {
+  height: 400px;
+  width: 400px;
+}
+
 .signup-link {
   font-size: 600%;
   position: absolute;
@@ -33,3 +38,4 @@ html, body {
   display: none;
   text-align: center;
 }
+

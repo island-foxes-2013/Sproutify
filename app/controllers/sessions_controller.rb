@@ -2,10 +2,17 @@ class SessionsController < ApplicationController
   skip_before_filter :require_login, except: [:destroy]
 
   def index
-    render json: {
-      logged_in: logged_in?,
-      current_user: current_user
-    }
+    if logged_in?
+      render json: {
+        logged_in: logged_in?,
+        user_lat: current_user.geocode.lat,
+        user_lng: current_user.geocode.lng
+      }
+    else
+      render json: {
+        logged_in: logged_in?
+      }
+    end
   end
 
   def new
@@ -45,6 +52,15 @@ class SessionsController < ApplicationController
     render json:{
       success: true
     }
+  end
+
+  def user_data
+    if logged_in?
+      render json: {
+        user_lat: current_user.geocode.lat,
+        user_lng: current_user.geocode.lng
+      } 
+    end
   end
 
 end

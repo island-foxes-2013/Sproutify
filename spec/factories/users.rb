@@ -5,8 +5,8 @@ FactoryGirl.define do
     first_name 	{Faker::Name.first_name}
     last_name 	{Faker::Name.last_name}
     email 			{Faker::Internet.email}
-    password 		"meangreen"
-    password_confirmation "meangreen"
+    password 		{Faker::Internet.password}
+    password_confirmation {|u| u.password}
   end
 
   factory :invalid_user, parent: :user do
