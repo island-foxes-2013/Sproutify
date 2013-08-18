@@ -12,12 +12,17 @@ class HomeController < ApplicationController
     search = Geocode.search do
       with(:location).in_radius(params[:lat], params[:lng], 10)
     end
-
+    # it "has a search radius of 10"
+    # it "shuffles the results"
+    # context "when there are no results"
+    #   it "returns blablabla"
+    # context "when there are multiple pages of results"
+    # context ""
     crops_available = []
     crops_demanded = []
 
     search.results.shuffle.each do |result|
-      user = User.find_by_id(result[:user_id])
+      user = result.user
       supplies = user.supplies
       demands = user.demands
 
@@ -60,7 +65,9 @@ class HomeController < ApplicationController
     search.results.each do |result|
       hit = { user: result.user,
               lat:  result.lat,
-              lng:  result.lng }
+              lng:  result.lng,
+              supplies: result.user.supplies.map{|supply| supply.crop.name},
+              demands: result.user.demands.map{|demand| demand.crop.name} }
       local_users << hit
     end
 
