@@ -29,5 +29,27 @@ class HomeController < ApplicationController
 
     render json: { count: search.results.count, crops_available: crops_available }
   end
+
+  def find_users
+    ap params
+
+    search = Geocode.search do
+      with(:location).in_radius(params[:lat], params[:lng], 10)
+    end
+
+    local_users = []
+
+    search.results.each do |result|
+      hit = { user: result.user,
+              lat:  result.lat,
+              lng:  result.lng }
+      local_users << hit
+    end
+
+    respond_to do |format|
+      format.json { render :json => local_users }
+    end
+
+  end
   
 end

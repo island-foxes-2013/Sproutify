@@ -43,25 +43,27 @@
 //   }
 // }
 
-// ////////////////
-// //GARDENERCODER
-// function GardenSearcher() {
-// }
+////////////////
+//GARDENERCODER
+function GardenSearcher() {
+};
 
-// GardenSearcher.prototype = {
-//   fetch: function(lat, lng, successCallback, failureCallback) {
-//     //Some code that turns lat, lng into sunspot-accepting data
-//     $.ajax({
-//       url: '/fetch',
-//       type: 'get'
-//     }).done(function(gardens) {
-//       gardens = $.map(gardens, function(k, garden){
-//         return new Garden(garden);
-//       });
-//       successCallback(gardens);
-//     });
-//   }
-// }
+GardenSearcher.prototype = {
+  fetch: function(lat, lng, successCallback, failureCallback) {
+    console.log(lat);
+    //Some code that turns lat, lng into sunspot-accepting data
+    $.ajax({
+      url: '/find_users',
+      type: 'get',
+      data: {lat: lat, lng: lng}
+    }).done(function(gardens) {
+      console.log("hi", gardens);
+      // gardens = $.map(gardens, function(k, garden){
+      //   return new Garden(garden);
+    });
+      // successCallback(gardens);
+  }
+}
 
 
 ////////
@@ -118,6 +120,8 @@ function MainManager(user_data) {
   this.showMap();
   console.log(user_data);
   var map = new Map(document.getElementById('map-canvas'), user_data.user_lat, user_data.user_lng);
+  var searcher = new GardenSearcher();
+  searcher.fetch(user_data.user_lat, user_data.user_lng);
 }
 
 MainManager.prototype.showMap = function() {
