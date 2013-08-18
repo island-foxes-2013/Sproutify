@@ -11,12 +11,13 @@ Sproutify::Application.routes.draw do
   resources :demands, only: [:create, :index, :destroy]
 
 
-  resources :sessions, only: [:index, :new, :create, :destroy]
+  resources :sessions, only: [:index, :new, :create]
 
+  delete '/sessions', to: 'sessions#destroy'
 
   get 'fetch', to: 'home#fetch'
 
   get 'find_users', to: 'home#find_users'
 
-
+  get 'user_data', to: 'sessions#user_data'
 end

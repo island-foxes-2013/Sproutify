@@ -5,14 +5,12 @@ class SessionsController < ApplicationController
     if logged_in?
       render json: {
         logged_in: logged_in?,
-        user_lat: current_user.lat,
-        user_lng: current_user.lng
+        user_lat: current_user.geocode.lat,
+        user_lng: current_user.geocode.lng
       }
     else
       render json: {
-        logged_in: logged_in?,
-        user_lat: 37.792439,
-        user_lng: -122.40656
+        logged_in: logged_in?
       }
     end
   end
@@ -54,6 +52,15 @@ class SessionsController < ApplicationController
     render json:{
       success: true
     }
+  end
+
+  def user_data
+    if logged_in?
+      render json: {
+        user_lat: current_user.geocode.lat,
+        user_lng: current_user.geocode.lng
+      } 
+    end
   end
 
 end

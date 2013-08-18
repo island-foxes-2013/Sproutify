@@ -1,6 +1,7 @@
 ////////////////////
 // LANDING MANAGER
 function LandingManager() {
+  $("#main-body").html(HandlebarsTemplates['landing']());
 
   $('body').on('click', '#submit', function(event) {
     event.preventDefault();

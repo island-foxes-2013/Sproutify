@@ -1,2 +1,2 @@
 %li
-  %a.logout-link{href: "/sessions/{{current_user.id}}", "data-method"=>"delete", "data-remote" => "true", rel:"nofollow"} Logout
+  %a.logout-link{href: "/sessions", "data-method"=>"delete", "data-remote" => "true", rel:"nofollow"} Logout
