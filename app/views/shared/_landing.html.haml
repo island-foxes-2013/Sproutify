@@ -1,13 +1,13 @@
 .container
-  .h1 Find Gardeners near you
+  %h3 Find Gardeners near you
   =form_for :landing, html:{role: "form"} do |f|
     .form-group=f.text_field(:location, placeholder: "Street Address", class: "form-control", id:'address')
     .form-group=f.text_field(:location, placeholder: "Zip Code", class: "form-control", id:'zip')
     =f.submit "Submit", class: "btn btn-primary", id: "submit"
 
-
-%p=link_to "Signup", '#', remote: true, class: "btn btn-primary signup-link"
-%p=link_to "Login", '#', remote: true, class: "btn btn-primary login-link"
+.signup-link
+  =link_to "Signup!", '#', remote: true, class: "btn btn-success signup-link"
+/ %p=link_to "Login", '#', remote: true, class: "btn btn-primary login-link"
 
 %input{type: "hidden", id: "hidden_lat"}
 %input{type: "hidden", id: "hidden_lng"}

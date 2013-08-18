@@ -6,10 +6,18 @@ function LandingManager() {
     event.preventDefault();
     var geocoder = new Geocoder();
     geocoder.fetch(getLocation(), function(location) {
-      getLocalInfo(location);
+      clearResults();
+      getLocalInfo(location, function() {
+        $('.signup-link').fadeIn();
+      });
     });
   });
 
+}
+
+function clearResults() {
+  $('.container h3').remove();
+  $('.container ul').remove();
 }
 
 function getLocation(){
@@ -20,20 +28,29 @@ function setLocationFromPlugin(){
   $('#location').val(geoplugin_city());
 }
 
-function getLocalInfo(location) {
+function getLocalInfo(location, callBack) {
   $.ajax({
     url: "/fetch",
     type: "get",
     data: { lat: location.lat, lng: location.lng}
   }).done(function(result) {
+
     $('#hidden_lat').attr("value", location.lat);
     $('#hidden_lng').attr("value", location.lng);
-    $('.container').append("<p>There are "+ result.count +" gardeners in your area!</p>")
-    $('.container').append("<ul>These are some crops available in your area:</ul>")
-    for (var i in result.crops_available) {
-      $('.container ul').append("<li>"+ result.crops_available[i] +"</li>")
+    $('.container').append("<h3>There are "+ result.user_count +" gardeners in your area!</h3>")
+    $('.container h3').hide().fadeIn();
+    if (result.user_count !== 0) {
+      $('.container').append("<ul>In your area,</ul>")
+
+      for (var i = 0; i < 5; i++) {
+        $('.container ul').append("<li>"+ result.crops_available[i].count+ " people have " + result.crops_available[i].name.toLowerCase() +" available!</li>").hide().fadeIn();
+      }
+
+      for (var i = 0; i< 5; i++) {
+        $('.container ul').append("<li>"+ result.crops_demanded[i].count+ " people want " + result.crops_demanded[i].name.toLowerCase() + "!</li>").hide().fadeIn();
+      }
     }
-    
+    callBack();
   });
 }
 
@@ -77,12 +94,11 @@ SessionManager.prototype = {
       $("#login-modal").on('hidden.bs.modal', function(){
         $("#main-body").empty().append(response.pageElem);
         $(".navbar-right").empty().append(response.navElem);
-      });    
+      });
     }
-
     this.bindLogoutEvents();
-    
   },
+  
   logout: function(response){
     if (response.status === true){
       if (response.hasOwnProperty("pageElem")){
@@ -134,6 +150,7 @@ SessionManager.prototype = {
       self.logout(response);
     });
   }
+
 
 };
 
