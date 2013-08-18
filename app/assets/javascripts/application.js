@@ -42,25 +42,9 @@ $(function() {
   
   $("body").on("initialLoadDone", function(){
     session.bindEvents();
-
-    //GREG
-    $('#add-supplies-form').on('ajax:success', function(e, response, xhr, element){
-      $.ajax({
-        url: '/supplies',
-        type: 'GET'
-      }).done(function(response){
-      $('.user-supplies').html(HandlebarsTemplates['current_supply'](response))
-      $('input:first-child').val('');
-    });
   });
-
-  });
-
-
-
-
-  
 });
+
 
 function SessionManager(){}
 
