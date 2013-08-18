@@ -1,0 +1,3 @@
+{{#each supplies}}
+%li {{this}}
+{{/each}}

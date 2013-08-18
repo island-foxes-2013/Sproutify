@@ -3,18 +3,21 @@ class SuppliesController < ApplicationController
 
 	def index
 		user = !params[:user_id].nil? ? User.find_by_id(params[:user_id]) : current_user
-		@supplies = user.supplies.all
-		render json: {
-		  supply_partial: render_to_string(partial:"shared/current_supply", locals: { current_supply: @supplies, user: user })
-		}
+		supply_sentences = []
+		
+		user.supplies.all.each do |supply|
+			crop = Crop.find_by_id(supply.crop_id)
+			status = Status.find_by_id(supply.status_id)
+			supply_sentences << "#{crop.name}'s current status is #{status ? status.name : 'empty'}"
+		end
+
+		render json: { supplies: supply_sentences }
 	end
 
-
   def create
-  	crop = Crop.find_or_create_by_name(params[:crop_name])
-  	status = Status.create(name: params[:status])
+  	crop = Crop.find_or_create_by_name(params[:crop_name].first)
+  	status = Status.create(name: params[:status].first)
   	supply = current_user.supplies.create(crop: crop, status: status)
-
   	render json: { supply: supply, crop: crop.name, status: status.name }
   end
 

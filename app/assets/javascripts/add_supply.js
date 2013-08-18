@@ -5,9 +5,11 @@ $(function() {
 			type: 'GET'
 		}).done(function(response){
 			$('.user-supplies').empty();
-			$('.user-supplies').append(response.supply_partial)
+			console.log(response);
+			$('.user-supplies').html(HandlebarsTemplates['current_supply'](response))
+			// $('.user-supplies').append(response.supply_partial)
+
 			$('form-control').val('');
-			// $('form-control:first-child').focus();
 		});
 	});
 });
