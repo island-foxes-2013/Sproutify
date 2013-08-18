@@ -8,7 +8,7 @@ describe Geocode do
 
   let(:user) {FactoryGirl.create(:user)}
   let(:geocode) {FactoryGirl.build(:geocode)}
-
+  
   describe "#initialize" do
 
     context "valid data" do
