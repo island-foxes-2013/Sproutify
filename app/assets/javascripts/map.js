@@ -17,8 +17,7 @@ Map.prototype = {
       mapTypeId: google.maps.MapTypeId.ROADMAP
     }
     this.map = new google.maps.Map(this.element, mapOptions);
-    console.log('made it here');
-    this.info_window = new google.maps.InfoWindow({
+    this.map.info_window = new google.maps.InfoWindow({
       content: "placeholder"
     });
   },
@@ -34,6 +33,7 @@ function GardenMarker(map, garden) {
   this.map = map;
   this.garden = garden;
   this.place(map, garden.lat(), garden.lng());
+  console.log(garden.demandedCrops());
 }
 
 GardenMarker.prototype = {
@@ -42,7 +42,14 @@ GardenMarker.prototype = {
     var marker = new google.maps.Marker({
         map: map,
         position: latLng,
-        title: this.garden.username()
+        title: this.garden.username() + this.garden.demandedCrops()
+    });
+
+    console.log(map.info_window);
+
+    google.maps.event.addListener(marker, 'click', function() {
+      map.info_window.setContent(marker.title);
+      map.info_window.open(this.map, this);
     });
   }
 }
