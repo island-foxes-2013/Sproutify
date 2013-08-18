@@ -6,6 +6,6 @@ class User < ActiveRecord::Base
   has_many :demands
   validates_presence_of :first_name, :last_name, :email, :password, :password_confirmation
   validates_uniqueness_of :email
-  
+
   after_validation { self.errors.messages.delete(:password_digest) }
 end

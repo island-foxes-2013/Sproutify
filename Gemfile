@@ -44,7 +44,7 @@ group :development, :test do
   gem 'launchy'
   gem 'simplecov', require: false
   gem 'quiet_assets'
-  gem 'rspec-solr'
+  gem 'debugger'
 end
 
 gem 'rsolr'
