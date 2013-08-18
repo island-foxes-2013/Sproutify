@@ -11,6 +11,7 @@ class UsersController < ApplicationController
     if @user.errors.any?
       render json: {
         success: false,
+        logged_in: false,
         errors: @user.errors
       }
     else
@@ -19,6 +20,8 @@ class UsersController < ApplicationController
                            lng: params[:lng].to_f)
       render json:{
         success: true,
+        user: @user,
+        logged_in: true,
         current_user: current_user
       }
     end

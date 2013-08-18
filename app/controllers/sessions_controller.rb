@@ -27,14 +27,14 @@ class SessionsController < ApplicationController
       if @authenticated_user
         self.current_user = @authenticated_user
         render json:{
-          success: true,
-          current_user: current_user
+          logged_in: true,
+          user: current_user
         }
       else
         errors = {password: "invalid"}
         error_messages = ["Invalid password"]
         render json: {
-          success: false,
+          logged_in: false,
           errors: errors
         }
       end
@@ -42,7 +42,7 @@ class SessionsController < ApplicationController
       errors = {email: "unrecognized"}
       error_messages = ["Unrecognized email"]
       render json: {
-        success: false,
+        logged_in: false,
         errors: errors
       }
     end  
@@ -51,7 +51,7 @@ class SessionsController < ApplicationController
   def destroy
     session.clear
     render json:{
-      success: true
+      logged_in: false
     }
   end
 

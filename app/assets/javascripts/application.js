@@ -37,7 +37,7 @@ $(function() {
       $(".navbar-right").html(HandlebarsTemplates['nav_loggedout']());
       new LandingManager();
     }
-    
+
   });
   
 });
