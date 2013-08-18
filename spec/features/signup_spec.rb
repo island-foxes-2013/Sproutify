@@ -1,38 +1,71 @@
 require 'spec_helper'
 
-feature 'Login' do
+describe "Sign up" do
 
   context "from the landing page" do
+    # before do
+    #   visit root_url
+    # end
 
-    it "has a login link"
+    # subject { page }
 
-    context "after clicking the login link" do
+    it "has a Signup link"
+
+    context "after clicking the signup link" do
 
       it "user stays on the landing page"
+
+      it "has a field for first name"
+
+      it "has a field for last name"
 
       it "has a field for username"
 
       it "has a field for password"
 
-      context "when visitor logs in correctly" do
-      
-        it "user is redirected to main page"
+      context "if proper signup information provided" do
+
+        it "redirects to main page"
 
       end
 
-      context "when visitor logs in with unknown email" do
+      context "if an invalid email is submitted" do
 
-        it "user is shown 'Can't find that email' error"
+        it "user stays on the landing page"
 
-        it "user stays on landing page"
+        it "user fields stay filled in"
+
+        it "user is shown 'invalid email' error"
 
       end
 
-      context "when visitor logs in with invalid password" do
+      context "if email is left blank" do
 
-        it "user is shown 'Invalid password' error"
+        it "user stays on the landing page"
 
-        it "user statys on landing page"
+        it "user fields stay filled in"
+
+        it "user is shown 'email blank' error"
+
+      end
+
+      context "if username is left blank" do
+
+        it "user stays on the landing page"
+
+        it "user fields stay filled in"
+
+        it "user is shown 'username blank' error"
+
+      end
+
+      context "if password is left blank" do
+
+        it "user stays on the landing page"
+
+        it "user fields stay filled in"
+
+        it "user is shown 'password blank' error"
 
       end
 
