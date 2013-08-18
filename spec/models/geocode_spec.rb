@@ -38,5 +38,11 @@ describe Geocode do
         expect(Geocode.find_local_users(37.786453, -122.418015, 10).last).to eq user
       end
     end
+
+    context "when there are no results" do
+      it "should return an empty array" do
+        expect(Geocode.find_local_users(0, 0, 0)).to eq []
+      end
+    end
   end
 end
