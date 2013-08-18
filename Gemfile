@@ -44,6 +44,7 @@ group :development, :test do
   gem 'launchy'
   gem 'simplecov', require: false
   gem 'quiet_assets'
+  gem 'debugger'
 end
 
 gem 'sunspot_rails'
