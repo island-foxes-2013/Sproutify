@@ -11,7 +11,7 @@ Sproutify::Application.routes.draw do
   resources :demands, only: [:create, :index, :destroy]
 
 
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :sessions, only: [:index, :new, :create, :destroy]
 
 
   get 'fetch', to: 'home#fetch'

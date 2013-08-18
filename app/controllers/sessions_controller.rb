@@ -2,6 +2,12 @@ require 'debugger'
 class SessionsController < ApplicationController
   skip_before_filter :require_login, except: [:destroy]
 
+  def index
+    render json: {
+      logged_in: logged_in?
+    }
+  end
+
   def new
     @user = User.new
   end
