@@ -34,7 +34,14 @@ $(function() {
 
   // Begin handlebars
   $.get('/sessions').done(function(data){
-    $("body").html(HandlebarsTemplates['static'](data));
+    $("body").html(HandlebarsTemplates['static']());
+    if (data.logged_in){
+      $(".navbar-right").html(HandlebarsTemplates['nav_loggedin']());
+      $("#main-body").html(HandlebarsTemplates['main']());
+    } else {
+      $(".navbar-right").html(HandlebarsTemplates['nav_loggedout']());
+      $("#main-body").html(HandlebarsTemplates['landing']());
+    }
     $("body").trigger("initialLoadDone");
   });
 
@@ -57,7 +64,7 @@ SessionManager.prototype = {
       // after modal hidden, render handlebar templates
       $("#signup-modal").on('hidden.bs.modal', function(){
         $("#main-body").html(HandlebarsTemplates['_main']());
-        $(".navbar-right").empty().append(HandlebarsTemplates['_nav_loggedout']());
+        $(".navbar-right").html(HandlebarsTemplates['nav_loggedout']());
       }); 
     } else {
 
@@ -82,7 +89,7 @@ SessionManager.prototype = {
       // after modal hidden, render handlebar templates
       $("#login-modal").on('hidden.bs.modal', function(){
         $("#main-body").html(HandlebarsTemplates['_main']());
-        $(".navbar-right").empty().append(HandlebarsTemplates['_nav_loggedout']());
+        $(".navbar-right").html(HandlebarsTemplates['_nav_loggedout']());
       }); 
     } else {
       // empty fields where there is an error

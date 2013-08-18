@@ -1,4 +1,3 @@
-require 'debugger'
 class SessionsController < ApplicationController
   skip_before_filter :require_login, except: [:destroy]
 
@@ -17,7 +16,6 @@ class SessionsController < ApplicationController
     if @user
       @authenticated_user = @user.authenticate(params[:session][:password])
       if @authenticated_user
-        debugger
         self.current_user = @authenticated_user
         render json:{
           pageElem: render_to_string(partial: "shared/main"),
