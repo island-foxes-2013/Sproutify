@@ -4,10 +4,7 @@ class HomeController < ApplicationController
   def index
     @user = User.new if !logged_in?
     render partial: "shared/static", layout: "application"
-  end
-
-  def main
-
+    # render partial: "shared/landing", layout: "application"
   end
 
   def fetch

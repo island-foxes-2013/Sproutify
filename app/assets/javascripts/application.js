@@ -22,6 +22,32 @@
 // DOCUMENT READY
 $(function() {
   // setLocationFromPlugin();
-  new LandingManager();
-  bindEvents();
+
+  // new LandingManager();
+  // session = new SessionManager();
+  // session.bindAll();
+
+  // $("#testing").on("ajax:success", function(event, data, status, xhr) {
+  //   console.log(data)
+  //   $("#test").html(HandlebarsTemplates['home'](data));
+  // });
+
+  // Begin handlebars
+  $.get('/sessions').done(function(data){
+    $("body").html(HandlebarsTemplates['static'](data));
+    $("body").trigger("initialLoadDone");
+  });
+  
+  $("body").on("initialLoadDone", function(){
+    $("body").on("ajax:beforeSend", ".signup-link", function(){
+      $("#signup-modal").modal();
+      return false;
+    });
+
+    $("body").on("ajax:beforeSend", ".login-link", function(){
+      $("#login-modal").modal();
+      return false;
+    });
+  });
+  
 });

@@ -1,8 +1,10 @@
 class SuppliesController < ApplicationController
 	skip_before_filter :require_login
 
+  respond_to :json
+
 	def index
-		@supplies = User.find(params[:user_id]).supplies.all
+    @supplies = User.find(params[:user_id]).supplies.all
 	end
 
 
