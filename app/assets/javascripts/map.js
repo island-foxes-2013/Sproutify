@@ -12,13 +12,13 @@ Map.prototype = {
   generate: function() {
     var latLng = new google.maps.LatLng(this.lat, this.lng);
     var mapOptions = {
-      zoom: 12,
+      zoom: 13,
       center: latLng,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      scrollwheel: false
     }
     this.map = new google.maps.Map(this.element, mapOptions);
-    console.log('made it here');
-    this.info_window = new google.maps.InfoWindow({
+    this.map.info_window = new google.maps.InfoWindow({
       content: "placeholder"
     });
   },
@@ -42,7 +42,20 @@ GardenMarker.prototype = {
     var marker = new google.maps.Marker({
         map: map,
         position: latLng,
-        title: this.garden.username()
+        title: this.garden.username(),
+        garden: this.garden
     });
+
+    self = this;
+    google.maps.event.addListener(marker, 'click', function() {
+      map.info_window.setContent(self.renderInfoContent(this.garden));
+      map.info_window.open(this.map, this);
+    });
+  },
+  renderInfoContent: function(garden) {
+    var gardenLiteral = { name: garden.username(),
+                          supplies: garden.suppliedCrops(),
+                          demands: garden.demandedCrops() }
+    return HandlebarsTemplates['infowindow'](gardenLiteral);
   }
 }

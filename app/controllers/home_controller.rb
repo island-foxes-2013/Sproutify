@@ -39,7 +39,9 @@ class HomeController < ApplicationController
     search.results.each do |result|
       hit = { user: result.user,
               lat:  result.lat,
-              lng:  result.lng }
+              lng:  result.lng,
+              supplies: result.user.supplies.map{|supply| supply.crop.name},
+              demands: result.user.demands.map{|demand| demand.crop.name} }
       local_users << hit
     end
 
