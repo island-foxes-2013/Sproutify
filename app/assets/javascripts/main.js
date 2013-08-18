@@ -5,14 +5,14 @@ function MainManager() {
     self.showMap();
     console.log(user_data);
     var map = new Map(document.getElementById('map-canvas'), user_data.user_lat, user_data.user_lng);
-    var searcher = new GardenSearcher();
-    var lat = user_data.user_lat;
-    var lng = user_data.user_lng;
-    searcher.fetch(lat, lng, function(gardens) {
-      $.each(gardens, function(index) {
-        map.placeGarden(gardens[index]);
-      });
-    });
+    // var searcher = new GardenSearcher();
+    // var lat = user_data.user_lat;
+    // var lng = user_data.user_lng;
+    // searcher.fetch(lat, lng, function(gardens) {
+    //   $.each(gardens, function(index) {
+    //     map.placeGarden(gardens[index]);
+    //   });
+    // });
   });
 }
 

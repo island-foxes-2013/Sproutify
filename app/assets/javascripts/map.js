@@ -21,6 +21,21 @@ Map.prototype = {
     this.map.info_window = new google.maps.InfoWindow({
       content: "placeholder"
     });
+
+    var searcher = new GardenSearcher();
+
+    var self = this;
+    map = this.map;
+    google.maps.event.addListener(map, 'idle', function() {
+      var center = map.getCenter();
+      lat = center.mb;
+      lng = center.nb;
+      searcher.fetch(lat, lng, function(gardens) {
+        $.each(gardens, function(index) {
+          self.placeGarden(gardens[index]);
+        });
+      });
+    });
   },
   placeGarden: function(garden) {
     var gardenMarker = new GardenMarker(this.map, garden)
@@ -50,6 +65,7 @@ GardenMarker.prototype = {
     google.maps.event.addListener(marker, 'click', function() {
       map.info_window.setContent(self.renderInfoContent(this.garden));
       map.info_window.open(this.map, this);
+      console.log(this.map.getBounds());
     });
   },
   renderInfoContent: function(garden) {
