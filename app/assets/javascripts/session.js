@@ -1,4 +1,16 @@
-function SessionManager(){}
+function SessionManager(data){
+  new Session(data);
+  new SessionView();
+  this.bindEvents();
+}
+
+function Session(data){
+  this.logged_in = data.logged_in
+}
+
+function SessionView(){
+  
+}
 
 SessionManager.prototype = {
   signup: function(response){
