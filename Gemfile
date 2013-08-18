@@ -43,7 +43,6 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'launchy'
   gem 'simplecov', require: false
-  gem 'debugger'
   gem 'quiet_assets'
 end
 

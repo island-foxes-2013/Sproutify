@@ -1,7 +1,3 @@
 {{> _nav}}
 
 #main-body
-  = hb 'if logged_in' do
-    = hb '> _main'
-    = hb 'else'
-    = hb '> _landing'
