@@ -1,2 +1,0 @@
-%li
-  %a.logout-link{href: "/sessions", "data-method"=>"delete", "data-remote" => "true", rel:"nofollow"} Logout
