@@ -33,7 +33,6 @@ function GardenMarker(map, garden) {
   this.map = map;
   this.garden = garden;
   this.place(map, garden.lat(), garden.lng());
-  console.log(garden.demandedCrops());
 }
 
 GardenMarker.prototype = {
@@ -42,14 +41,18 @@ GardenMarker.prototype = {
     var marker = new google.maps.Marker({
         map: map,
         position: latLng,
-        title: this.garden.username() + this.garden.demandedCrops()
+        title: this.garden.username(),
+        garden: this.garden
     });
 
-    console.log(map.info_window);
-
+    self = this;
     google.maps.event.addListener(marker, 'click', function() {
-      map.info_window.setContent(marker.title);
+      map.info_window.setContent(self.renderInfoContent(this.garden));
       map.info_window.open(this.map, this);
     });
+  },
+  renderInfoContent: function(garden) {
+    var gardenLiteral = {name: garden.username() }
+    return HandlebarsTemplates['infowindow'](gardenLiteral);
   }
 }
