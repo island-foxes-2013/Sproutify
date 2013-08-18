@@ -14,7 +14,8 @@ Map.prototype = {
     var mapOptions = {
       zoom: 12,
       center: latLng,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      scrollwheel: false
     }
     this.map = new google.maps.Map(this.element, mapOptions);
     this.map.info_window = new google.maps.InfoWindow({
@@ -52,7 +53,9 @@ GardenMarker.prototype = {
     });
   },
   renderInfoContent: function(garden) {
-    var gardenLiteral = {name: garden.username() }
+    var gardenLiteral = { name: garden.username(),
+                          supplies: garden.suppliedCrops(),
+                          demands: garden.demandedCrops() }
     return HandlebarsTemplates['infowindow'](gardenLiteral);
   }
 }
