@@ -1,0 +1,4 @@
+%li
+  %a.signup-link{href: "#", "data-remote" => "true", rel:"nofollow"} Signup
+%li
+  %a.login-link{href: "#","data-remote" => "true", rel:"nofollow"} Login

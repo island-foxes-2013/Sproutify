@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
 
   def require_login
     if !logged_in?
-      flash[:error] = "You must be logged in to perform that action"
+      ap "*************You must be logged in to perform that action"
       render "home/landing"
     end
   end

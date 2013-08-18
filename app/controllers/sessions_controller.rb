@@ -1,5 +1,12 @@
+require 'debugger'
 class SessionsController < ApplicationController
   skip_before_filter :require_login, except: [:destroy]
+
+  def index
+    render json: {
+      logged_in: logged_in?
+    }
+  end
 
   def new
     @user = User.new
@@ -10,9 +17,11 @@ class SessionsController < ApplicationController
     if @user
       @authenticated_user = @user.authenticate(params[:session][:password])
       if @authenticated_user
+        debugger
         self.current_user = @authenticated_user
         render json:{
-          pageElem: render_to_string(partial: "shared/main")
+          pageElem: render_to_string(partial: "shared/main"),
+          navElem: render_to_string(partial: "shared/nav_loggedin")
         }
       else
         errors = {password: "invalid"}
@@ -34,7 +43,11 @@ class SessionsController < ApplicationController
 
   def destroy
     session.clear
-    redirect_to root_path
+    render json:{
+      status: true,
+      pageElem: render_to_string(partial: "shared/landing"),
+      navElem: render_to_string(partial: "shared/nav_loggedout")
+    }
   end
 
 end
