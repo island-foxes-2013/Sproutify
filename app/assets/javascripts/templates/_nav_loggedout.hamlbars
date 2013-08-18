@@ -1,2 +1,0 @@
-%li
-  %a.login-link{href: "#","data-remote" => "true", rel:"nofollow"} Login
