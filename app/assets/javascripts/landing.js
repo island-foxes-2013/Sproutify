@@ -2,13 +2,14 @@
 // LANDING MANAGER
 function LandingManager() {
 
-  $('#submit').on('click', function(event) {
+  $('body').on('click', '#submit', function(event) {
     event.preventDefault();
+    console.log('Landing Manager');
     var geocoder = new Geocoder();
     geocoder.fetch(getLocation(), function(location) {
       clearResults();
       getLocalInfo(location, function() {
-        $('.signup-link').fadeIn();
+        $('.signup-link').fadeIn(4000);
       });
     });
   });
@@ -16,8 +17,10 @@ function LandingManager() {
 }
 
 function clearResults() {
-  $('.container h3').remove();
-  $('.container ul').remove();
+  $('.user_count h3').remove();
+  $('.user_count h4').remove();
+  $('.available p').remove();
+  $('.demanded p').remove();
 }
 
 function getLocation(){
@@ -37,17 +40,17 @@ function getLocalInfo(location, callBack) {
 
     $('#hidden_lat').attr("value", location.lat);
     $('#hidden_lng').attr("value", location.lng);
-    $('.container').append("<h3>There are "+ result.user_count +" gardeners in your area!</h3>")
-    $('.container h3').hide().fadeIn();
+    $('.user_count').append("<h3>There are "+ result.user_count +" gardeners near you!</h3>")
+    $('.user_count').hide().fadeIn();
     if (result.user_count !== 0) {
-      $('.container').append("<ul>In your area,</ul>")
+      $('.user_count').append("<h4>In your area,</h4>").hide().fadeIn(1000);
 
       for (var i = 0; i < 5; i++) {
-        $('.container ul').append("<li>"+ result.crops_available[i].count+ " people have " + result.crops_available[i].name.toLowerCase() +" available!</li>").hide().fadeIn();
+        $('.available').append("<p>"+ result.crops_available[i].count+ " people have " + result.crops_available[i].name.toLowerCase() +" available!</p>").hide().fadeIn(2000);
       }
 
       for (var i = 0; i< 5; i++) {
-        $('.container ul').append("<li>"+ result.crops_demanded[i].count+ " people want " + result.crops_demanded[i].name.toLowerCase() + "!</li>").hide().fadeIn();
+        $('.demanded').append("<p>"+ result.crops_demanded[i].count+ " people want " + result.crops_demanded[i].name.toLowerCase() + "!</p>").hide().fadeIn(2000);
       }
     }
     callBack();

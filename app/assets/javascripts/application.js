@@ -23,7 +23,7 @@
 $(function() {
   // setLocationFromPlugin();
 
-  // new LandingManager();
+  new LandingManager();
   // session = new SessionManager();
   // session.bindAll();
 
