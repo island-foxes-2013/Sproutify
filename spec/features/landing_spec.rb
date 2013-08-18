@@ -23,9 +23,7 @@ describe "Landing Page", js:true do
       include SolrSpecHelper
       let(:user) { FactoryGirl.create(:user) }
 
-      before {
-        solr_setup
-      }
+      before { solr_setup }
 
       it "should list number of users in that area" do
         user.create_geocode(lat: 37.786453, lng: -122.418015)

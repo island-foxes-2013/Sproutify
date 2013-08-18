@@ -24,4 +24,19 @@ describe Geocode do
       end
     end
   end
+
+  describe "#find_local_users" do
+    include SolrSpecHelper
+    let(:user) {FactoryGirl.create(:user)}
+
+    before { solr_setup }
+
+    context "valid data" do
+      it "should return user objects" do
+        user.create_geocode(lat: 37.786453, lng: -122.418015)
+        Sunspot.commit
+        expect(Geocode.find_local_users(37.786453, -122.418015, 10).last).to eq user
+      end
+    end
+  end
 end
