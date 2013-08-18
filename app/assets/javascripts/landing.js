@@ -7,19 +7,17 @@ function LandingManager() {
     var geocoder = new Geocoder();
     geocoder.fetch(getLocation(), function(location) {
       clearResults();
-      getLocalInfo(location);
+      getLocalInfo(location, function() {
+        $('.signup-link').fadeIn();
+      });
     });
   });
 
 }
 
 function clearResults() {
-  $('.container h3').fadeOut( function() {
-    $(this).remove();
-  });
-  $('.container ul').fadeOut( function() {
-    $(this).remove();
-  });
+  $('.container h3').remove();
+  $('.container ul').remove();
 }
 
 function getLocation(){
@@ -30,7 +28,7 @@ function setLocationFromPlugin(){
   $('#location').val(geoplugin_city());
 }
 
-function getLocalInfo(location) {
+function getLocalInfo(location, callBack) {
   $.ajax({
     url: "/fetch",
     type: "get",
@@ -52,6 +50,7 @@ function getLocalInfo(location) {
         $('.container ul').append("<li>"+ result.crops_demanded[i].count+ " people want " + result.crops_demanded[i].name.toLowerCase() + "!</li>").hide().fadeIn();
       }
     }
+    callBack();
   });
 }
 
@@ -97,10 +96,9 @@ SessionManager.prototype = {
         $(".navbar-right").empty().append(response.navElem);
       });    
     }
-
     this.bindLogoutEvents();
-    
   },
+  
   logout: function(response){
     if (response.status === true){
       if (response.hasOwnProperty("pageElem")){
