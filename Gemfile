@@ -44,8 +44,10 @@ group :development, :test do
   gem 'launchy'
   gem 'simplecov', require: false
   gem 'quiet_assets'
+  gem 'rspec-solr'
 end
 
+gem 'rsolr'
 gem 'sunspot_rails'
 gem 'sunspot_solr'
 
