@@ -8,16 +8,51 @@ function Session(data){
   this.user = data.user;
 }
 
-function SessionView(session){
-  this.session = session;
+function SignupView(){
   this.bindEvents();
+  this.linkSelector = ".signup-link";
+  this.formSelector = "#new_user"
+  this.modalSelector = "signup-modal";
+  this.$parent = $("body");
+  this.$modal = $(this.modalSelector);
 }
 
-SessionView.prototype = {
+SignupView.prototype = {
+  bindEvents: function(){
+    var self = this;
+
+    // Clicking on signup link
+    this.$parent.on("ajax:beforeSend", this.linkSelector, function(){
+      self.showModal();
+      return false;
+    });
+
+    // After modal is hidden
+    this.$parent.on('hidden.bs.modal', this.modalSelector,  function(){
+      this.$modal.find('.alert').remove();
+    });
+
+    // Before sending signup info
+    this.$parent.on("ajax:beforeSend", this.formSelector, function(event, xhr, settings) {
+      settings.data += "&lat="+$('#hidden_lat').val();
+      settings.data += "&lng="+$('#hidden_lng').val();
+    });
+
+    // After signup info sent
+    this.$parent.on("ajax:success", this.formSelector, function(event, response, xhr, element){
+      self.signup(response);
+    });
+  },
+  showModal: function(){
+    this.$modal.modal();
+  },
+  hideModal: function(){
+    this.$modal.modal('hide');
+  },
   signup: function(response){
     if (response.success === true){
       // hide modal
-      $("#signup-modal").modal('hide');
+      this.hideModal();
 
       // after modal hidden, go to MainManager
       $("#signup-modal").on('hidden.bs.modal', function(){
@@ -40,6 +75,15 @@ SessionView.prototype = {
       $("#new_user").find(".modal-body").prepend(HandlebarsTemplates['error'](response));
     }
   },
+}
+
+function SessionView(session){
+  this.session = session;
+  this.bindEvents();
+}
+
+SessionView.prototype = {
+  
   login: function(response){
     if (response.success === true){
       // hide modal
@@ -70,26 +114,8 @@ SessionView.prototype = {
     }
   },
   bindEvents: function(){
-    this.bindSignupEvents();
     this.bindLoginEvents();
     this.bindLogoutEvents();
-  },
-  bindSignupEvents: function(){
-    var self = this;
-    $("body").on("ajax:beforeSend", ".signup-link", function(){
-      $("#signup-modal").modal();
-      return false;
-    });
-    $("body").on('hidden.bs.modal', "#signup-modal",  function(){
-      $(this).find('.alert').remove();
-    });
-    $("body").on("ajax:beforeSend", "#new_user", function(event, xhr, settings) {
-      settings.data += "&lat="+$('#hidden_lat').val();
-      settings.data += "&lng="+$('#hidden_lng').val();
-    });
-    $("body").on("ajax:success", "#new_user", function(event, response, xhr, element){
-      self.signup(response);
-    });
   },
   bindLoginEvents: function(){
     var self = this;

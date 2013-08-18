@@ -64,7 +64,7 @@ function LocationFetcher() {
 }
 
 
-LocationFetcher.prototype.fetch(location, callback) {
+LocationFetcher.prototype.fetch = function(location, callback){
   $.ajax({
     url: "/fetch",
     type: "get",
