@@ -3,6 +3,15 @@
 =form_tag supplies_path, method: 'post', remote: true, html:{role: "form"}, id: 'add-supplies-form' do
   .form-group=text_field :crop_name, nil, placeholder: "Crop name", class: "form-control"
   .form-group=text_field :status, nil, placeholder: "Status", class: "form-control"
+  
+  .form-group=select_tag :status, options_for_select(["Growing", "Harvesting", "Done"], "Growing")
+  
   =submit_tag "Add Supply", class: "btn btn-primary"
 
 .user-supplies
+
+/ <select name="mydropdown">
+/ <option value="Milk">Fresh Milk</option>
+/ <option value="Cheese">Old Cheese</option>
+/ <option value="Bread">Hot Bread</option>
+/ </select>
