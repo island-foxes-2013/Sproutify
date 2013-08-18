@@ -9,7 +9,7 @@
   / Collect the nav links, forms, and other content for toggling
   .collapse.navbar-collapse.navbar-ex1-collapse
     %ul.nav.navbar-nav.navbar-right
-      -if logged_in?
-        =render "shared/nav_loggedin"
-      -else
-        =render "shared/nav_loggedout"
+      = hb 'if logged_in' do
+        = hb '> _nav_loggedin'
+        = hb 'else'
+        = hb '> _nav_loggedout'

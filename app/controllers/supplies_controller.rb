@@ -1,6 +1,8 @@
 class SuppliesController < ApplicationController
 	skip_before_filter :require_login
 
+  respond_to :json
+
 	def index
 		user = !params[:user_id].nil? ? User.find_by_id(params[:user_id]) : current_user
 		supply_sentences = []
