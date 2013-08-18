@@ -12,6 +12,10 @@ describe "Landing page", js:true do
   it {should have_field("zip")}
   it {should have_field("address")}
 
+  context "logged out" do
+    it {should have_link("Login")}
+  end
+
   describe "feed" do
     let!(:user) { FactoryGirl.create(:user) }
     # user.create_geocode(lat: 37.786453, lng: -122.418015)
