@@ -1,18 +1,19 @@
 function SessionManager(data){
-  new Session(data);
-  new SessionView();
-  this.bindEvents();
+  mySession = new Session(data);
+  new SessionView(mySession);
 }
 
 function Session(data){
-  this.logged_in = data.logged_in
+  this.logged_in = data.logged_in;
+  this.user = data.user;
 }
 
-function SessionView(){
-  
+function SessionView(session){
+  this.session = session;
+  this.bindEvents();
 }
 
-SessionManager.prototype = {
+SessionView.prototype = {
   signup: function(response){
     if (response.success === true){
       // hide modal

@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
     if logged_in?
       render json: {
         logged_in: logged_in?,
+        user: current_user,
         user_lat: current_user.geocode.lat,
         user_lng: current_user.geocode.lng
       }

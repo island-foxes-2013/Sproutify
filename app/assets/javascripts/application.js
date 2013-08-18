@@ -40,8 +40,4 @@ $(function() {
     
   });
   
-  $("body").on("initialLoadDone", function(){
-    
-  });
-  
 });
