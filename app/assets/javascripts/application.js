@@ -21,28 +21,21 @@
 ///////////////////
 // DOCUMENT READY
 $(function() {
-  // setLocationFromPlugin();
-
-  new LandingManager();
-  // session = new SessionManager();
-  // session.bindAll();
-
-  // $("#testing").on("ajax:success", function(event, data, status, xhr) {
-  //   console.log(data)
-  //   $("#test").html(HandlebarsTemplates['home'](data));
-  // });
 
   // Begin handlebars
   $.get('/sessions').done(function(data){
+
     $("body").html(HandlebarsTemplates['static']());
-    if (data.logged_in){
-      $(".navbar-right").html(HandlebarsTemplates['nav_loggedin'](data));
-      $("#main-body").html(HandlebarsTemplates['main']());
-    } else {
-      $(".navbar-right").html(HandlebarsTemplates['nav_loggedout']());
-      $("#main-body").html(HandlebarsTemplates['landing']());
-    }
     $("body").trigger("initialLoadDone");
+    
+    if (data.logged_in == true) {
+      $(".navbar-right").html(HandlebarsTemplates['nav_loggedin'](data));
+      new MainManager();
+    }
+    else {
+      $(".navbar-right").html(HandlebarsTemplates['nav_loggedout']());
+      new LandingManager();
+    }
   });
 
   session = new SessionManager();
@@ -61,10 +54,11 @@ SessionManager.prototype = {
       // hide modal
       $("#signup-modal").modal('hide');
 
-      // after modal hidden, render handlebar templates
+      // after modal hidden, go to MainManager
       $("#signup-modal").on('hidden.bs.modal', function(){
-        $("#main-body").html(HandlebarsTemplates['main']());
+        $("#main-body").empty();
         $(".navbar-right").html(HandlebarsTemplates['nav_loggedin'](response));
+        new MainManager();
       }); 
     } else {
 
@@ -86,10 +80,11 @@ SessionManager.prototype = {
       // hide modal
       $("#login-modal").modal('hide');
 
-      // after modal hidden, render handlebar templates
+      // after modal hidden, go to MainManager
       $("#login-modal").on('hidden.bs.modal', function(){
-        $("#main-body").html(HandlebarsTemplates['main']());
+        $("#main-body").empty();
         $(".navbar-right").html(HandlebarsTemplates['nav_loggedin'](response));
+        new MainManager();
       }); 
     } else {
       // empty fields where there is an error
