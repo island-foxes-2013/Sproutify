@@ -4,7 +4,6 @@ function LandingManager() {
 
   $('body').on('click', '#submit', function(event) {
     event.preventDefault();
-    console.log('Landing Manager');
     var geocoder = new Geocoder();
     geocoder.fetch(getLocation(), function(location) {
       clearResults();
