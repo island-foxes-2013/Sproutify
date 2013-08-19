@@ -10,23 +10,15 @@ class User < ActiveRecord::Base
   after_validation { self.errors.messages.delete(:password_digest) }
 
   def growing
-  	status_id = Status.find_by_name('growing').id
-  	growing_supplies = self.supplies.all.select {|x| x.status_id == status_id}
-  	crop_names = []
-  	growing_supplies.each do |supply|
-  		crop_names << Crop.find_by_id(supply.crop_id)
-  	end
-  	crop_names
+  	status_id = Status.find_or_create_by_name('growing').id
+  	growing_supplies = self.supplies.select {|x| x.status_id == status_id}
+    growing_supplies.map {|s| Crop.find_by_id(s.crop_id) }
   end
 
   def harvesting
-  	status_id = Status.find_by_name('harvested').id
-  	harvested_supplies = self.supplies.all.select {|x| x.status_id == status_id}
-  	crop_names = []
-  	harvested_supplies.each do |supply|
-  		crop_names << Crop.find_by_id(supply.crop_id)
-  	end
-  	crop_names
+  	status_id = Status.find_or_create_by_name('harvested').id
+  	harvested_supplies = self.supplies.select {|x| x.status_id == status_id}
+    harvested_supplies.map {|s| Crop.find_by_id(s.crop_id) }
   end
 
   def demanding
