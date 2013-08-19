@@ -40,7 +40,7 @@ Map.prototype = {
         $.each(gardens, function(i) {
           self.placeGarden(gardens[i]);
         });
-        self.clusterer = new MarkerClusterer(self.map, self.markers, {gridSize: 80});
+        // self.clusterer = new MarkerClusterer(self.map, self.markers, {gridSize: 80});
       });
 
     });
@@ -63,7 +63,7 @@ GardenMarker.prototype = {
   place: function(map_object, lat, lng) {
     var latLng = new google.maps.LatLng(lat,lng);
     var marker = new google.maps.Marker({
-        // map: map,
+        map: map,
         position: latLng,
         title: this.garden.username(),
         garden: this.garden
