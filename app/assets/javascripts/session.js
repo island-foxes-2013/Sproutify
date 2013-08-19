@@ -83,12 +83,6 @@ SignupView.prototype = {
       self.signup(response);
     });
   },
-  showModal: function(){
-    this.$modal.modal();
-  },
-  hideModal: function(){
-    this.$modal.modal('hide');
-  },
   signup: function(response){
     if (this.session.logged_in === true){
       var self = this;
@@ -145,12 +139,6 @@ LoginView.prototype = {
       self.login(response);
     });
   },
-  showModal: function(){
-    this.$modal.modal();
-  },
-  hideModal: function(){
-    this.$modal.modal('hide');
-  },
   login: function(response){
     if (this.session.logged_in === true){
       var self = this;
@@ -191,3 +179,10 @@ LogoutView.prototype = {
     });
   }
 };
+
+LoginView.prototype.showModal = SignupView.prototype.showModal = function showModal() {
+  this.$modal.modal();
+}
+LoginView.prototype.hideModal = SignupView.prototype.hideModal = function hideModal() {
+  this.$modal.modal('hide');
+}
