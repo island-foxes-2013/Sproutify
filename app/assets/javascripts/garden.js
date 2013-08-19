@@ -55,5 +55,8 @@ GardenSearcher.prototype = {
       });
       successCallback(gardens);
     });
+  },
+  getSuppliedCrops: function() {
+    //return an array of
   }
 }
