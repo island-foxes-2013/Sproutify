@@ -28,21 +28,16 @@ Garden.prototype.suppliedCrops = function () {
   return this.attrs.supplies;
 }
 
-// Garden.prototype.demandedCrops = function() {
-//   this.attrs.demandedCrops;
-// }
-
-// function Crop(cropAttributes) {
-//   this.attrs = cropAttributes;
-// }
 
 ////////////////
 //GARDEN SEARCH
 function GardenSearcher() {
+  // this.gardens = [];
 };
 
 GardenSearcher.prototype = {
   fetch: function(bounds, successCallback, failureCallback) {
+    gsearcher = this;
     //Some code that turns lat, lng into sunspot-accepting data
     $.ajax({
       url: '/find_in_box',
@@ -50,10 +45,23 @@ GardenSearcher.prototype = {
       data: {ulat: bounds.ulat, ulng: bounds.ulng,
              blat: bounds.blat, blng: bounds.blng}
     }).done(function(gardens) {
-      gardens = $.map(gardens, function(garden){
+      gsearcher.gardens = $.map(gardens, function(garden){
         return new Garden(garden);
       });
-      successCallback(gardens);
+      console.log(gsearcher.localCropSupplies());
+      gsearcher.localCropSupplies();
     });
+  },
+  localCropSupplies: function() {
+    this.crops = [];
+    self = this;
+    $.each(this.gardens, function(i) {
+      g = self.gardens[i];
+      $.each(g.suppliedCrops(), function(i) {
+        self.crops.push(g.suppliedCrops()[i]);
+      })
+      // self.crops.push(g.suppliedCrops());
+    });
+    return this.crops;
   }
 }
