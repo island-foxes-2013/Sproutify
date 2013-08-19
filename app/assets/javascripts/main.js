@@ -1,4 +1,3 @@
-// MAIN MANAGER
 function MainManager() {
   $("#main-body").html(HandlebarsTemplates['main']());
   var self = this;
@@ -82,4 +81,3 @@ MainManager.prototype.getCurrentDemand = function() {
     $('.demand-field').val('');
   });
 };
-

@@ -8,13 +8,6 @@ class HomeController < ApplicationController
   end
 
   def fetch
-    #Uses Sunspot to search
-
-    # it "has a search radius of 10"
-    # it "shuffles the results"
-    # context "when there are multiple pages of results"
-    # context ""
-
     local_users = Geocode.find_local_users(params[:lat], params[:lng], 10)
 
     crops_available = Crop.all.map{|crop| {name: crop.name, count: crop.number_supplied(local_users)}}
