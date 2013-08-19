@@ -69,11 +69,6 @@ SignupView.prototype = {
       return false;
     });
 
-    // After modal is hidden
-    // this.$parent.on('hidden.bs.modal', this.modalSelector,  function(){
-    //   this.$modal.find('.alert').remove();
-    // });
-
     // Before sending signup info
     this.$parent.on("ajax:beforeSend", this.formSelector, function(event, xhr, settings) {
       settings.data += "&lat="+$('#hidden_lat').val();
@@ -142,11 +137,6 @@ LoginView.prototype = {
       return false;
     });
 
-    // After modal is hidden
-    // this.$parent.on('hidden.bs.modal', this.modalSelector,  function(){
-    //   this.$modal.find('.alert').remove();
-    // });
-
     // After signup info sent
     this.$parent.on("ajax:success", this.formSelector, function(event, response, xhr, element){
       self.session.logged_in = response.logged_in;
@@ -201,20 +191,3 @@ LogoutView.prototype = {
     });
   }
 };
-
-
-// SessionView.prototype = {
-//   logout: function(response){
-//     // render handlebar templates
-//     if (response.success === true){
-//       $("#main-body").html(HandlebarsTemplates['landing']());
-//       $(".navbar-right").html(HandlebarsTemplates['nav_loggedout']());
-//     }
-//   },
-//   bindLogoutEvents: function(){
-//     var self = this;
-//     $("body").on("ajax:success", ".logout-link", function(event, response, xhr, element){
-//       self.logout(response);
-//     });
-//   }
-// };
