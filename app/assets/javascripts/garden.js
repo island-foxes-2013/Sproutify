@@ -45,7 +45,7 @@ GardenSearcher.prototype = {
   fetch: function(bounds, successCallback, failureCallback) {
     //Some code that turns lat, lng into sunspot-accepting data
     $.ajax({
-      url: '/find_users',
+      url: '/find_in_box',
       type: 'get',
       data: {ulat: bounds.ulat, ulng: bounds.ulng,
              blat: bounds.blat, blng: bounds.blng}

@@ -3,18 +3,9 @@ function MainManager() {
   $("#main-body").html(HandlebarsTemplates['main']());
   var self = this;
   var user_data = this.getUserData(function(user_data) {
-    // self.showMap();
     self.showAddSupply();
     self.showAddDemand();
     self.map = new Map(document.getElementById('map-canvas'), user_data.user_lat, user_data.user_lng);
-    // var searcher = new GardenSearcher();
-    // var lat = user_data.user_lat;
-    // var lng = user_data.user_lng;
-    // searcher.fetch(lat, lng, function(gardens) {
-    //   $.each(gardens, function(index) {
-    //     self.map.placeGarden(gardens[index]);
-    //   });
-    // });
     $("body").trigger("initialMapLoad");
 
   });
@@ -89,25 +80,4 @@ MainManager.prototype.getCurrentDemand = function() {
     $('.demand-field').val('');
   });
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
