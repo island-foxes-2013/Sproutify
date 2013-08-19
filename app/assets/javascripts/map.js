@@ -23,31 +23,40 @@ Map.prototype = {
     });
     
     var searcher = new GardenSearcher();
+    this.refreshMarkers(searcher);
 
     var self = this;
     map = this.map;
-    google.maps.event.addListener(map, 'idle', function() {
-      var bounds = map.getBounds();
-      var boundary = {ulat: bounds.ea.b, ulng: bounds.ia.b, blat: bounds.ea.d, blng: bounds.ia.d}
-
-      $.each(self.markers, function(i) {
-        self.markers[i].setMap(null);
-      });
-      
-      self.markers = [];
-
-      searcher.fetch(boundary, function(gardens) {
-        $.each(gardens, function(i) {
-          self.placeGarden(gardens[i]);
-        });
-        // self.clusterer = new MarkerClusterer(self.map, self.markers, {gridSize: 80});
-      });
-
+    // google.maps.event.addListener(map, 'bounds_changed', function() { 
+    //   self.refreshMarkers(searcher);
+    //   $("body").trigger("mapIdle");
+    // });
+    google.maps.event.addListener(map, 'idle', function() { 
+      self.refreshMarkers(searcher);
+      $("body").trigger("mapIdle");
     });
   },
   placeGarden: function(garden) {
-    var gardenMarker = new GardenMarker(this, garden)
-    this.markers.push(gardenMarker.marker_object);
+    var gardenMarker = new GardenMarker(this, garden);
+    this.markers.push(gardenMarker);
+  },
+  refreshMarkers: function(searcher){
+    var bounds = this.map.getBounds();
+    var boundary = {ulat: bounds.ea.b, ulng: bounds.ia.b, blat: bounds.ea.d, blng: bounds.ia.d}
+    var self = this;
+
+    $.each(this.markers, function(i) {
+      self.markers[i].marker_object.setMap(null);
+    });
+    
+    this.markers = [];
+    
+    searcher.fetch(boundary, function(gardens) {
+      $.each(gardens, function(i) {
+        self.placeGarden(gardens[i]);
+      });
+      // self.clusterer = new MarkerClusterer(self.map, self.markers, {gridSize: 80});
+    });
   }
 }
 
@@ -69,11 +78,11 @@ GardenMarker.prototype = {
         garden: this.garden
     });
     // console.log(this.map_object);
-    this.map_object.markers.push(marker);
+    // this.map_object.markers.push(marker);
 
     this.marker_object = marker;
 
-    self = this;
+    var self = this;
     google.maps.event.addListener(marker, 'click', function() {
       console.log("clicked");
       self.map_object.map.info_window.setContent(self.renderInfoContent(this.garden));

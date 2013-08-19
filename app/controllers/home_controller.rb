@@ -27,6 +27,7 @@ class HomeController < ApplicationController
     render json: { user_count: local_users.count, crops_available: crops_available, crops_demanded: crops_demanded }
   end
 
+
   def find_in_box
     upperLeft = {lat: params[:ulat], lng: params[:ulng]}
     lowerRight = {lat: params[:blat], lng: params[:blng]}
