@@ -22,13 +22,14 @@
 // DOCUMENT READY
 $(function() {
 
+  $("body").html(HandlebarsTemplates['static']());
+
   // Begin handlebars
   $.get('/sessions').done(function(data){
 
-    $("body").html(HandlebarsTemplates['static']());
-    $("body").trigger("initialLoadDone");
-    
-    if (data.logged_in == true) {
+    new SessionManager(data);
+
+    if (data.logged_in === true) {
       $(".navbar-right").html(HandlebarsTemplates['nav_loggedin'](data));
       new MainManager();
     }
@@ -36,12 +37,7 @@ $(function() {
       $(".navbar-right").html(HandlebarsTemplates['nav_loggedout']());
       new LandingManager();
     }
+
   });
 
-  session = new SessionManager();
-  
-  $("body").on("initialLoadDone", function(){
-    session.bindEvents();
-  });
-  
 });
