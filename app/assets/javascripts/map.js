@@ -74,8 +74,9 @@ GardenMarker.prototype = {
 
     self = this;
     google.maps.event.addListener(marker, 'click', function() {
-      map_object.info_window.setContent(self.renderInfoContent(this.garden));
-      map_object.info_window.open(this.map_object, this);
+      console.log("clicked");
+      self.map_object.map.info_window.setContent(self.renderInfoContent(this.garden));
+      self.map_object.map.info_window.open(self.map_object.map, this);
     });
   },
   renderInfoContent: function(garden) {
