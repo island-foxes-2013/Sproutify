@@ -1,20 +1,20 @@
 // MAIN MANAGER
 function MainManager() {
+  $("#main-body").html(HandlebarsTemplates['main']());
   var self = this;
   var user_data = this.getUserData(function(user_data) {
-    self.showMap();
+    // self.showMap();
     self.showAddSupply();
     self.showAddDemand();
-    console.log(user_data);
     self.map = new Map(document.getElementById('map-canvas'), user_data.user_lat, user_data.user_lng);
-    var searcher = new GardenSearcher();
-    var lat = user_data.user_lat;
-    var lng = user_data.user_lng;
-    searcher.fetch(lat, lng, function(gardens) {
-      $.each(gardens, function(index) {
-        self.map.placeGarden(gardens[index]);
-      });
-    });
+    // var searcher = new GardenSearcher();
+    // var lat = user_data.user_lat;
+    // var lng = user_data.user_lng;
+    // searcher.fetch(lat, lng, function(gardens) {
+    //   $.each(gardens, function(index) {
+    //     self.map.placeGarden(gardens[index]);
+    //   });
+    // });
     $("body").trigger("initialMapLoad");
 
   });
@@ -41,13 +41,13 @@ MainManager.prototype.getUserData = function(successCallback) {
   });
 };
 
-MainManager.prototype.showMap = function() {
-  $('#main-body').append(HandlebarsTemplates['map']);
-};
+// MainManager.prototype.showMap = function() {
+//   $('#mapcanvas').html(HandlebarsTemplates['map']);
+// };
 
 // CURRENT SUPPLY
 MainManager.prototype.showAddSupply = function() {
-  $('#main-body').append(HandlebarsTemplates['add_supply']);
+  $('#add-supply').html(HandlebarsTemplates['add_supply']);
 };
 
 MainManager.prototype.getCurrentSupply = function() {
@@ -70,7 +70,7 @@ MainManager.prototype.bindCurrentSupply = function (){
 
 // CURRENT DEMAND
 MainManager.prototype.showAddDemand = function() {
-  $('#main-body').append(HandlebarsTemplates['add_demand']);
+  $('#add-demand').html(HandlebarsTemplates['add_demand']);
 };
 
 MainManager.prototype.bindCurrentDemand = function (){

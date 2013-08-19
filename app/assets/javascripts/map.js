@@ -23,9 +23,14 @@ Map.prototype = {
     });
     
     var searcher = new GardenSearcher();
+    this.refreshMarkers(searcher);
 
     var self = this;
     map = this.map;
+    // google.maps.event.addListener(map, 'bounds_changed', function() { 
+    //   self.refreshMarkers(searcher);
+    //   $("body").trigger("mapIdle");
+    // });
     google.maps.event.addListener(map, 'idle', function() { 
       self.refreshMarkers(searcher);
       $("body").trigger("mapIdle");

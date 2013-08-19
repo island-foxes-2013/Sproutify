@@ -28,6 +28,7 @@ class HomeController < ApplicationController
   end
 
   def find_users
+    ap params
     search = Geocode.search do
       with(:location).in_bounding_box([params[:ulat], params[:ulng]],
                                       [params[:blat], params[:blng]])
