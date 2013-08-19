@@ -28,6 +28,10 @@ SessionView.prototype = {
     }
   },
   bindEvents: function(){
+    $("body").on("click", ".modal .close", function(){
+      // this is here to fix bootstrap modal quirkiness
+      $(this).closest('.modal').modal('hide');
+    });
     $("body").on("login", function(){
       $("#main-body").empty();
       $(".navbar-right").html(HandlebarsTemplates['nav_loggedin']());
