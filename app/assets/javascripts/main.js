@@ -14,12 +14,14 @@ function MainManager() {
 }
 
 MainManager.prototype.bindEvents = function(){
+  var self = this;
+
   this.bindCurrentSupply();
   this.bindCurrentDemand();
 
   $("body").on("initialMapLoad", function(){
     self.browser = new Browser(self.map);
-    self.browserView = new BrowserView(browser);
+    self.browserView = new BrowserView(self.browser);
   });
 };
 

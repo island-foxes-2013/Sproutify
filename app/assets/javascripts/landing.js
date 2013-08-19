@@ -12,9 +12,7 @@
       var geocoder = new Geocoder();
       geocoder.fetch(getLocation(), function(location) {
         clearResults();
-        getLocalInfo(location, function() {
-          $('.signup-link').fadeIn(4000);
-        });
+        getLocalInfo(location);
       });
     });
   }
@@ -34,25 +32,12 @@
     $('#location').val(geoplugin_city());
   }
 
-  function getLocalInfo(location, callBack) {
+  function getLocalInfo(location) {
     var locationFetcher = new LocationFetcher();
-    locationFetcher.fetch(location, function(result) {
+    locationFetcher.fetch(location, function(localData) {
       $('#hidden_lat').attr("value", location.lat);
       $('#hidden_lng').attr("value", location.lng);
-      $('.user_count').append("<h3>There are "+ result.user_count +" gardeners near you!</h3>");
-      $('.user_count').hide().fadeIn();
-      if (result.user_count !== 0) {
-        $('.user_count').append("<h4>In your area,</h4>").hide().fadeIn(1000);
-
-        for (var i = 0; i < result.crops_available.length; i++) {
-          $('.available').append("<p>"+ result.crops_available[i].count+ " people have " + result.crops_available[i].name.toLowerCase() +" available!</p>").hide().fadeIn(2000);
-        }
-
-        for (var i = 0; i< result.crops_demanded.length; i++) {
-          $('.demanded').append("<p>"+ result.crops_demanded[i].count+ " people want " + result.crops_demanded[i].name.toLowerCase() + "!</p>").hide().fadeIn(2000);
-        }
-      }
-      callBack();
+      $('#hook').html(HandlebarsTemplates['hook'](localData));
     });
   }
 

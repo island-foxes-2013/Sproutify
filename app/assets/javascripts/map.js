@@ -23,17 +23,12 @@ Map.prototype = {
     });
     
     var searcher = new GardenSearcher();
-    this.refreshMarkers(searcher);
 
     var self = this;
     map = this.map;
-    // google.maps.event.addListener(map, 'bounds_changed', function() { 
-    //   self.refreshMarkers(searcher);
-    //   $("body").trigger("mapIdle");
-    // });
     google.maps.event.addListener(map, 'idle', function() { 
       self.refreshMarkers(searcher);
-      $("body").trigger("mapIdle");
+      
     });
   },
   placeGarden: function(garden) {
@@ -55,6 +50,7 @@ Map.prototype = {
       $.each(gardens, function(i) {
         self.placeGarden(gardens[i]);
       });
+      $("body").trigger("newMarkers");
       // self.clusterer = new MarkerClusterer(self.map, self.markers, {gridSize: 80});
     });
   }

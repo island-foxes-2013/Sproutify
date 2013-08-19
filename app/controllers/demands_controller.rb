@@ -10,7 +10,7 @@ class DemandsController < ApplicationController
   end
 
   def create
-    crop = Crop.find_or_create_by_name(params[:crop_name])
+    crop = Crop.find_or_create_by_name(params[:crop_name].downcase.pluralize)
     demand = current_user.demands.create(crop: crop)
     render json: { demand: demand }
   end
