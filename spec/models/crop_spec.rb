@@ -8,6 +8,8 @@ describe Crop do
 
   let(:crop) {Crop.new}
   let(:crop2) {Crop.new}
+  let(:user) { FactoryGirl.create(:user) }
+
   describe "#initialize" do
 
     context "valid data" do
@@ -28,6 +30,26 @@ describe Crop do
         crop2.name = "Corn"
         crop2.save.should eq false
       end
+    end
+  end
+
+  describe "#number_supplied" do
+    before do
+      user.supplies.create(crop: crop)
+    end
+
+    it "should return correct count of users' supplies for respective crop" do
+      expect(crop.number_supplied([user])).to eq 1
+    end
+  end
+
+  describe "#number_demanded" do
+    before do
+      user.demands.create(crop: crop)
+    end
+
+    it "should return correct count of users' demands for respective crop" do
+      expect(crop.number_demanded([user])).to eq 1
     end
   end
 end

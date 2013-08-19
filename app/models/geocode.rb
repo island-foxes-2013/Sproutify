@@ -9,4 +9,11 @@ class Geocode < ActiveRecord::Base
     double :lng
     latlon(:location) { Sunspot::Util::Coordinates.new(lat, lng) }
   end
+
+  def self.find_local_users(lat, lng, radius)
+    search = self.search do
+      with(:location).in_radius(lat, lng, radius)
+    end
+    search.results.map{|result| result.user}
+  end
 end
