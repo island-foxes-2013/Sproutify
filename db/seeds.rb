@@ -31,8 +31,8 @@ max_lng = -122.401825
   user = User.create(first_name: Faker::Name.first_name,
               last_name:  Faker::Name.last_name,
               email: Faker::Internet.email,
-              password: "test",
-              password_confirmation: "test")
+              password: "password",
+              password_confirmation: "password")
   lat = (max_lat - min_lat) * rand() + min_lat
   lng = (max_lng - min_lng) * rand() + min_lng
   user.create_geocode(lat: lat, lng: lng)
@@ -45,8 +45,8 @@ end
   user = User.create(first_name: Faker::Name.first_name,
               last_name:  Faker::Name.last_name,
               email: Faker::Internet.email,
-              password: "test",
-              password_confirmation: "test")
+              password: "password",
+              password_confirmation: "password")
   lat = (max_lat - min_lat) * rand() + min_lat
   lng = (max_lng - min_lng) * rand() + min_lng
   user.create_geocode(lat: lat, lng: lng)
@@ -54,3 +54,14 @@ end
   crop = Crop.all.sample
   user.demands.create(crop: crop)
 end
+
+# Create test user
+
+user = User.create(first_name: "Disco",
+            last_name:  "Lumberjack",
+            email: "test@test.com",
+            password: "password",
+            password_confirmation: "password")
+lat = (max_lat - min_lat) * rand() + min_lat
+lng = (max_lng - min_lng) * rand() + min_lng
+user.create_geocode(lat: lat, lng: lng)

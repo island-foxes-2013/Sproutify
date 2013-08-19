@@ -26,28 +26,29 @@ Map.prototype = {
 
     var self = this;
     map = this.map;
-    google.maps.event.addListener(map, 'idle', function() {
-      var bounds = map.getBounds();
-      var boundary = {ulat: bounds.ea.b, ulng: bounds.ia.b, blat: bounds.ea.d, blng: bounds.ia.d}
-
-      $.each(self.markers, function(i) {
-        self.markers[i].setMap(null);
-      });
-      
-      self.markers = [];
-
-      searcher.fetch(boundary, function(gardens) {
-        $.each(gardens, function(i) {
-          self.placeGarden(gardens[i]);
-        });
-        // self.clusterer = new MarkerClusterer(self.map, self.markers, {gridSize: 80});
-      });
-
-    });
+    google.maps.event.addListener(map, 'idle', function() { self.refreshMarkers(searcher) });
   },
   placeGarden: function(garden) {
     var gardenMarker = new GardenMarker(this, garden)
     this.markers.push(gardenMarker.marker_object);
+  },
+  refreshMarkers: function(searcher){
+    var bounds = this.map.getBounds();
+    var boundary = {ulat: bounds.ea.b, ulng: bounds.ia.b, blat: bounds.ea.d, blng: bounds.ia.d}
+
+    $.each(this.markers, function(i) {
+      this.markers[i].setMap(null);
+    });
+    
+    this.markers = [];
+
+    var self = this;
+    searcher.fetch(boundary, function(gardens) {
+      $.each(gardens, function(i) {
+        self.placeGarden(gardens[i]);
+      });
+      // self.clusterer = new MarkerClusterer(self.map, self.markers, {gridSize: 80});
+    });
   }
 }
 
