@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
       }
     end
   end
-  
+
   def create
     @user = User.find_by_email(params[:session][:email])
     if @user
@@ -27,16 +27,14 @@ class SessionsController < ApplicationController
           user: current_user
         }
       else
-        errors = {password: "invalid"}
-        error_messages = ["Invalid password"]
+        errors = {password: ["is invalid"]}
         render json: {
           logged_in: false,
           errors: errors
         }
       end
     else
-      errors = {email: "unrecognized"}
-      error_messages = ["Unrecognized email"]
+      errors = {email: ["is unrecognized"]}
       render json: {
         logged_in: false,
         errors: errors
