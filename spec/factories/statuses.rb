@@ -2,6 +2,12 @@
 
 FactoryGirl.define do
   factory :status do
-    name "Harvesting"
+    name "growing"
+  end
+end
+
+FactoryGirl.define do
+  factory :harvesting do
+    name "harvesting"
   end
 end
