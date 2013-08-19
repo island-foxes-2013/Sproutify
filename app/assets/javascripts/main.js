@@ -4,14 +4,6 @@ function MainManager() {
   var user_data = this.getUserData(function(user_data) {
     self.showMap();
     var map = new Map(document.getElementById('map-canvas'), user_data.user_lat, user_data.user_lng);
-    // var searcher = new GardenSearcher();
-    // var lat = user_data.user_lat;
-    // var lng = user_data.user_lng;
-    // searcher.fetch(lat, lng, function(gardens) {
-    //   $.each(gardens, function(index) {
-    //     map.placeGarden(gardens[index]);
-    //   });
-    // });
   });
 }
 
