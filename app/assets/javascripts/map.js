@@ -3,20 +3,13 @@
 function Map(lat, lng) {
   this.lat = lat;
   this.lng = lng;
-  this.gardens = [];
+  this.gardens = new AllGardenSet();
   this.searcher = new GardenSearcher();
 }
 
 Map.prototype = {
   placeGarden: function(garden) {
-    this.gardens.push(garden);
-
-    var self = this;
-    $(garden).on('removed', function(e) {
-      self.gardens.exterminate(this);
-    });
-
-    $(this).trigger('gardenAdded', garden);
+    this.gardens.addGarden(garden);    
   },
   refreshGardens: function(boundary){
     this.clearGardens();
@@ -29,7 +22,7 @@ Map.prototype = {
   },
   clearGardens: function() {
     var self = this;
-    $(this.gardens).each(function() {
+    $(this.gardens.set).each(function() {
       this.remove();
     });
   }

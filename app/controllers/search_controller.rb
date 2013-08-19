@@ -15,6 +15,7 @@ class SearchController < ApplicationController
               demands: user.demands.map do |demand|
                 {name: demand.crop.name} 
               end
+            }
     end
 
     respond_to do |format|
