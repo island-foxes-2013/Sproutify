@@ -40,8 +40,9 @@ Map.prototype = {
         $.each(gardens, function(i) {
           self.placeGarden(gardens[i]);
         });
-        self.mc = new MarkerClusterer(self.map, self.markers);
+        self.clusterer = new MarkerClusterer(self.map, self.markers, {gridSize: 80});
       });
+
     });
   },
   placeGarden: function(garden) {
