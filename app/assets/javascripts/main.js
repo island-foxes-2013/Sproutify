@@ -27,3 +27,4 @@ MainManager.prototype.getUserData = function(successCallback) {
 MainManager.prototype.showMap = function() {
   $('#main-body').append(HandlebarsTemplates['map']);
 }
+
