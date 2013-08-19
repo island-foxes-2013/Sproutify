@@ -15,11 +15,7 @@ class SessionsController < ApplicationController
       }
     end
   end
-
-  def new
-    @user = User.new
-  end
-
+  
   def create
     @user = User.find_by_email(params[:session][:email])
     if @user
