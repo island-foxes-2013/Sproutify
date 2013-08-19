@@ -1,7 +1,9 @@
 <div class="alert alert-danger">
   {{#each errors}}
-    <p>
-      {{@key}} {{this}}
-    </p>
+    {{#each this}}
+      <p>
+        {{@key}} {{this}}
+      </p>
+    {{/each}}
   {{/each}}
 </div>
