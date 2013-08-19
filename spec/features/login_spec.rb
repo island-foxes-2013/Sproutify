@@ -6,10 +6,6 @@ feature 'Login', js: true do
   context "from the landing page" do
     before(:each) {visit root_path}
 
-    it "has a login link" do
-      expect(page).to have_link "Login"
-    end
-
     context "after clicking the login link" do
       before(:each) {click_link "Login"}
 
@@ -38,6 +34,14 @@ feature 'Login', js: true do
       
         it "user is shown the main page" do
           pending "Need something on the main page to map to"
+        end
+
+        context "after visiting root path" do
+          before(:each) {visit root_path}
+
+          it "should show the main page" do
+            pending "Need something on main page to bind to"
+          end
         end
 
       end

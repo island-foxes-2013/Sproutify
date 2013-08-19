@@ -2,7 +2,7 @@ Sproutify::Application.routes.draw do
 
   root :to => 'home#index'
 
-  resources :users, :only => [:new, :create] do
+  resources :users, :only => [:create] do
     resources :supplies, :only => [:index, :create, :destroy], module: "users"
     resources :demands, only: [:index], module: "users"
   end
@@ -11,7 +11,7 @@ Sproutify::Application.routes.draw do
   resources :demands, only: [:create, :index, :destroy]
 
 
-  resources :sessions, only: [:index, :new, :create]
+  resources :sessions, only: [:index, :create]
 
   delete '/sessions', to: 'sessions#destroy'
 
