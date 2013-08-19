@@ -23,4 +23,8 @@ class UsersController < ApplicationController
     end
   end
 
+  def email_user
+    p "*" * 70
+    p params
+  end
 end

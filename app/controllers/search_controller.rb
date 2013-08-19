@@ -9,17 +9,17 @@ class SearchController < ApplicationController
       hit = { user: user,
               lat:  user.geocode.lat,
               lng:  user.geocode.lng,
-              supplies: user.supplies.map do |supply| 
+              supplies: user.supplies.map do |supply|
                 {name: supply.crop.name, status: supply.status.name}
               end,
               demands: user.demands.map do |demand|
-                {name: demand.crop.name} 
+                {name: demand.crop.name}
               end
+            }
     end
 
     respond_to do |format|
       format.json { render :json => parsed_users }
     end
-
   end
 end

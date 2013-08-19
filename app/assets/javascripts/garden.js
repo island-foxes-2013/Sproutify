@@ -16,6 +16,10 @@ Garden.prototype.lng = function() {
   return this.attrs.lng;
 }
 
+Garden.prototype.user_id = function() {
+  return this.attrs.user.id;
+}
+
 Garden.prototype.username = function() {
   return this.attrs.user.first_name +' '+ this.attrs.user.last_name;
 }

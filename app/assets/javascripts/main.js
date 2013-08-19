@@ -8,6 +8,15 @@ function MainManager() {
     new MapView(self.map, document.getElementById('map-canvas'));
     $("body").trigger("initialMapLoad");
 
+    $(document).on('click', '#generate_form', function() {
+      var user_id = $(this).data('id')
+      self.generateEmailForm();
+      $('#connect').on('click', function(event) {
+        event.preventDefault();
+        self.emailUser(user_id);
+      });
+    });
+
   });
 
   this.bindEvents();
@@ -33,6 +42,19 @@ MainManager.prototype.getUserData = function(successCallback) {
     successCallback(user_data);
   });
 };
+
+MainManager.prototype.generateEmailForm = function(id) {
+  $('#main-body').append(HandlebarsTemplates['email_form'])
+}
+
+MainManager.prototype.emailUser = function(id) {
+  var user_id = {id: id};
+  $.ajax({
+    url: '/connect',
+    type: 'post',
+    data: user_id
+  });
+}
 
 // MainManager.prototype.showMap = function() {
 //   $('#mapcanvas').html(HandlebarsTemplates['map']);
