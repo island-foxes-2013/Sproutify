@@ -21,8 +21,7 @@ class ApplicationController < ActionController::Base
 
   def require_login
     if !logged_in?
-      ap "*************You must be logged in to perform that action"
-      render "home/landing"
+      render text: "You are not authorized to do that"
     end
   end
 end

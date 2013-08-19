@@ -42,6 +42,15 @@ feature 'Logout', js: true do
 
     end
 
+    context "when the user tries to access protected info" do
+      before(:each) {visit demands_path}
+
+      it "an error message should display" do
+        expect(page).to have_text "You are not authorized to do that"
+      end
+
+    end
+
   end
 
 end
