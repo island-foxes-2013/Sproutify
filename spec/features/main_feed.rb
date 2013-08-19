@@ -31,7 +31,6 @@ describe "main page", js:true do
     it "should write and display updated demands" do
       fill_in "demand_crop_name", with: "Apple"
       click_button "Add Demand"
-      # to change{user.demands.count}.by(1)
       page.should have_content("Apple")
       user.demands.count.should eq 1
     end
@@ -39,8 +38,15 @@ describe "main page", js:true do
      it "should write and display updated supplies" do
       fill_in "supply_crop_name", with: "Orange"
       click_button "Add Supply"
-      # to change{user.supplies.count}.by(1)
       page.should have_content("Orange")
+      user.supplies.count.should eq 1
+    end
+
+    it "should allow user to select status of supply" do
+      fill_in "supply_crop_name", with: "Avocado"
+      select 'Harvested', from: 'status_name'
+      click_button "Add Supply"
+      page.should have_content("Avocado")
       user.supplies.count.should eq 1
     end
   end
