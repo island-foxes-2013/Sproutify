@@ -7,7 +7,7 @@ function Browser(map){
 Browser.prototype = {
   bindEvents: function(){
     var self = this;
-    $("body").on("mapIdle", function(){
+    $("body").on("newMarkers", function(){
       self.updateMarkers();
     });
   },

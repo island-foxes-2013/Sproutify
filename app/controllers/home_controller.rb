@@ -4,7 +4,6 @@ class HomeController < ApplicationController
   def index
     @user = User.new if !logged_in?
     render partial: "shared/static", layout: "application"
-    # render partial: "shared/landing", layout: "application"
   end
 
   def fetch
@@ -19,28 +18,4 @@ class HomeController < ApplicationController
     #Return to ajax call.
     render json: { user_count: local_users.count, crops_available: crops_available, crops_demanded: crops_demanded }
   end
-
-
-  def find_in_box
-    upperLeft = {lat: params[:ulat], lng: params[:ulng]}
-    lowerRight = {lat: params[:blat], lng: params[:blng]}
-    users_in_boundary = Geocode.boundary_search(upperLeft, lowerRight)
-
-    parsed_users = []
-
-    users_in_boundary.each do |user|
-      hit = { user: user,
-              lat:  user.geocode.lat,
-              lng:  user.geocode.lng,
-              supplies: user.supplies.map{|supply| supply.crop.name},
-              demands: user.demands.map{|demand| demand.crop.name} }
-      parsed_users << hit
-    end
-
-    respond_to do |format|
-      format.json { render :json => parsed_users }
-    end
-
-  end
-  
 end

@@ -16,17 +16,4 @@ describe HomeController do
     end
 
   end
-
-  describe '#find_in_box' do
-    include SolrSpecHelper
-    let(:user) {FactoryGirl.create(:user)}
-    before { solr_setup }
-
-    it "should respond nicely with valid params" do
-      user.create_geocode(lat: 32.5, lng: -119.5)
-      Sunspot.commit
-      get :find_in_box, ulat: 32, ulng: -120, blat: 33, blng: -119 
-      response.body
-    end
-  end
 end

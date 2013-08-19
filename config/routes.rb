@@ -17,7 +17,7 @@ Sproutify::Application.routes.draw do
 
   get 'fetch', to: 'home#fetch'
 
-  get 'find_in_box', to: 'home#find_in_box'
+  get 'search', to: 'search#search'
 
   get 'user_data', to: 'sessions#user_data'
 end
