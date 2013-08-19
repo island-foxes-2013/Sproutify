@@ -12,3 +12,10 @@
 <h3>
   Demands
 </h3>
+<ul>
+{{#eachProperty demand}}
+  <li>
+    {{property}}: {{value.length}}
+  </li>
+{{/eachProperty}}
+</ul>
