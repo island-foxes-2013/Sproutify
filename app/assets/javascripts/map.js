@@ -91,6 +91,7 @@ GardenMarker.prototype = {
   },
   renderInfoContent: function(garden) {
     var gardenLiteral = { name: garden.username(),
+                          email: garden.email(),
                           supplies: garden.suppliedCrops(),
                           demands: garden.demandedCrops() }
     return HandlebarsTemplates['infowindow'](gardenLiteral);
