@@ -1,6 +1,4 @@
 class DemandsController < ApplicationController
-  skip_before_filter :require_login
-  
   respond_to :json
 
   def index
