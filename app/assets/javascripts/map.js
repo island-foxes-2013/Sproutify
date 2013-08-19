@@ -15,6 +15,8 @@ Map.prototype = {
     this.clearGardens();
     var self = this;
     this.searcher.fetch(boundary, function(gardens) {
+      //
+      self.gardens.clearIndex();
       $.each(gardens, function() {
         self.placeGarden(this);
       });

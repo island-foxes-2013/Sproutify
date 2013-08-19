@@ -40,3 +40,8 @@ AllGardenSet.prototype.findSuppliedCrops = function(garden) {
     }
   });
 }
+
+AllGardenSet.prototype.clearIndex = function() {
+  this.demandCropIndex = {};
+  this.supplyCropIndex = {};
+}
