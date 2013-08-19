@@ -1,6 +1,4 @@
 class DemandsController < ApplicationController
-  skip_before_filter :require_login
-  
   respond_to :json
 
   def index
@@ -10,7 +8,7 @@ class DemandsController < ApplicationController
   end
 
   def create
-    crop = Crop.find_or_create_by_name(params[:crop_name])
+    crop = Crop.find_or_create_by_name(params[:demand_crop_name])
     demand = current_user.demands.create(crop: crop)
     render json: { demand: demand }
   end
