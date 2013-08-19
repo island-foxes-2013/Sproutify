@@ -24,8 +24,8 @@ html, body {
 }
 
 #map-canvas {
-  height: 400px;
-  width: 400px;
+  height: 600px;
+  width: 100%;
 }
 
 .signup-link {
@@ -37,5 +37,9 @@ html, body {
   border-radius: 20px;
   display: none;
   text-align: center;
+}
+
+.navbar {
+  margin-bottom: 0;
 }
 

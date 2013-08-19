@@ -9,55 +9,29 @@ class HomeController < ApplicationController
 
   def fetch
     #Uses Sunspot to search
-    search = Geocode.search do
-      with(:location).in_radius(params[:lat], params[:lng], 10)
-    end
+
     # it "has a search radius of 10"
     # it "shuffles the results"
-    # context "when there are no results"
-    #   it "returns blablabla"
     # context "when there are multiple pages of results"
     # context ""
-    crops_available = []
-    crops_demanded = []
 
-    search.results.shuffle.each do |result|
-      user = result.user
-      supplies = user.supplies
-      demands = user.demands
+    local_users = Geocode.find_local_users(params[:lat], params[:lng], 10)
 
-      if !supplies.empty?
-        supplies.each do |supply|
-          if supply.crop.supplies.count != 0
-            crop = {}
-            crop[:name] = supply.crop.name
-            crop[:count] = supply.crop.supplies.count
-            crops_available << crop
-          end
-        end
-      end
+    crops_available = Crop.all.map{|crop| {name: crop.name, count: crop.number_supplied(local_users)}}
+    crops_available.reject! {|crop| crop[:count] == 0}
 
-      if !demands.empty?
-        demands.each do |demand|
-          if demand.crop.demands.count != 0
-            crop = {}
-            crop[:name] = demand.crop.name
-            crop[:count] = demand.crop.demands.count
-            crops_demanded << crop
-          end
-        end
-      end
-    end
-    
+    crops_demanded = Crop.all.map{|crop| {name: crop.name, count: crop.number_demanded(local_users)}}
+    crops_demanded.reject! {|crop| crop[:count] == 0}
+
     #Return to ajax call.
-    render json: { user_count: search.results.count, crops_available: crops_available, crops_demanded: crops_demanded }
+    render json: { user_count: local_users.count, crops_available: crops_available, crops_demanded: crops_demanded }
   end
 
   def find_users
-    ap params
-
     search = Geocode.search do
-      with(:location).in_radius(params[:lat], params[:lng], 10)
+      with(:location).in_bounding_box([params[:ulat], params[:ulng]],
+                                      [params[:blat], params[:blng]])
+      paginate :page => 1, :per_page => 100
     end
 
     local_users = []
@@ -65,7 +39,9 @@ class HomeController < ApplicationController
     search.results.each do |result|
       hit = { user: result.user,
               lat:  result.lat,
-              lng:  result.lng }
+              lng:  result.lng,
+              supplies: result.user.supplies.map{|supply| supply.crop.name},
+              demands: result.user.demands.map{|demand| demand.crop.name} }
       local_users << hit
     end
 

@@ -12,37 +12,77 @@ Map.prototype = {
   generate: function() {
     var latLng = new google.maps.LatLng(this.lat, this.lng);
     var mapOptions = {
-      zoom: 12,
+      zoom: 13,
       center: latLng,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      scrollwheel: false
     }
     this.map = new google.maps.Map(this.element, mapOptions);
-    console.log('made it here');
-    this.info_window = new google.maps.InfoWindow({
+    this.map.info_window = new google.maps.InfoWindow({
       content: "placeholder"
+    });
+    
+    var searcher = new GardenSearcher();
+
+    var self = this;
+    map = this.map;
+    google.maps.event.addListener(map, 'idle', function() {
+      var bounds = map.getBounds();
+      var boundary = {ulat: bounds.ea.b, ulng: bounds.ia.b, blat: bounds.ea.d, blng: bounds.ia.d}
+
+      $.each(self.markers, function(i) {
+        self.markers[i].setMap(null);
+      });
+      
+      self.markers = [];
+
+      searcher.fetch(boundary, function(gardens) {
+        $.each(gardens, function(i) {
+          self.placeGarden(gardens[i]);
+        });
+        self.mc = new MarkerClusterer(self.map, self.markers);
+      });
     });
   },
   placeGarden: function(garden) {
-    var gardenMarker = new GardenMarker(this.map, garden)
-    this.markers.push(gardenMarker);
+    var gardenMarker = new GardenMarker(this, garden)
+    this.markers.push(gardenMarker.marker_object);
   }
 }
 
 //////////
 // MARKER
-function GardenMarker(map, garden) {
-  this.map = map;
+function GardenMarker(map_object, garden) {
+  this.map_object = map_object;
   this.garden = garden;
-  this.place(map, garden.lat(), garden.lng());
+  this.place(map_object, garden.lat(), garden.lng());
 }
 
 GardenMarker.prototype = {
-  place: function(map, lat, lng) {
+  place: function(map_object, lat, lng) {
     var latLng = new google.maps.LatLng(lat,lng);
     var marker = new google.maps.Marker({
-        map: map,
+        // map: map,
         position: latLng,
-        title: this.garden.username()
+        title: this.garden.username(),
+        garden: this.garden
     });
+    // console.log(this.map_object);
+    this.map_object.markers.push(marker);
+
+    this.marker_object = marker;
+
+    self = this;
+    google.maps.event.addListener(marker, 'click', function() {
+      console.log("clicked");
+      self.map_object.map.info_window.setContent(self.renderInfoContent(this.garden));
+      self.map_object.map.info_window.open(self.map_object.map, this);
+    });
+  },
+  renderInfoContent: function(garden) {
+    var gardenLiteral = { name: garden.username(),
+                          supplies: garden.suppliedCrops(),
+                          demands: garden.demandedCrops() }
+    return HandlebarsTemplates['infowindow'](gardenLiteral);
   }
 }

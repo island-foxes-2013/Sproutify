@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
     if logged_in?
       render json: {
         logged_in: logged_in?,
+        user: current_user,
         user_lat: current_user.geocode.lat,
         user_lng: current_user.geocode.lng
       }
@@ -15,10 +16,6 @@ class SessionsController < ApplicationController
     end
   end
 
-  def new
-    @user = User.new
-  end
-
   def create
     @user = User.find_by_email(params[:session][:email])
     if @user
@@ -26,22 +23,20 @@ class SessionsController < ApplicationController
       if @authenticated_user
         self.current_user = @authenticated_user
         render json:{
-          success: true,
-          current_user: current_user
+          logged_in: true,
+          user: current_user
         }
       else
-        errors = {password: "invalid"}
-        error_messages = ["Invalid password"]
+        errors = {password: ["is invalid"]}
         render json: {
-          success: false,
+          logged_in: false,
           errors: errors
         }
       end
     else
-      errors = {email: "unrecognized"}
-      error_messages = ["Unrecognized email"]
+      errors = {email: ["is unrecognized"]}
       render json: {
-        success: false,
+        logged_in: false,
         errors: errors
       }
     end  
@@ -50,7 +45,7 @@ class SessionsController < ApplicationController
   def destroy
     session.clear
     render json:{
-      success: true
+      logged_in: false
     }
   end
 

@@ -34,9 +34,6 @@ MainManager.prototype.showMap = function() {
   $('#main-body').append(HandlebarsTemplates['map']);
 }
 
-
-
-
 // CURRENT SUPPLY
 MainManager.prototype.showAddSupply = function() {
   $('#main-body').append(HandlebarsTemplates['add_supply']);

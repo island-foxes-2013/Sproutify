@@ -20,6 +20,14 @@ Garden.prototype.username = function() {
   return this.attrs.user.first_name +' '+ this.attrs.user.last_name;
 }
 
+Garden.prototype.demandedCrops = function () {
+  return this.attrs.demands;
+}
+
+Garden.prototype.suppliedCrops = function () {
+  return this.attrs.supplies;
+}
+
 // Garden.prototype.demandedCrops = function() {
 //   this.attrs.demandedCrops;
 // }
@@ -34,13 +42,13 @@ function GardenSearcher() {
 };
 
 GardenSearcher.prototype = {
-  fetch: function(lat, lng, successCallback, failureCallback) {
-    console.log(lat);
+  fetch: function(bounds, successCallback, failureCallback) {
     //Some code that turns lat, lng into sunspot-accepting data
     $.ajax({
       url: '/find_users',
       type: 'get',
-      data: {lat: lat, lng: lng}
+      data: {ulat: bounds.ulat, ulng: bounds.ulng,
+             blat: bounds.blat, blng: bounds.blng}
     }).done(function(gardens) {
       gardens = $.map(gardens, function(garden){
         return new Garden(garden);
