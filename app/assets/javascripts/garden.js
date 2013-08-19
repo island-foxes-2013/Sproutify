@@ -28,6 +28,10 @@ Garden.prototype.suppliedCrops = function () {
   return this.attrs.supplies;
 }
 
+Garden.prototype.remove = function() {
+
+  $(this).trigger('removed');
+}
 
 ////////////////
 //GARDEN SEARCH
@@ -40,14 +44,15 @@ GardenSearcher.prototype = {
     gsearcher = this;
     //Some code that turns lat, lng into sunspot-accepting data
     $.ajax({
-      url: '/find_in_box',
+      url: '/search',
       type: 'get',
       data: {ulat: bounds.ulat, ulng: bounds.ulng,
              blat: bounds.blat, blng: bounds.blng}
     }).done(function(gardens) {
-      gsearcher.gardens = $.map(gardens, function(garden){
+      var gardens = gsearcher.gardens = $.map(gardens, function(garden){
         return new Garden(garden);
       });
+      successCallback(gardens);
       console.log(gsearcher.localCropSupplies());
       gsearcher.localCropSupplies();
     });
