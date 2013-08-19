@@ -1,4 +1,3 @@
-// MAIN MANAGER
 function MainManager() {
   $("#main-body").html(HandlebarsTemplates['main']());
   var self = this;
