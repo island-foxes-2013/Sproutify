@@ -16,4 +16,13 @@ class Geocode < ActiveRecord::Base
     end
     search.results.map{|result| result.user}
   end
+
+  def self.boundary_search(upperLeft, lowerRight)
+    search = self.search do
+      with(:location).in_bounding_box([upperLeft[:lat], upperLeft[:lng]],
+                                      [lowerRight[:lat], lowerRight[:lng]])
+      paginate :page => 1, :per_page => 100
+    end
+    search.results.map{|result| result.user}
+  end
 end
