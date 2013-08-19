@@ -54,4 +54,20 @@ describe Geocode do
       end
     end
   end
+
+  describe "#boundary_search" do
+    include SolrSpecHelper
+    let(:user) {FactoryGirl.create(:user)}
+
+    before { solr_setup }
+
+    context "valid data" do
+      it "should return an array" do
+        upperLeft = {lat: 32,lng: -120}
+        lowerRight = {lat: 33, lng: -119}
+        expect(Geocode.boundary_search(upperLeft, lowerRight).class).to be Array
+      end
+    end
+  end
+
 end
