@@ -28,4 +28,8 @@ class User < ActiveRecord::Base
   	end
   	crop_names
   end
+
+  def demanding
+    self.demands.all.map {|x| Crop.find_by_id(x.crop_id).name}
+  end
 end

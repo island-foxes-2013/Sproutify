@@ -4,6 +4,7 @@ function MainManager() {
   var user_data = this.getUserData(function(user_data) {
     self.showMap();
     self.showAddSupply();
+    self.showAddDemand();
     console.log(user_data);
     var map = new Map(document.getElementById('map-canvas'), user_data.user_lat, user_data.user_lng);
     var searcher = new GardenSearcher();
@@ -17,6 +18,7 @@ function MainManager() {
   });
 
   self.bindCurrentSupply();
+  self.bindCurrentDemand();
 }
 
 MainManager.prototype.getUserData = function(successCallback) {
@@ -31,6 +33,9 @@ MainManager.prototype.getUserData = function(successCallback) {
 MainManager.prototype.showMap = function() {
   $('#main-body').append(HandlebarsTemplates['map']);
 }
+
+
+
 
 // CURRENT SUPPLY
 MainManager.prototype.showAddSupply = function() {
@@ -55,10 +60,41 @@ MainManager.prototype.bindCurrentSupply = function (){
   });
 }
 
-// // CURRENT DEMAND  return to this after finishing User methods 'growing', 'harvesting'
-// MainManager.prototype.showAddDemand = function() {
-//   $('#main-body').append(HandlebarsTemplates['add_demand']);
-// }
+// CURRENT DEMAND
+MainManager.prototype.showAddDemand = function() {
+  $('#main-body').append(HandlebarsTemplates['add_demand']);
+}
+
+MainManager.prototype.bindCurrentDemand = function (){
+  var self = this;
+  $("body").on('ajax:success', '#add-demands-form', function(){
+    self.getCurrentDemand();
+  });
+}
+
+MainManager.prototype.getCurrentDemand = function() {
+  $.ajax({
+    url: '/demands',
+    type: 'GET'
+  }).done(function(response){
+    $('.user-demands').html(HandlebarsTemplates['current_demand'](response));
+    $('.demand-field').val('');
+  });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
