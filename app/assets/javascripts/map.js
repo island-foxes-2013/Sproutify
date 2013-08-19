@@ -19,6 +19,7 @@ Map.prototype = {
         self.placeGarden(this);
       });
     });
+    console.log(this.gardens)
   },
   clearGardens: function() {
     var self = this;

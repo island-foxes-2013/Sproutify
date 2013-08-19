@@ -20,11 +20,12 @@ AllGardenSet.prototype.addGarden = function(garden){
 
 AllGardenSet.prototype.findDemandedCrops = function(garden) {
   var self = this;
+  // var blah = garden;
   $(garden.demandedCrops()).each(function() {
     if (self.demandCropIndex.hasOwnProperty(this.name)) {
-      self.demandCropIndex[this.name].push(self.set.indexOf(this));
+      self.demandCropIndex[this.name].push(self.set.indexOf(garden));
     } else {
-      self.demandCropIndex[this.name] = [self.set.indexOf(this)];
+      self.demandCropIndex[this.name] = [self.set.indexOf(garden)];
     }
   });
 }
@@ -33,9 +34,9 @@ AllGardenSet.prototype.findSuppliedCrops = function(garden) {
   var self = this;
   $(garden.suppliedCrops()).each(function() {
     if (self.supplyCropIndex.hasOwnProperty(this.name)) {
-      self.supplyCropIndex[this.name].push(self.set.indexOf(this));
+      self.supplyCropIndex[this.name].push(self.set.indexOf(garden));
     } else {
-      self.supplyCropIndex[this.name] = [self.set.indexOf(this)];
+      self.supplyCropIndex[this.name] = [self.set.indexOf(garden)];
     }
   });
 }
