@@ -23,7 +23,7 @@ Map.prototype = {
     });
     
     var searcher = new GardenSearcher();
-    this.refreshMarkers(searcher);
+    // this.refreshMarkers(searcher);
 
     var self = this;
     map = this.map;
