@@ -7,7 +7,7 @@ function ContactGardenerModal(user_id) {
     var content = self.modal.find('.message').val();
     self.emailUser(user_id, title, content);
   });
-  this.modal.on('click', '#close', function() {
+  this.modal.on('click', '.close', function() {
     event.preventDefault();
     self.hide();
   });
