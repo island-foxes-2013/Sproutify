@@ -14,10 +14,10 @@ class DemandsController < ApplicationController
       if demand.valid?
         render json: { demand: demand }
       else
-        render json: { errors: demand.errors }
+        render json: { errors: demand.errors.full_messages }
       end
     else
-      render json: {errors: crop.errors }
+      render json: {errors: crop.errors.full_messages }
     end
   end
 
