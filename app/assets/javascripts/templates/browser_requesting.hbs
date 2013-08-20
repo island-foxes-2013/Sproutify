@@ -1,0 +1,10 @@
+<h3>
+  Requesting
+</h3>
+<ul>
+{{#eachProperty demand}}
+  <p>
+    <input type="checkbox" class="demand-filter" data-name="{{property}}"> {{property}}: {{value.length}}
+  </p>
+{{/eachProperty}}
+</ul>

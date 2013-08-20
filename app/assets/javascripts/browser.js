@@ -29,12 +29,26 @@ BrowserView.prototype = {
       }
       self.filter.filter();
     });
+
+    //Nav pills
+    $('body').on('click', '#share_link', function(e) {
+      e.preventDefault();
+      $('ul.nav-pills li.active').removeClass('active');
+      $(this).closest('li').addClass('active');
+      $('#browser-body').html(HandlebarsTemplates['browser_sharing'](self.browseData));
+    });
+    $('body').on('click', '#request_link', function(e) {
+      e.preventDefault();
+      $('ul.nav-pills li.active').removeClass('active');
+      $(this).closest('li').addClass('active');
+      $('#browser-body').html(HandlebarsTemplates['browser_requesting'](self.browseData));
+    });
   },
   updateView: function(){
-    var browseData = {
+    this.browseData = {
       demand: this.allGardenSet.demandCropIndex,
       supply: this.allGardenSet.supplyCropIndex
     }
-    this.$elem.html(HandlebarsTemplates['browser'](browseData));
+    this.$elem.html(HandlebarsTemplates['browser']);
   }
 };

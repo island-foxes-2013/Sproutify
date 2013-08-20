@@ -1,26 +1,7 @@
 <div id="browser">
   <ul class="nav nav-pills">
-    <li class="active"><a href="#">Sharing</a></li>
-    <li><a href="#">Requesting</a></li>
+    <li class="active"><a id="share_link" href="#">Sharing</a></li>
+    <li><a id="request_link" href="#">Requesting</a></li>
   </ul>
-  <h3>
-    Sharing
-  </h3>
-  <ul>
-  {{#eachProperty supply}}
-    <p>
-      <input type="checkbox" class="supply-filter" data-name="{{property}}">  {{property}}: {{value.length}}
-    </p>
-  {{/eachProperty}}
-  </ul>
-  <h3>
-    Requesting
-  </h3>
-  <ul>
-  {{#eachProperty demand}}
-    <p>
-      <input type="checkbox" class="demand-filter" data-name="{{property}}"> {{property}}: {{value.length}}
-    </p>
-  {{/eachProperty}}
-  </ul>
+  <div id="browser-body"></div>
 <div>
