@@ -1,7 +1,15 @@
-function Filter(garden_set) {
-  this.set = garden_set.set;
+function Filter(gardenSet) {
+  this.gardenSet = gardenSet
+  this.set = gardenSet.set;
   this.demandCropFilter = [];
   this.supplyCropFilter = [];
+}
+
+Filter.prototype.bindEvents = function(){
+  var self = this;
+  $(this.gardenSet).on('gardenAdded', function(){
+    self.filter();
+  })
 }
 
 Filter.prototype.validateDemand = function(garden){
