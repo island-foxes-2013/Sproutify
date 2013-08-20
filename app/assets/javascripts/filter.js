@@ -3,6 +3,7 @@ function Filter(gardenSet) {
   this.set = gardenSet.set;
   this.demandCropFilter = [];
   this.supplyCropFilter = [];
+  this.bindEvents();
 }
 
 Filter.prototype.bindEvents = function(){
