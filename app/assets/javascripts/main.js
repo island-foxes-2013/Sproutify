@@ -74,7 +74,8 @@ MainManager.prototype.getMessage = function (message_id) {
 }
 
 MainManager.prototype.generateEmailForm = function(id) {
-  $('#connect-with-user').html(HandlebarsTemplates['email_form'])
+  $("#main-body").append(HandlebarsTemplates['email_form']);
+  Avgrund.show('#email-form');
 }
 
 MainManager.prototype.emailUser = function(id, title, content) {
