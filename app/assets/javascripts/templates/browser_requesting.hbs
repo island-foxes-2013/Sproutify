@@ -1,6 +1,26 @@
-<h3>
-  Requesting in your area
-</h3>
+<h4>
+  Your Growing Shares
+</h4>
+<ul>
+{{#eachProperty myGrowing}}
+  <p>
+    <input type="checkbox" class="supply-filter" data-name="{{property}}">  {{property}}: {{value.length}}
+  </p>
+{{/eachProperty}}
+</ul>
+<h4>
+  Your Harvested Shares
+</h4>
+<ul>
+{{#eachProperty myHarvesting}}
+  <p>
+    <input type="checkbox" class="supply-filter" data-name="{{property}}">  {{property}}: {{value.length}}
+  </p>
+{{/eachProperty}}
+</ul>
+<h4>
+  All Requests
+</h4>
 <ul>
 {{#eachProperty allDemand}}
   <p>
