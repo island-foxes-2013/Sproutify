@@ -1,40 +1,50 @@
-function Browser(map){
-  this.map = map;
-  this.browseData = {gardens: map.markers};
+function Browser(allGardenSet, mySupply, myDemand){
+  this.allGardenSet = allGardenSet;
+  this.mySupply = mySupply;
+  this.myDemand = myDemand;
+
+  this.myDemandIndex = {};
+  this.allDemandIndex = {};
+  this.myGrowingIndex = {};
+  this.myHarvestingIndex = {};
+  this.allSupplyIndex = {};
   this.bindEvents();
 }
 
 Browser.prototype = {
   bindEvents: function(){
     var self = this;
-    $("body").on("newMarkers", function(){
-      self.updateMarkers();
-    });
+    $(this.mySupply).on("updatedData", function() {self.refreshIndices()});
+    $(this.myDemand).on("updatedData", function() {self.refreshIndices()});
+    $(this.allGardenSet).on("gardenAdded", function() {self.refreshIndices()});
   },
-  updateMarkers: function(){
-    this.browseData.gardens = this.map.markers;
-    $("body").trigger("newBrowseData");
-  }
-};
-
-function BrowserView(allGardenSet){
-  this.allGardenSet = allGardenSet;
-  this.$elem = $("#browser");
-
-  this.updateView();
-  this.bindEvents();
-}
-
-BrowserView.prototype = {
-  bindEvents: function(){
-    var self = this;
-    $(this.allGardenSet).on("gardenAdded", function(){ self.updateView() });
+  refreshIndices: function(){
+    this.refreshDemandIndices();
+    this.refreshSupplyIndices();
+    $(this).trigger("updatedIndices");
   },
-  updateView: function(){
-    var browseData = {
-      demand: this.allGardenSet.demandCropIndex,
-      supply: this.allGardenSet.supplyCropIndex
+  refreshDemandIndices: function(){
+    this.myDemandIndex = {};
+    this.allSupplyIndex = {};
+    for (crop in this.allGardenSet.supplyCropIndex){
+      if (this.myDemand.myDemandNames.includes(crop)){
+        this.myDemandIndex[crop] = this.allGardenSet.supplyCropIndex[crop];
+      } else {
+        this.allSupplyIndex[crop] = this.allGardenSet.supplyCropIndex[crop];
+      }
     }
-    this.$elem.html(HandlebarsTemplates['browser'](browseData));
+  },
+  refreshSupplyIndices: function(){
+    this.mySupplyIndex = {};
+    this.allDemandIndex = {};
+    for (crop in this.allGardenSet.demandCropIndex){
+      if (this.mySupply.growingNames.includes(crop)){
+        this.myGrowingIndex[crop] = this.allGardenSet.demandCropIndex[crop];
+      } else if (this.mySupply.harvestingNames.includes(crop)) {
+        this.myHarvestingIndex[crop] = this.allGardenSet.demandCropIndex[crop];
+      } else {
+        this.allDemandIndex[crop] = this.allGardenSet.demandCropIndex[crop];
+      }
+    }
   }
 };

@@ -1,8 +1,6 @@
 ////////////////
 //GARDEN SEARCH
-function GardenSearcher() {
-  // this.gardens = [];
-};
+function GardenSearcher() {};
 
 GardenSearcher.prototype = {
   fetch: function(bounds, successCallback, failureCallback) {
@@ -13,28 +11,27 @@ GardenSearcher.prototype = {
       type: 'get',
       data: {ulat: bounds.ulat, ulng: bounds.ulng,
              blat: bounds.blat, blng: bounds.blng}
-    }).done(function(gardens) {
-      var gardens = gsearcher.gardens = $.map(gardens, function(garden){
+    }).done(function(gardenData) {
+      var gardens = $.map(gardenData, function(garden){
         return new Garden(garden);
       });
       successCallback(gardens);
-      console.log(gsearcher.localCropSupplies());
-      gsearcher.localCropSupplies();
+
     });
-  },
-  localCropSupplies: function() {
-    this.crops = [];
-    self = this;
-    $.each(this.gardens, function(i) {
-      g = self.gardens[i];
-      $.each(g.suppliedCrops(), function(i) {
-        self.crops.push(g.suppliedCrops()[i]);
-      })
-      // self.crops.push(g.suppliedCrops());
-    });
-    return this.crops;
-  },
-  getSuppliedCrops: function() {
-    //return an array of
   }
+  // localCropSupplies: function() {
+  //   this.crops = [];
+  //   self = this;
+  //   $.each(this.gardens, function(i) {
+  //     g = self.gardens[i];
+  //     $.each(g.suppliedCrops(), function(i) {
+  //       self.crops.push(g.suppliedCrops()[i]);
+  //     })
+  //     // self.crops.push(g.suppliedCrops());
+  //   });
+  //   return this.crops;
+  // },
+  // getSuppliedCrops: function() {
+  //   //return an array of
+  // }
 }

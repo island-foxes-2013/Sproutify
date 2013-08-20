@@ -5,6 +5,8 @@ class Crop < ActiveRecord::Base
   has_many :supplies
   has_many :demands
 
+  before_save :normalize
+
   def number_supplied(users)
     count = 0
 
@@ -25,5 +27,11 @@ class Crop < ActiveRecord::Base
       end
     end
     count
+  end
+
+  private
+
+  def normalize
+    self.name = self.name.downcase.pluralize
   end
 end

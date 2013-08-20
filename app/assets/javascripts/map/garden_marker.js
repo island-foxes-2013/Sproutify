@@ -7,17 +7,24 @@ function GardenMarker(map, garden) {
   $(garden).on('removed', function() {
     self.remove();
   });
+  $(garden).on('hidden', function() {
+    self.hide();
+  });
 
+  $(garden).on('shown', function() {
+    self.show();
+  });
   this.place();
 }
 
 GardenMarker.prototype = {
   place: function() {
     var latLng = new google.maps.LatLng(this.garden.lat(), this.garden.lng());
+
     var marker = new google.maps.Marker({
         map: this.map.google_map,
         position: latLng,
-        title: this.garden.username(),
+        title: this.garden.username()
     });
 
     this.marker = marker;
@@ -28,8 +35,6 @@ GardenMarker.prototype = {
     });
   },
   renderInfoContent: function() {
-
-    // this.garden.suppliedCrops()[0].name
     var gardenLiteral = { name: this.garden.username(),
                           id: this.garden.user_id(),
                           supplies: this.garden.suppliedCrops(),
@@ -39,5 +44,11 @@ GardenMarker.prototype = {
   },
   remove: function() {
     this.marker.setMap(null);
+  },
+  show: function() {
+    this.marker.setIcon('/assets/tree_icon.png');
+  },
+  hide: function() {
+    this.marker.setIcon('/assets/small_marker.png');
   }
 }

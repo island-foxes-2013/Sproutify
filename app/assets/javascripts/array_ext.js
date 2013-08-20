@@ -5,3 +5,13 @@ Array.prototype.exterminate = function(element) {
   }
   this
 }
+
+Array.prototype.diff = function(a) {
+  return this.filter(function(i) {
+    return !(a.includes(i));
+  })
+}
+
+Array.prototype.includes = function(element) {
+  return this.indexOf(element) > -1;
+}

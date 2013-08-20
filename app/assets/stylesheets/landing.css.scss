@@ -24,8 +24,8 @@ html, body {
 }
 
 #map-canvas {
-  height: 600px;
-  width: 100%;
+  min-height: 800px;
+  width: 75%;
 }
 
 .signup-link {
@@ -38,3 +38,14 @@ html, body {
 .navbar {
   margin-bottom: 0;
 }
+
+#main-container div{
+  display: inline-block;
+  vertical-align: top;
+}
+
+#browser {
+  padding-top: 10px;
+  padding-left: 10px;
+}
+

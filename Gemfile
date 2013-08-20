@@ -45,6 +45,7 @@ group :development, :test do
   gem 'simplecov', require: false
   gem 'quiet_assets'
   gem 'debugger'
+  gem 'jasmine'
 end
 
 gem 'rsolr'

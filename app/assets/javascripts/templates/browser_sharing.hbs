@@ -1,0 +1,20 @@
+<h4>
+  Your Requests
+</h4>
+<ul>
+{{#eachProperty myDemand}}
+  <p>
+    <input type="checkbox" class="supply-filter" data-name="{{property}}">  {{property}}: {{value.length}}
+  </p>
+{{/eachProperty}}
+</ul>
+<h4>
+  All Shares
+</h4>
+<ul>
+{{#eachProperty allSupply}}
+  <p>
+    <input type="checkbox" class="supply-filter" data-name="{{property}}">  {{property}}: {{value.length}}
+  </p>
+{{/eachProperty}}
+</ul>
