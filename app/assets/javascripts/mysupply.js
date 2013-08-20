@@ -22,10 +22,10 @@ MySupply.prototype = {
   },
   mapNames: function(){
     this.growingNames = $.map(this.growing, function(crop){
-      crop.name;
+      return crop.name;
     });
     this.harvestingNames = $.map(this.harvesting, function(crop){
-      crop.name;
+      return crop.name;
     });
   }
 

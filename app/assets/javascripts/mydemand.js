@@ -19,7 +19,7 @@ MyDemand.prototype = {
   },
   mapNames: function(){
     this.myDemandNames = $.map(this.myDemand, function(crop){
-      crop.name;
+      return crop.name;
     });
   }
 
