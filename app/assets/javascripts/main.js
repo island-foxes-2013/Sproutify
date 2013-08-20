@@ -46,8 +46,8 @@ MainManager.prototype.getUserData = function(successCallback) {
 
 MainManager.prototype.generateEmailForm = function(id) {
   $('#connect_with_user').remove();
-  $('#main-body').append(HandlebarsTemplates['email_form'])
-}
+  $('#main-body').append(HandlebarsTemplates['email_form']);
+};
 
 MainManager.prototype.emailUser = function(id, content) {
   var data = {id: id, content: content};
@@ -58,7 +58,7 @@ MainManager.prototype.emailUser = function(id, content) {
   }).done(function(response){
     $('#connect_with_user').html(response.recipient.first_name + ' has been messaged!').fadeOut(2000);
   });
-}
+};
 
 // MainManager.prototype.showMap = function() {
 //   $('#mapcanvas').html(HandlebarsTemplates['map']);

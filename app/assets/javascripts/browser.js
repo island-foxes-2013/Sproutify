@@ -10,7 +10,9 @@ function BrowserView(allGardenSet, filter){
 BrowserView.prototype = {
   bindEvents: function(){
     var self = this;
-    $(this.allGardenSet).on("gardenAdded", function(){ self.updateView() });
+    $(this.allGardenSet).on("gardenAdded", function(){
+      self.updateView();
+    });
     $("body").on("click",".supply-filter", function(){
       var cropName = $(this).attr("data-name");
       if ($(this).is(':checked')){
@@ -34,7 +36,7 @@ BrowserView.prototype = {
     var browseData = {
       demand: this.allGardenSet.demandCropIndex,
       supply: this.allGardenSet.supplyCropIndex
-    }
+    };
     this.$elem.html(HandlebarsTemplates['browser'](browseData));
   }
 };
