@@ -27,24 +27,24 @@ Browser.prototype = {
   refreshDemandIndices: function(){
     this.myDemandIndex = {};
     this.allDemandIndex = {};
-    for (crop in this.allGardenSet.demandCropIndex){
+    for (crop in this.allGardenSet.supplyCropIndex){
       if (this.myDemand.myDemandNames.includes(crop)){
-        this.myDemandIndex[crop] = this.allGardenSet.demandCropIndex[crop];
+        this.myDemandIndex[crop] = this.allGardenSet.supplyCropIndex[crop];
       } else {
-        this.allDemandIndex[crop] = this.allGardenSet.demandCropIndex[crop];
+        this.allSupplyIndex[crop] = this.allGardenSet.supplyCropIndex[crop];
       }
     }
   },
   refreshSupplyIndices: function(){
     this.mySupplyIndex = {};
     this.allSupplyIndex = {};
-    for (crop in this.allGardenSet.supplyCropIndex){
+    for (crop in this.allGardenSet.demandCropIndex){
       if (this.mySupply.growingNames.includes(crop)){
-        this.myGrowingIndex[crop] = this.allGardenSet.supplyCropIndex[crop];
+        this.myGrowingIndex[crop] = this.allGardenSet.demandCropIndex[crop];
       } else if (this.mySupply.harvestingNames.includes(crop)) {
-        this.myHarvestingIndex[crop] = this.allGardenSet.supplyCropIndex[crop];
+        this.myHarvestingIndex[crop] = this.allGardenSet.demandCropIndex[crop];
       } else {
-        this.allSupplyIndex[crop] = this.allGardenSet.supplyCropIndex[crop];
+        this.allDemandIndex[crop] = this.allGardenSet.demandCropIndex[crop];
       }
     }
   }
@@ -88,10 +88,11 @@ BrowserView.prototype = {
   updateView: function(){
     var browseData = {
       myDemand: this.browser.myDemandIndex,
-      allDemand: this.browser.allDemandIndex,
+      allSupply: this.browser.allSupplyIndex,
+      
       myGrowing: this.browser.myGrowingIndex,
       myHarvesting: this.browser.myHarvestingIndex,
-      allSupply: this.browser.allSupplyIndex,
+      allDemand: this.browser.allDemandIndex
     };
     this.$elem.html(HandlebarsTemplates['browser'](browseData));
   }
