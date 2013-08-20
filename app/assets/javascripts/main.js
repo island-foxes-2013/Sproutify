@@ -1,5 +1,6 @@
 function MainManager() {
-  $("#main-body").html(HandlebarsTemplates['main']());
+  this.element = $('#main-body');
+  this.element.html(HandlebarsTemplates['main']());
   var self = this;
   var user_data = this.getUserData(function(user_data) {
     self.map = new Map(user_data.user_lat, user_data.user_lng);
@@ -7,17 +8,22 @@ function MainManager() {
     $("body").trigger("initialMapLoad");
 
     $(document).on('click', '#generate_form', function() {
-      var user_id = $(this).data('id');
-      self.generateEmailForm();
-      $('#connect').on('click', function(event) {
-        event.preventDefault();
-        var content = $('#message').val();
-        self.emailUser(user_id, content);
-      });
+      var contactGardenerModal = new ContactGardenerModal($(this).data('id'));
+      console.log(contactGardenerModal.modal);
+      self.element.append(contactGardenerModal.modal);
+      contactGardenerModal.show();
     });
 
-  });
+    $(document).on('click', '#messages-nav', function() {
+      self.getInbox();
+    });
 
+    $(document).on('click', '.inbox-message', function(event) {
+      event.preventDefault();
+      var message_id = $(this).data('id');
+      self.getMessage(message_id);
+    });
+  });
   this.bindEvents();
 }
 
@@ -46,18 +52,22 @@ MainManager.prototype.getUserData = function(successCallback) {
   });
 };
 
-MainManager.prototype.generateEmailForm = function(id) {
-  $('#connect_with_user').remove();
-  $('#main-body').append(HandlebarsTemplates['email_form']);
-};
-
-MainManager.prototype.emailUser = function(id, content) {
-  var data = {id: id, content: content};
+MainManager.prototype.getInbox = function(){
   $.ajax({
-    url: '/connect',
-    type: 'get',
-    data: data
+    url: '/inbox',
+    type: 'get'
   }).done(function(response){
-    $('#connect_with_user').html(response.recipient.first_name + ' has been messaged!').fadeOut(2000);
+    $('#connect-with-user').html(HandlebarsTemplates['inbox'](response));
+  });
+}
+
+MainManager.prototype.getMessage = function (message_id) {
+  $.ajax({
+    url: '/message',
+    type: 'get',
+    data: {message_id: message_id}
+  }).done(function(response){
+    $('<p>'+response.message[0].body+'</p>').insertAfter('*[data-id='+response.message[0].conversation_id+']')
+    $('*[data-id='+response.message[0].conversation_id+']').remove();
   });
 };

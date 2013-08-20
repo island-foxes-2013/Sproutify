@@ -23,8 +23,9 @@
 ///////////////////
 // DOCUMENT READY
 $(function() {
-
-  $("body").html(HandlebarsTemplates['static']());
+  Avgrund.initialize();
+  $("#content").html(HandlebarsTemplates['static']());
+  // Avgrund.initialize();
 
   // Begin handlebars
   $.get('/sessions').done(function(data){
