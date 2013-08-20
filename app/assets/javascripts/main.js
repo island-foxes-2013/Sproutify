@@ -1,5 +1,6 @@
 function MainManager() {
-  $("#main-body").html(HandlebarsTemplates['main']());
+  this.element = $('#main-body');
+  this.element.html(HandlebarsTemplates['main']());
   var self = this;
   var user_data = this.getUserData(function(user_data) {
     self.showAddSupply();
@@ -9,14 +10,8 @@ function MainManager() {
     $("body").trigger("initialMapLoad");
 
     $(document).on('click', '#generate_form', function() {
-      var user_id = $(this).data('id')
-      self.generateEmailForm();
-      $('#connect').on('click', function(event) {
-        event.preventDefault();
-        var title = $('#email_title').val();
-        var content = $('#message').val();
-        self.emailUser(user_id, title, content);
-      });
+      var contactGardenerModal = new ContactGardenerModal($(this).data('id'));
+      self.element.append(contactGardenerModal.element);
     });
 
     $(document).on('click', '#messages-nav', function() {
@@ -73,21 +68,8 @@ MainManager.prototype.getMessage = function (message_id) {
   });
 }
 
-MainManager.prototype.generateEmailForm = function(id) {
-  $("#main-body").append(HandlebarsTemplates['email_form']);
-  Avgrund.show('#email-form');
-}
 
-MainManager.prototype.emailUser = function(id, title, content) {
-  var data = {id: id, title: title, content: content};
-  $.ajax({
-    url: '/connect',
-    type: 'get',
-    data: data
-  }).done(function(response){
-    $('#connect-with-user').html(response.recipient.first_name + ' has been messaged!').fadeOut(2000);
-  });
-}
+
 
 // MainManager.prototype.showMap = function() {
 //   $('#mapcanvas').html(HandlebarsTemplates['map']);

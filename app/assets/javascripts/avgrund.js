@@ -5,14 +5,17 @@
  *
  * Copyright (C) 2012 Hakim El Hattab, http://hakim.se
  */
-var Avgrund = (function(){
+ var Avgrund = (function(){
+ 	var container, popup, cover, currentState;
 
-	var container = document.documentElement,
-		popup = document.querySelector( '.avgrund-popup-animate' ),
-		cover = document.querySelector( '.avgrund-cover' ),
-		currentState = null;
+ 	function initialize() {
+ 		container = document.documentElement;
+ 		popup = document.querySelector( '.avgrund-popup-animate' );
+ 		cover = document.querySelector( '.avgrund-cover' );
+ 		currentState = null;
 
-	container.className = container.className.replace( /\s+$/gi, '' ) + ' avgrund-ready';
+ 		container.className = container.className.replace( /\s+$/gi, '' ) + ' avgrund-ready';
+ 	}
 
 	// Deactivate on ESC
 	function onDocumentKeyUp( event ) {
@@ -24,6 +27,7 @@ var Avgrund = (function(){
 	// Deactivate on click outside
 	function onDocumentClick( event ) {
 		if( event.target === cover ) {
+			console.log('DEACTIVATE');
 			deactivate();
 		}
 	}
@@ -81,7 +85,8 @@ var Avgrund = (function(){
 		deactivate: deactivate,
 		disableBlur: disableBlur,
 		show: show,
-		hide: hide
+		hide: hide,
+		initialize: initialize
 	}
 
 })();
