@@ -20,4 +20,6 @@ Sproutify::Application.routes.draw do
   get 'search', to: 'search#search'
 
   get 'user_data', to: 'sessions#user_data'
+
+  get 'connect', to: 'users#email_user'
 end

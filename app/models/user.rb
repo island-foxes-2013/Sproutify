@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_secure_password
+  acts_as_messageable
 
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation
   
@@ -29,5 +30,13 @@ class User < ActiveRecord::Base
 
   def demanding
     self.demands.all.map {|x| Crop.find_by_id(x.crop_id).name}
+  end
+
+  def name
+    "#{self.first_name} #{self.last_name}"
+  end
+
+  def mailboxer_email(object)
+    self.email
   end
 end

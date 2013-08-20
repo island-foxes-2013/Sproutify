@@ -9,7 +9,7 @@ function Map(lat, lng) {
 
 Map.prototype = {
   placeGarden: function(garden) {
-    this.gardens.addGarden(garden);    
+    this.gardens.addGarden(garden);
   },
   refreshGardens: function(boundary){
     this.clearGardens();

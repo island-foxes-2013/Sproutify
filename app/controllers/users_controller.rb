@@ -23,4 +23,9 @@ class UsersController < ApplicationController
     end
   end
 
+  def email_user
+    recipient = User.find_by_id(params[:id])
+    current_user.send_message(recipient, params[:content], "subject")
+    render json: {recipient: recipient}
+  end
 end

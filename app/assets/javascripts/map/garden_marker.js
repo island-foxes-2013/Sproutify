@@ -34,9 +34,13 @@ GardenMarker.prototype = {
     });
   },
   renderInfoContent: function() {
+
+    // this.garden.suppliedCrops()[0].name
     var gardenLiteral = { name: this.garden.username(),
+                          id: this.garden.user_id(),
                           supplies: this.garden.suppliedCrops(),
                           demands: this.garden.demandedCrops() }
+
     return HandlebarsTemplates['infowindow'](gardenLiteral);
   },
   remove: function() {
