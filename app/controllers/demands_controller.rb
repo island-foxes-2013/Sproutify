@@ -17,7 +17,7 @@ class DemandsController < ApplicationController
         render json: { errors: demand.errors.full_messages }
       end
     else
-      render json: {errors: crop.errors.full_messages }
+      render json: { errors: crop.errors.full_messages }
     end
   end
 

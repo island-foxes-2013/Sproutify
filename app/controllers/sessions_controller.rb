@@ -27,14 +27,14 @@ class SessionsController < ApplicationController
           user: current_user
         }
       else
-        errors = {password: ["is invalid"]}
+        errors = ["Invalid password"]
         render json: {
           logged_in: false,
           errors: errors
         }
       end
     else
-      errors = {email: ["is unrecognized"]}
+      errors = ["Unrecognized eamil"]
       render json: {
         logged_in: false,
         errors: errors
