@@ -11,7 +11,9 @@ function MainManager() {
 
     $(document).on('click', '#generate_form', function() {
       var contactGardenerModal = new ContactGardenerModal($(this).data('id'));
-      self.element.append(contactGardenerModal.element);
+      console.log(contactGardenerModal.modal);
+      self.element.append(contactGardenerModal.modal);
+      contactGardenerModal.show();
     });
 
     $(document).on('click', '#messages-nav', function() {
@@ -67,9 +69,6 @@ MainManager.prototype.getMessage = function (message_id) {
     $('*[data-id='+response.message[0].conversation_id+']').remove();
   });
 }
-
-
-
 
 // MainManager.prototype.showMap = function() {
 //   $('#mapcanvas').html(HandlebarsTemplates['map']);

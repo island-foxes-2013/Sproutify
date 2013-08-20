@@ -1,34 +1,37 @@
-function View() {
-}
-
-View.prototype.buildElement = function() {
-  this.element = $(HandlebarsTemplates[this.template]
-}
-
-
-function ContactGardenerModal(recipient_id) {
-  this.locator = '#contact-gardener-form';
-  this.template = 'email_form'
-  this.buildElement();
-  Avgrund.show(this.locator);
+function ContactGardenerModal(user_id) {
+  this.generateEmailForm();
   var self = this;
-  this.element.find('form').on('submit', function(event) {
+  this.modal.on('submit', function(event) {
     event.preventDefault();
-    var title = self.element.find('.title').val();
-    var content = self.element.find('.message').val();
-    self.emailUser(recipient_id, title, content);
+    var title = self.modal.find('.title').val();
+    var content = self.modal.find('.message').val();
+    self.emailUser(user_id, title, content);
+  });
+  this.modal.on('click', '#close', function() {
+    event.preventDefault();
+    self.hide();
   });
 }
 
-$.extend(ContactGardenerModal.prototype, View.prototype);
+ContactGardenerModal.prototype.generateEmailForm = function() {
+  this.modal = $(HandlebarsTemplates['email_form']());
+}
+
+ContactGardenerModal.prototype.show = function() {
+  Avgrund.show('#contact-gardener-form');
+}
+
+ContactGardenerModal.prototype.hide = function() {
+  Avgrund.hide();
+}
+
 ContactGardenerModal.prototype.emailUser = function(id, title, content) {
   var data = {id: id, title: title, content: content};
   $.ajax({
     url: '/connect',
-    type: 'get',
+    type: 'post',
     data: data
   }).done(function(response){
-    $('#connect-with-user').html(response.recipient.first_name + ' has been messaged!').fadeOut(2000);
+    $('#contact-gardener-form').html(HandlebarsTemplates['sent_message']());
   });
 }
-
