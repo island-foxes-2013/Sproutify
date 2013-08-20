@@ -28,6 +28,7 @@ GardenMarker.prototype = {
     });
   },
   renderInfoContent: function() {
+
     // this.garden.suppliedCrops()[0].name
     var gardenLiteral = { name: this.garden.username(),
                           id: this.garden.user_id(),

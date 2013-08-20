@@ -1,13 +1,21 @@
+<h1>Browser</h1>
 <h3>
   Supplies
 </h3>
 <ul>
-  {{#each gardens}}
+{{#eachProperty supply}}
   <li>
-    {{this}}
+    {{property}}: {{value.length}}
   </li>
-  {{/each}}
+{{/eachProperty}}
 </ul>
 <h3>
   Demands
 </h3>
+<ul>
+{{#eachProperty demand}}
+  <li>
+    {{property}}: {{value.length}}
+  </li>
+{{/eachProperty}}
+</ul>

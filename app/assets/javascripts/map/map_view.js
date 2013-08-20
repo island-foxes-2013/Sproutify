@@ -4,7 +4,7 @@ function MapView(map, element) {
   this.generate();
   var self = this;
 
-  $(this.map).on('gardenAdded', function(e, garden) {
+  $(this.map.gardens).on('gardenAdded', function(e, garden) {
     self.placeMarker(garden);
   });
 }

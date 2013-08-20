@@ -17,8 +17,8 @@ Browser.prototype = {
   }
 };
 
-function BrowserView(browser){
-  this.browser = browser;
+function BrowserView(allGardenSet){
+  this.allGardenSet = allGardenSet;
   this.$elem = $("#browser");
 
   this.updateView();
@@ -28,9 +28,13 @@ function BrowserView(browser){
 BrowserView.prototype = {
   bindEvents: function(){
     var self = this;
-    $("body").on("newBrowseData", function(){ self.updateView() });
+    $(this.allGardenSet).on("gardenAdded", function(){ self.updateView() });
   },
   updateView: function(){
-    this.$elem.html(HandlebarsTemplates['browser'](this.browser.browseData));
+    var browseData = {
+      demand: this.allGardenSet.demandCropIndex,
+      supply: this.allGardenSet.supplyCropIndex
+    }
+    this.$elem.html(HandlebarsTemplates['browser'](browseData));
   }
 };

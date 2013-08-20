@@ -9,6 +9,7 @@ class SearchController < ApplicationController
       hit = { user: user,
               lat:  user.geocode.lat,
               lng:  user.geocode.lng,
+
               supplies: user.supplies.map do |supply|
                 {name: supply.crop.name, status: supply.status.name}
               end,
