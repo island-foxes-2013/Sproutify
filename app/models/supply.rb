@@ -5,5 +5,5 @@ class Supply < ActiveRecord::Base
   belongs_to :status
 
   validates_presence_of :user, :crop
-  validates_uniqueness_of :user_id, scope: [:crop_id, :status_id]
+  validates_uniqueness_of :crop_id, scope: [:user_id, :status_id], message: "has already een shared"
 end

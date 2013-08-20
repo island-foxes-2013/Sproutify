@@ -28,9 +28,9 @@ class User < ActiveRecord::Base
     harvested_supplies.map {|s| Crop.find_by_id(s.crop_id) }
   end
 
-  # def demanding
-  #   self.demands.all.map {|x| Crop.find_by_id(x.crop_id)}
-  # end
+  def demanding
+    self.demands.all.map {|x| {id: x.id, crop: Crop.find_by_id(x.crop_id) } }
+  end
 
   def name
     "#{self.first_name} #{self.last_name}"
