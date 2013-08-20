@@ -1,5 +1,6 @@
 function MyDemand(){
-  this.myDemand = {};
+  this.myDemand = [];
+  this.myDemandNames = [];
   this.getDemand();
 }
 
@@ -12,8 +13,15 @@ MyDemand.prototype = {
       type: 'GET'
     }).done(function(response){ 
       self.myDemand = response.demands;
+      self.mapNames();
+      $(self).trigger("updatedData");
     });
   },
+  mapNames: function(){
+    this.myDemandNames = $.map(this.myDemand, function(crop){
+      crop.name;
+    });
+  }
 
 };
 

@@ -1,6 +1,8 @@
 function MySupply(){
-  this.growing = {};
-  this.harvesting = {};
+  this.growing = [];
+  this.harvesting = [];
+  this.growingNames = [];
+  this.harvestingNames = [];
   this.getSupply();
 }
 
@@ -14,11 +16,18 @@ MySupply.prototype = {
     }).done(function(response){ 
       self.growing = response.growing;
       self.harvest = response.harvesting;
-      // $('.user-supplies').html(HandlebarsTemplates['current_supply'](response));
-      // $('.crop-field').val('');
-      // $('.drop-down').prop('selectedIndex',0);
+      self.mapNames();
+      $(self).trigger("updatedData");
     });
   },
+  mapNames: function(){
+    this.growingNames = $.map(this.growing, function(crop){
+      crop.name;
+    });
+    this.harvestingNames = $.map(this.harvesting, function(crop){
+      crop.name;
+    });
+  }
 
 };
 

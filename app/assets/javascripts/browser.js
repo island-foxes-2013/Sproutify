@@ -5,25 +5,53 @@ function Browser(allGardenSet, filter, mySupply, myDemand){
   this.myDemand = myDemand;
 
   this.myDemandIndex = {};
-  this.mySupplyIndex = {};
   this.allDemandIndex = {};
+  this.myGrowingIndex = {};
+  this.myHarvestingIndex = {};
   this.allSupplyIndex = {};
+  this.bindEvents();
 }
 
 Browser.prototype = {
+  bindEvents: function(){
+    var self = this;
+    $(this.mySupply).on("updatedData", function() {self.refreshIndices()});
+    $(this.myDemand).on("updatedData", function() {self.refreshIndices()});
+    $(this.allGardenSet).on("gardenAdded", function() {self.refreshIndices()});
+  },
+  refreshIndices: function(){
+    this.refreshDemandIndices();
+    this.refreshSupplyIndices();
+    $(this).trigger("updatedIndices");
+  },
   refreshDemandIndices: function(){
-
+    this.myDemandIndex = {};
+    this.allDemandIndex = {};
+    for (crop in this.allGardenSet.demandCropIndex){
+      if (this.myDemand.myDemandNames.includes(crop)){
+        this.myDemandIndex[crop] = this.allGardenSet.demandCropIndex[crop];
+      } else {
+        this.allDemandIndex[crop] = this.allGardenSet.demandCropIndex[crop];
+      }
+    }
   },
   refreshSupplyIndices: function(){
-    
+    this.mySupplyIndex = {};
+    this.allSupplyIndex = {};
+    for (crop in this.allGardenSet.supplyCropIndex){
+      if (this.mySupply.growingNames.includes(crop)){
+        this.myGrowingIndex[crop] = this.allGardenSet.supplyCropIndex[crop];
+      } else if (this.mySupply.harvestingNames.includes(crop)) {
+        this.myHarvestingIndex[crop] = this.allGardenSet.supplyCropIndex[crop];
+      } else {
+        this.allSupplyIndex[crop] = this.allGardenSet.supplyCropIndex[crop];
+      }
+    }
   }
-}
+};
 
-function BrowserView(allGardenSet, filter, mySupply, myDemand){
-  this.allGardenSet = allGardenSet;
-  this.filter = filter;
-  this.mySupply = mySupply;
-  this.myDemand = myDemand;
+function BrowserView(browser){
+  this.browser = browser;
   this.$elem = $("#browser");
 
   this.updateView();
@@ -33,9 +61,10 @@ function BrowserView(allGardenSet, filter, mySupply, myDemand){
 BrowserView.prototype = {
   bindEvents: function(){
     var self = this;
-    $(this.allGardenSet).on("gardenAdded", function(){
+    $(this.browser).on("updatedIndices", function(){
       self.updateView();
     });
+
     $("body").on("click",".supply-filter", function(){
       var cropName = $(this).attr("data-name");
       if ($(this).is(':checked')){
@@ -45,6 +74,7 @@ BrowserView.prototype = {
       }
       self.filter.filter();
     });
+
     $("body").on("click",".demand-filter", function(){
       var cropName = $(this).attr("data-name");
       if ($(this).is(':checked')){
@@ -55,13 +85,13 @@ BrowserView.prototype = {
       self.filter.filter();
     });
   },
-  separateMyData: function(){
-
-  },
   updateView: function(){
     var browseData = {
-      demand: this.allGardenSet.demandCropIndex,
-      supply: this.allGardenSet.supplyCropIndex
+      myDemand: this.browser.myDemandIndex,
+      allDemand: this.browser.allDemandIndex,
+      myGrowing: this.browser.myGrowingIndex,
+      myHarvesting: this.browser.myHarvestingIndex,
+      allSupply: this.browser.allSupplyIndex,
     };
     this.$elem.html(HandlebarsTemplates['browser'](browseData));
   }

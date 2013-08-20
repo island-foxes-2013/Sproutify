@@ -30,6 +30,7 @@ Filter.prototype.filter = function() {
       $(this).trigger('hidden');
     }
   });
+  $(this).trigger("updatedFilter");
 };
 
 Filter.prototype.addDemand = function(crop_name){
