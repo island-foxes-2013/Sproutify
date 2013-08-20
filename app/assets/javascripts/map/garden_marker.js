@@ -46,9 +46,9 @@ GardenMarker.prototype = {
     this.marker.setMap(null);
   },
   show: function() {
-    this.marker.setIcon('http://mapicons.nicolasmollet.com/wp-content/uploads/mapicons/shape-default/color-128e4d/shapecolor-color/shadow-1/border-dark/symbolstyle-white/symbolshadowstyle-dark/gradient-no/arbol.png');
+    this.marker.setIcon('/assets/tree_icon.png');
   },
   hide: function() {
-    this.marker.setIcon('http://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_red.png');
+    this.marker.setIcon('/assets/small_marker.png');
   }
 }
