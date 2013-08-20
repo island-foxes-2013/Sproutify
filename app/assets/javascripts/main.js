@@ -17,13 +17,7 @@ function MainManager() {
     });
 
   });
-
-  this.mySupply = new MySupply();
-  this.mySupplyView = new MySupplyView(this.mySupply);
-
-  this.myDemand = new MyDemand();
-  this.myDemandView = new MyDemandView(this.myDemand);
-
+  
   this.bindEvents();
 }
 
@@ -31,8 +25,14 @@ MainManager.prototype.bindEvents = function(){
   var self = this;
 
   $("body").on("initialMapLoad", function(){
+    this.mySupply = new MySupply();
+    this.mySupplyView = new MySupplyView(this.mySupply);
+
+    this.myDemand = new MyDemand();
+    this.myDemandView = new MyDemandView(this.myDemand);
+
     self.filter = new Filter(self.map.gardens);
-    self.browserView = new BrowserView(self.map.gardens, self.filter);
+    self.browserView = new BrowserView(self.map.gardens, self.filter, self.mySupply, self.myDemand);
   });
 };
 

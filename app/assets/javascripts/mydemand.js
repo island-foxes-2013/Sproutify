@@ -1,5 +1,6 @@
 function MyDemand(){
-  this.myDemand = this.getDemand();
+  this.myDemand = {};
+  this.getDemand();
 }
 
 MyDemand.prototype = {
@@ -10,7 +11,7 @@ MyDemand.prototype = {
       url: '/demands',
       type: 'GET'
     }).done(function(response){ 
-      self.myDemand = response;
+      self.myDemand = response.demands;
     });
   },
 

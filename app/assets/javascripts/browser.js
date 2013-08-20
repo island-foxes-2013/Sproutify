@@ -1,6 +1,29 @@
-function BrowserView(allGardenSet, filter){
+function Browser(allGardenSet, filter, mySupply, myDemand){
   this.allGardenSet = allGardenSet;
   this.filter = filter;
+  this.mySupply = mySupply;
+  this.myDemand = myDemand;
+
+  this.myDemandIndex = {};
+  this.mySupplyIndex = {};
+  this.allDemandIndex = {};
+  this.allSupplyIndex = {};
+}
+
+Browser.prototype = {
+  refreshDemandIndices: function(){
+
+  },
+  refreshSupplyIndices: function(){
+    
+  }
+}
+
+function BrowserView(allGardenSet, filter, mySupply, myDemand){
+  this.allGardenSet = allGardenSet;
+  this.filter = filter;
+  this.mySupply = mySupply;
+  this.myDemand = myDemand;
   this.$elem = $("#browser");
 
   this.updateView();
@@ -31,6 +54,9 @@ BrowserView.prototype = {
       }
       self.filter.filter();
     });
+  },
+  separateMyData: function(){
+
   },
   updateView: function(){
     var browseData = {

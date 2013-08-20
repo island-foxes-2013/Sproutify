@@ -1,5 +1,7 @@
 function MySupply(){
-  this.mySupply = this.getSupply();
+  this.growing = {};
+  this.harvesting = {};
+  this.getSupply();
 }
 
 MySupply.prototype = {
@@ -10,7 +12,8 @@ MySupply.prototype = {
       url: '/supplies',
       type: 'GET'
     }).done(function(response){ 
-      self.mySupply = response;
+      self.growing = response.growing;
+      self.harvest = response.harvesting;
       // $('.user-supplies').html(HandlebarsTemplates['current_supply'](response));
       // $('.crop-field').val('');
       // $('.drop-down').prop('selectedIndex',0);
