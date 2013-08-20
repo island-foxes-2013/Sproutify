@@ -21,5 +21,5 @@ Sproutify::Application.routes.draw do
 
   get 'user_data', to: 'sessions#user_data'
 
-  post 'connect', to: 'users#email_user'
+  get 'connect', to: 'users#email_user'
 end

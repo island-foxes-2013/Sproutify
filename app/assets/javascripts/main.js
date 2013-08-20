@@ -13,7 +13,8 @@ function MainManager() {
       self.generateEmailForm();
       $('#connect').on('click', function(event) {
         event.preventDefault();
-        self.emailUser(user_id);
+        var content = $('#message').val();
+        self.emailUser(user_id, content);
       });
     });
 
@@ -44,15 +45,18 @@ MainManager.prototype.getUserData = function(successCallback) {
 };
 
 MainManager.prototype.generateEmailForm = function(id) {
+  $('#connect_with_user').remove();
   $('#main-body').append(HandlebarsTemplates['email_form'])
 }
 
-MainManager.prototype.emailUser = function(id) {
-  var user_id = {id: id};
+MainManager.prototype.emailUser = function(id, content) {
+  var data = {id: id, content: content};
   $.ajax({
     url: '/connect',
-    type: 'post',
-    data: user_id
+    type: 'get',
+    data: data
+  }).done(function(response){
+    $('#connect_with_user').html(response.recipient.first_name + ' has been messaged!').fadeOut(2000);
   });
 }
 
