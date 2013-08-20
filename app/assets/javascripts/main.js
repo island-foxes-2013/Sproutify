@@ -20,8 +20,8 @@ MainManager.prototype.bindEvents = function(){
   this.bindCurrentDemand();
 
   $("body").on("initialMapLoad", function(){
-    // self.browser = new Browser(self.map);
-    self.browserView = new BrowserView(self.map.gardens);
+    self.filter = new Filter(self.map.gardens);
+    self.browserView = new BrowserView(self.map.gardens, self.filter);
   });
 };
 

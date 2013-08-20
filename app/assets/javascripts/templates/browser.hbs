@@ -4,9 +4,9 @@
 </h3>
 <ul>
 {{#eachProperty supply}}
-  <li>
-    {{property}}: {{value.length}}
-  </li>
+  <p>
+    <input type="checkbox" class="supply-filter" data-name="{{property}}">  {{property}}: {{value.length}}
+  </p>
 {{/eachProperty}}
 </ul>
 <h3>
@@ -14,8 +14,8 @@
 </h3>
 <ul>
 {{#eachProperty demand}}
-  <li>
-    {{property}}: {{value.length}}
-  </li>
+  <p>
+    <input type="checkbox" class="demand-filter" data-name="{{property}}-demand"> {{property}}: {{value.length}}
+  </p>
 {{/eachProperty}}
 </ul>

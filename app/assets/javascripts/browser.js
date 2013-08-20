@@ -1,24 +1,6 @@
-function Browser(map){
-  this.map = map;
-  this.browseData = {gardens: map.markers};
-  this.bindEvents();
-}
-
-Browser.prototype = {
-  bindEvents: function(){
-    var self = this;
-    $("body").on("newMarkers", function(){
-      self.updateMarkers();
-    });
-  },
-  updateMarkers: function(){
-    this.browseData.gardens = this.map.markers;
-    $("body").trigger("newBrowseData");
-  }
-};
-
-function BrowserView(allGardenSet){
+function BrowserView(allGardenSet, filter){
   this.allGardenSet = allGardenSet;
+  this.filter = filter;
   this.$elem = $("#browser");
 
   this.updateView();
@@ -29,6 +11,24 @@ BrowserView.prototype = {
   bindEvents: function(){
     var self = this;
     $(this.allGardenSet).on("gardenAdded", function(){ self.updateView() });
+    $("body").on("click",".supply-filter", function(){
+      var cropName = $(this).attr("data-name");
+      if ($(this).is(':checked')){
+        self.filter.addSupply(cropName);
+      } else {
+        self.filter.removeSupply(cropName);
+      }
+      self.filter.filter();
+    });
+    $("body").on("click",".demand-filter", function(){
+      var cropName = $(this).attr("data-name");
+      if ($(this).is(':checked')){
+        self.filter.addDemand(cropName);
+      } else {
+        self.filter.removeDemand(cropName);
+      }
+      self.filter.filter();
+    });
   },
   updateView: function(){
     var browseData = {

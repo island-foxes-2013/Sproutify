@@ -7,7 +7,13 @@ function GardenMarker(map, garden) {
   $(garden).on('removed', function() {
     self.remove();
   });
+  $(garden).on('hidden', function() {
+    self.remove();
+  });
 
+  $(garden).on('shown', function() {
+    self.show();
+  });
   this.place();
 }
 
@@ -35,5 +41,8 @@ GardenMarker.prototype = {
   },
   remove: function() {
     this.marker.setMap(null);
+  },
+  show: function() {
+    this.marker.setMap(this.map.google_map);
   }
 }
