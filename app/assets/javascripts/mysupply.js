@@ -17,7 +17,7 @@ MySupply.prototype = {
     });
   },
 
-}
+};
 
 function MySupplyView(mySupply){
   this.mySupply = mySupply;
@@ -35,4 +35,4 @@ MySupplyView.prototype = {
       self.mySupply.getSupply();
     });
   }
-}
+};
