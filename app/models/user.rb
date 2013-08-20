@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :email, :password, :password_confirmation
   validates_uniqueness_of :email
   validates :email, format: {with: /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/,
-    message: "%{value} is not a properly formatted email address" }
+    message: "is not properly formatted" }
   validates_length_of :password, :in => 6..20
 
   after_validation { self.errors.messages.delete(:password_digest) }
@@ -28,9 +28,9 @@ class User < ActiveRecord::Base
     harvested_supplies.map {|s| Crop.find_by_id(s.crop_id) }
   end
 
-  def demanding
-    self.demands.all.map {|x| Crop.find_by_id(x.crop_id)}
-  end
+  # def demanding
+  #   self.demands.all.map {|x| Crop.find_by_id(x.crop_id)}
+  # end
 
   def name
     "#{self.first_name} #{self.last_name}"

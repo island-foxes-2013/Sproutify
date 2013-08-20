@@ -28,11 +28,11 @@ MainManager.prototype.bindEvents = function(){
     self.mySupply = new MySupply();
     self.mySupplyView = new MySupplyView(self.mySupply);
 
-    self.myDemand = new MyDemand();
-    self.myDemandView = new MyDemandView(self.myDemand);
+    self.myDemands = new MyDemands();
+    self.myDemandsForm = new MyDemandsForm(self.myDemands);
 
     self.filter = new Filter(self.map.gardens);
-    self.browser = new Browser(self.map.gardens, self.mySupply, self.myDemand);
+    self.browser = new Browser(self.map.gardens, self.mySupply, self.myDemands);
     self.browserView = new BrowserView(self.browser, self.filter);
   });
 };
