@@ -9,13 +9,13 @@ function MainManager() {
 
     $(document).on('click', '#generate_form', function() {
       var contactGardenerModal = new ContactGardenerModal($(this).data('id'));
-      console.log(contactGardenerModal.modal);
       self.element.append(contactGardenerModal.modal);
       contactGardenerModal.show();
     });
 
     $(document).on('click', '#messages-nav', function() {
-      self.getInbox();
+      var inbox = new Inbox();
+      // inbox.show(); //If we wanted a modal
     });
 
     $(document).on('click', '.inbox-message', function(event) {
@@ -52,14 +52,14 @@ MainManager.prototype.getUserData = function(successCallback) {
   });
 };
 
-MainManager.prototype.getInbox = function(){
-  $.ajax({
-    url: '/inbox',
-    type: 'get'
-  }).done(function(response){
-    $('#connect-with-user').html(HandlebarsTemplates['inbox'](response));
-  });
-}
+// MainManager.prototype.getInbox = function(){
+//   $.ajax({
+//     url: '/inbox',
+//     type: 'get'
+//   }).done(function(response){
+//     $('#connect-with-user').html(HandlebarsTemplates['inbox'](response));
+//   });
+// }
 
 MainManager.prototype.getMessage = function (message_id) {
   $.ajax({
