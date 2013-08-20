@@ -1,0 +1,10 @@
+<h3>
+  Sharing in your area
+</h3>
+<ul>
+{{#eachProperty allSupply}}
+  <p>
+    <input type="checkbox" class="supply-filter" data-name="{{property}}">  {{property}}: {{value.length}}
+  </p>
+{{/eachProperty}}
+</ul>

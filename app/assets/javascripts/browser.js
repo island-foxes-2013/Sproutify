@@ -1,6 +1,5 @@
-function Browser(allGardenSet, filter, mySupply, myDemand){
+function Browser(allGardenSet, mySupply, myDemand){
   this.allGardenSet = allGardenSet;
-  this.filter = filter;
   this.mySupply = mySupply;
   this.myDemand = myDemand;
 
@@ -50,8 +49,9 @@ Browser.prototype = {
   }
 };
 
-function BrowserView(browser){
+function BrowserView(browser, filter){
   this.browser = browser;
+  this.filter = filter;
   this.$elem = $("#browser");
 
   this.updateView();
@@ -84,16 +84,30 @@ BrowserView.prototype = {
       }
       self.filter.filter();
     });
+
+    //Nav pills
+    $('body').on('click', '#share_link', function(e) {
+      e.preventDefault();
+      $('ul.nav-pills li.active').removeClass('active');
+      $(this).closest('li').addClass('active');
+      $('#browser-body').html(HandlebarsTemplates['browser_sharing'](self.browseData));
+    });
+    $('body').on('click', '#request_link', function(e) {
+      e.preventDefault();
+      $('ul.nav-pills li.active').removeClass('active');
+      $(this).closest('li').addClass('active');
+      $('#browser-body').html(HandlebarsTemplates['browser_requesting'](self.browseData));
+    });
   },
   updateView: function(){
-    var browseData = {
+    this.browseData = {
       myDemand: this.browser.myDemandIndex,
       allSupply: this.browser.allSupplyIndex,
       
       myGrowing: this.browser.myGrowingIndex,
       myHarvesting: this.browser.myHarvestingIndex,
       allDemand: this.browser.allDemandIndex
-    };
-    this.$elem.html(HandlebarsTemplates['browser'](browseData));
+    }
+    this.$elem.html(HandlebarsTemplates['browser']);
   }
 };
