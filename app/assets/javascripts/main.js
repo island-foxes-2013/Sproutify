@@ -2,14 +2,12 @@ function MainManager() {
   $("#main-body").html(HandlebarsTemplates['main']());
   var self = this;
   var user_data = this.getUserData(function(user_data) {
-    self.showAddSupply();
-    self.showAddDemand();
     self.map = new Map(user_data.user_lat, user_data.user_lng);
     new MapView(self.map, document.getElementById('map-canvas'));
     $("body").trigger("initialMapLoad");
 
     $(document).on('click', '#generate_form', function() {
-      var user_id = $(this).data('id')
+      var user_id = $(this).data('id');
       self.generateEmailForm();
       $('#connect').on('click', function(event) {
         event.preventDefault();
@@ -20,14 +18,17 @@ function MainManager() {
 
   });
 
+  this.mySupply = new MySupply();
+  this.mySupplyView = new MySupplyView(this.mySupply);
+
+  this.myDemand = new MyDemand();
+  this.myDemandView = new MyDemandView(this.myDemand);
+
   this.bindEvents();
 }
 
 MainManager.prototype.bindEvents = function(){
   var self = this;
-
-  this.bindCurrentSupply();
-  this.bindCurrentDemand();
 
   $("body").on("initialMapLoad", function(){
     self.filter = new Filter(self.map.gardens);
@@ -57,54 +58,5 @@ MainManager.prototype.emailUser = function(id, content) {
     data: data
   }).done(function(response){
     $('#connect_with_user').html(response.recipient.first_name + ' has been messaged!').fadeOut(2000);
-  });
-};
-
-// MainManager.prototype.showMap = function() {
-//   $('#mapcanvas').html(HandlebarsTemplates['map']);
-// };
-
-// CURRENT SUPPLY
-MainManager.prototype.showAddSupply = function() {
-  $('#add-supply').html(HandlebarsTemplates['add_supply']);
-};
-
-MainManager.prototype.getCurrentSupply = function() {
-  $.ajax({
-    url: '/supplies',
-    type: 'GET'
-  }).done(function(response){
-    $('.user-supplies').html(HandlebarsTemplates['current_supply'](response));
-    $('.crop-field').val('');
-    $('.drop-down').prop('selectedIndex',0);
-  });
-};
-
-MainManager.prototype.bindCurrentSupply = function (){
-  var self = this;
-  $("body").on('ajax:success', '#add-supplies-form', function(){
-    self.getCurrentSupply();
-  });
-};
-
-// CURRENT DEMAND
-MainManager.prototype.showAddDemand = function() {
-  $('#add-demand').html(HandlebarsTemplates['add_demand']);
-};
-
-MainManager.prototype.bindCurrentDemand = function (){
-  var self = this;
-  $("body").on('ajax:success', '#add-demands-form', function(){
-    self.getCurrentDemand();
-  });
-};
-
-MainManager.prototype.getCurrentDemand = function() {
-  $.ajax({
-    url: '/demands',
-    type: 'GET'
-  }).done(function(response){
-    $('.user-demands').html(HandlebarsTemplates['current_demand'](response));
-    $('.demand-field').val('');
   });
 };
