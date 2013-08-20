@@ -11,10 +11,22 @@ class SuppliesController < ApplicationController
 	end
 
   def create
-  	crop = Crop.find_or_create_by_name(params[:crop_name].downcase.pluralize)
-  	status = Status.find_or_create_by_name(params[:status_name])
-  	supply = current_user.supplies.create(crop: crop, status: status)
-  	render json: { supply: supply, crop: crop.name, status: status.name }
+  	crop = Crop.find_or_create_by_name(params[:supply_crop_name])
+    if crop.valid?
+      status = Status.find_or_create_by_name(params[:status_name])
+      if status.valid?
+        supply = current_user.supplies.create(crop: crop, status: status)
+        if supply.valid?
+          render json: { supply: supply, crop: crop.name, status: status.name }
+        else
+          render json: {errors: supply.errors}
+        end
+      else
+        render json: {errors: status.errors}
+      end
+    else
+      render json: {errors: crop.errors}
+    end
   end
 
   def show
