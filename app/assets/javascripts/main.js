@@ -13,13 +13,22 @@ function MainManager() {
       self.generateEmailForm();
       $('#connect').on('click', function(event) {
         event.preventDefault();
+        var title = $('#email_title').val();
         var content = $('#message').val();
-        self.emailUser(user_id, content);
+        self.emailUser(user_id, title, content);
       });
     });
 
-  });
+    $(document).on('click', '#messages-nav', function() {
+      self.getInbox();
+    });
 
+    $(document).on('click', '.inbox-message', function(event) {
+      event.preventDefault();
+      var message_id = $(this).data('id');
+      self.getMessage(message_id);
+    });
+  });
   this.bindEvents();
 }
 
@@ -44,19 +53,38 @@ MainManager.prototype.getUserData = function(successCallback) {
   });
 };
 
-MainManager.prototype.generateEmailForm = function(id) {
-  $('#connect_with_user').remove();
-  $('#main-body').append(HandlebarsTemplates['email_form'])
+MainManager.prototype.getInbox = function(){
+  $.ajax({
+    url: '/inbox',
+    type: 'get'
+  }).done(function(response){
+    $('#connect-with-user').html(HandlebarsTemplates['inbox'](response));
+  });
 }
 
-MainManager.prototype.emailUser = function(id, content) {
-  var data = {id: id, content: content};
+MainManager.prototype.getMessage = function (message_id) {
+  $.ajax({
+    url: '/message',
+    type: 'get',
+    data: {message_id: message_id}
+  }).done(function(response){
+    $('<p>'+response.message[0].body+'</p>').insertAfter('*[data-id='+response.message[0].conversation_id+']')
+    $('*[data-id='+response.message[0].conversation_id+']').remove();
+  });
+}
+
+MainManager.prototype.generateEmailForm = function(id) {
+  $('#connect-with-user').html(HandlebarsTemplates['email_form'])
+}
+
+MainManager.prototype.emailUser = function(id, title, content) {
+  var data = {id: id, title: title, content: content};
   $.ajax({
     url: '/connect',
     type: 'get',
     data: data
   }).done(function(response){
-    $('#connect_with_user').html(response.recipient.first_name + ' has been messaged!').fadeOut(2000);
+    $('#connect-with-user').html(response.recipient.first_name + ' has been messaged!').fadeOut(2000);
   });
 }
 

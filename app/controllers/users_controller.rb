@@ -25,7 +25,21 @@ class UsersController < ApplicationController
 
   def email_user
     recipient = User.find_by_id(params[:id])
-    current_user.send_message(recipient, params[:content], "subject")
+    current_user.send_message(recipient, params[:content], params[:title])
     render json: {recipient: recipient}
+  end
+
+  def inbox
+    inbox = current_user.mailbox.inbox
+    render json: {inbox: inbox}
+  end
+
+  def message
+    messages = []
+    receipts = Conversation.find_by_id(params[:message_id]).receipts_for current_user
+    receipts.each do |receipt|
+      messages << receipt.message
+    end
+    render json: {message: messages}
   end
 end
