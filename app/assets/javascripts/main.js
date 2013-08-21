@@ -6,6 +6,14 @@ function MainManager() {
     self.map = new Map(user_data.user_lat, user_data.user_lng);
     new MapView(self.map, document.getElementById('map-canvas'));
     $("body").trigger("initialMapLoad");
+  });
+  this.bindEvents();
+}
+
+MainManager.prototype.bindEvents = function(){
+  var self = this;
+
+  $("body").on("initialMapLoad", function(){
 
     $(document).on('click', '#generate_form', function() {
       var contactGardenerModal = new ContactGardenerModal($(this).data('id'));
@@ -23,19 +31,19 @@ function MainManager() {
       var message_id = $(this).data('id');
       self.getMessage(message_id);
     });
-  });
-  this.bindEvents();
-}
 
-MainManager.prototype.bindEvents = function(){
-  var self = this;
-
-  $("body").on("initialMapLoad", function(){
     self.mySupply = new MySupply();
     self.mySupplyView = new MySupplyView(self.mySupply);
 
     self.myDemands = new MyDemands();
     self.myDemandsForm = new MyDemandsForm(self.myDemands);
+
+    self.manageDemandsModal = new ManageDemandsModal();
+
+    $(document).on('click', '#demand-manager-link', function(event) {
+      event.preventDefault();
+      self.manageDemandsModal.show();
+    });
 
     self.filter = new Filter(self.map.gardens);
     self.browser = new Browser(self.map.gardens, self.mySupply, self.myDemands);

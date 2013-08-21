@@ -1,7 +1,7 @@
 function MyDemandsForm(myDemands){
   this.myDemands = myDemands;
 
-  this.linkSelector = ".demand-manager-link";
+ 
   this.modalSelector = "#demand-manager-modal";
 
   this.formSelector = '#new-demand-form';
