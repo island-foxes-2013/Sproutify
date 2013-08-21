@@ -39,10 +39,13 @@ Browser.prototype = {
     this.mySupplyIndex = {};
     this.allDemandIndex = {};
     for (crop in this.allGardenSet.demandCropIndex){
-      if (this.mySupply.growingNames.includes(crop)){
-        this.myGrowingIndex[crop] = this.allGardenSet.demandCropIndex[crop];
-      } else if (this.mySupply.harvestingNames.includes(crop)) {
-        this.myHarvestingIndex[crop] = this.allGardenSet.demandCropIndex[crop];
+      if (this.mySupply.mySuppliesNames.includes(crop)){
+        var cropIndex = this.mySupply.mySuppliesNames.indexOf(crop);
+        if (this.mySupply.mySupplies[cropIndex].status.name == "growing"){
+          this.myGrowingIndex[crop] = this.allGardenSet.demandCropIndex[crop];
+        } else if (this.mySupply.mySupplies[cropIndex].status.name == "harvesting"){
+          this.myHarvestingIndex[crop] = this.allGardenSet.demandCropIndex[crop];
+        }
       } else {
         this.allDemandIndex[crop] = this.allGardenSet.demandCropIndex[crop];
       }

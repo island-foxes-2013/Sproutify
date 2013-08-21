@@ -16,17 +16,23 @@ class User < ActiveRecord::Base
 
   after_validation { self.errors.messages.delete(:password_digest) }
 
-  def growing
-  	status_id = Status.find_or_create_by_name('growing').id
-  	growing_supplies = self.supplies.select {|x| x.status_id == status_id}
-    growing_supplies.map {|s| Crop.find_by_id(s.crop_id) }
+  def supplying
+    self.supplies.all.map do |s|
+      {id: s.id, crop: Crop.find_by_id(s.crop_id), status: Status.find_by_id(s.status_id) }
+    end
   end
 
-  def harvesting
-  	status_id = Status.find_or_create_by_name('harvested').id
-  	harvested_supplies = self.supplies.select {|x| x.status_id == status_id}
-    harvested_supplies.map {|s| Crop.find_by_id(s.crop_id) }
-  end
+  # def growing
+  # 	status_id = Status.find_or_create_by_name('growing').id
+  # 	growing_supplies = self.supplies.select {|x| x.status_id == status_id}
+  #   growing_supplies.map {|s| {id: s.id, crop: Crop.find_by_id(s.crop_id) } }
+  # end
+
+  # def harvesting
+  # 	status_id = Status.find_or_create_by_name('harvested').id
+  # 	harvested_supplies = self.supplies.select {|x| x.status_id == status_id}
+  #   harvested_supplies.map {|s| {id: s.id, crop: Crop.find_by_id(s.crop_id) } }
+  # end
 
   def demanding
     self.demands.all.map {|x| {id: x.id, crop: Crop.find_by_id(x.crop_id) } }

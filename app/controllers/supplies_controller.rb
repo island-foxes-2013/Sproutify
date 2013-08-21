@@ -5,13 +5,11 @@ class SuppliesController < ApplicationController
 
 	def index
 		user = !params[:user_id].nil? ? User.find_by_id(params[:user_id]) : current_user
-		growing = user.growing
-		harvested = user.harvesting
-		render json: { growing: growing, harvested: harvested }
+		render json: { supplies: user.supplying }
 	end
 
   def create
-  	crop = Crop.find_or_create_by_name(params[:supply_crop_name])
+  	crop = Crop.find_or_create_by_name(params[:supply_crop_name].downcase.pluralize)
     if crop.valid?
       status = Status.find_or_create_by_name(params[:status_name])
       if status.valid?
@@ -33,7 +31,29 @@ class SuppliesController < ApplicationController
   	@supply = Supply.find(params[:id])
   end
 
-  def destroy
-  	Supply.find(params[:id]).destroy
+  def update
+    supply = Supply.find(params[:id])
+    if supply
+      supply.status = Status.find_or_create_by_name(params[:status])
+      supply.save
+      if supply.valid?
+        render json: {success: true}
+      else
+        render json: {errors: ["Duplicate supply error"]}
+      end
+    else
+      render json: {errors: ["Update error"]}
+    end
   end
+
+  def destroy
+    supply = Supply.find(params[:id])
+    if supply
+      supply.destroy
+      render json: {success: true}
+    else
+      render json: {errors: ["Deletion error"]}
+    end
+  end
+
 end

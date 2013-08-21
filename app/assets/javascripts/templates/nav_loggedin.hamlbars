@@ -1,4 +1,6 @@
 %li
+  %a#supply-manager-link{href: "#", rel:"nofollow"} Manage My Shares
+%li
   %a#demand-manager-link{href: "#", rel:"nofollow"} Manage My Requests
 %li
   %a.logout-link{href: "/sessions", "data-method"=>"delete", "data-remote" => "true", rel:"nofollow"} Logout

@@ -30,6 +30,9 @@ MyDemandView.prototype = {
   bindEvents: function(){
     var self = this;
     this.$parent.on("ajax:success", this.deleteLinkSelector, function(){
+      if (response.hasOwnProperty("errors")){
+        self.renderErrors(response);
+      }
       self.myDemand.remove();
     });
     $(this.myDemand).on("removed", function(){
@@ -37,7 +40,7 @@ MyDemandView.prototype = {
     });
   },
   renderErrors: function(response){
-    this.$list.find('.alert').remove();
-    this.$list.find(".modal-body").prepend(HandlebarsTemplates['error'](response));
+    this.$list.parent().find('.alert').remove();
+    this.$list.before(HandlebarsTemplates['error'](response));
   }
 };

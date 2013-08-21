@@ -14,7 +14,7 @@ describe Crop do
 
     context "valid data" do
       it "should save to database" do
-        crop.name = "Corn"
+        crop.name = Faker::Name.first_name
         crop.save.should eq true
       end
     end
