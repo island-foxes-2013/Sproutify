@@ -1,6 +1,6 @@
 function LogoutView(session, element){
+  console.log(element);
   element.on('click', '.logout-link',  function(e) {
-    debugger
     e.preventDefault();
     session.logOut();
   });
