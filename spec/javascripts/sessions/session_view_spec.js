@@ -15,7 +15,7 @@ describe("SessionView", function(){
     it("should create a new SignupView", function(){
       expect(authenticationSpy).toHaveBeenCalledWith({ 
         session: session, 
-        element: $('#main-body'), 
+        element: $('body'), 
         modal: SignupModal,
         link: '.signup-link'
       });
@@ -24,14 +24,14 @@ describe("SessionView", function(){
     it("should create a new LoginView", function(){
       expect(authenticationSpy).toHaveBeenCalledWith({
         session: session, 
-        element: $('#main-body'), 
+        element: $('body'), 
         modal: LoginModal,
         link: '.login-link'
       });
     });
 
     it("should create a new LogoutView", function(){
-      expect(logoutSpy).toHaveBeenCalledWith(session, $('#main-body'));
+      expect(logoutSpy).toHaveBeenCalledWith(session, $('body'));
     });
   });
   xdescribe("when a session triggers a loggedIn event", function() {
