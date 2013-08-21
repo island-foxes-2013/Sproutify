@@ -22,7 +22,7 @@ class DemandsController < ApplicationController
   end
 
   def destroy
-    demand = Demand.find(params[:id])
+    demand = Demand.find_by_id(params[:id])
     if demand
       demand.destroy
       render json: {success: true}
