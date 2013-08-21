@@ -57,5 +57,6 @@ BrowserView.prototype = {
       allDemand: this.browser.allDemandIndex
     };
     this.$elem.html(HandlebarsTemplates['browser']);
+    $('#browser-body').html(HandlebarsTemplates['browser_sharing'](this.browseData));
   }
 };
