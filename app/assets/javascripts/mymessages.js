@@ -37,7 +37,6 @@ Message.prototype.retrieve = function (message_id) {
 }
 
 Message.prototype.set = function(data) {
-  this.receipt_id        = data.message[0].receipt_id
   this.sender_id         = data.message[0].sender.id
   this.sender_first_name = data.message[0].sender.first_name;
   this.sender_last_name  = data.message[0].sender.last_name;
@@ -59,17 +58,19 @@ Message.prototype.listen = function() {
     event.preventDefault();
     event.stopPropagation();
     var content = $(event.target).find('.message-email-body').val();
-    var replyData = {receipt_id: this.receipt_id, body: content, message_id: this.id};
+    var title = $(event.target).find('.title').val();
+    var replyData = {id: this.sender_id, title: title, content: content};
     $(this).trigger('reply', replyData);
   }.bind(this));
 }
 
 Message.prototype.reply = function(ev, replyData) {
+  var replyData = replyData
   $.ajax({
-    url: '/respond',
+    url: '/connect',
     type: 'post',
     data: replyData
   }).done(function(response) {
-    console.log(response);
-  });
+    $('#message-'+this.id).html(HandlebarsTemplates['sent_message']());
+  }.bind(this));
 }
