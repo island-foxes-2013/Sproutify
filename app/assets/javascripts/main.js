@@ -21,7 +21,6 @@ function MainManager() {
     $(document).on('click', '.inbox-message', function(event) {
       event.preventDefault();
       var message = new Message($(this).data('id'));
-      // message.show(); //MODAL
     });
   });
   this.bindEvents();

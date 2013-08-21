@@ -27,14 +27,17 @@ Message.prototype.retrieve = function (message_id) {
     type: 'get',
     data: {message_id: message_id}
   }).done(function(response){
-    self.show(response);
+    self.set(response);
   });
 }
 
-Message.prototype.show = function(message) {
-  var sender = message.message[0].sender.first_name + " " + message.message[0].sender.last_name;
+Message.prototype.set = function(message) {
+  var sender_id = message.message[0].sender.id;
+  var sender_name = message.message[0].sender.first_name + " " + message.message[0].sender.last_name;
+  var message_id = message.message[0].message.id;
   var subject = message.message[0].message.subject;
   var body = message.message[0].message.body;
-  console.log(message)
-  // Avgrund.show(location);
+  var message = {sender_id: sender_id, sender_name: sender_name, message_id: message_id, subject: subject, body: body};
+  $('#main-body').append(HandlebarsTemplates['message'](message));
+  Avgrund.show('#message-'+ message_id);
 }
