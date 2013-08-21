@@ -38,7 +38,10 @@ class UsersController < ApplicationController
     messages = []
     receipts = Conversation.find_by_id(params[:message_id]).receipts_for current_user
     receipts.each do |receipt|
-      messages << receipt.message
+      conversation = {}
+      conversation[:sender] = receipt.message.sender
+      conversation[:message] = receipt.message
+      messages << conversation
     end
     render json: {message: messages}
   end

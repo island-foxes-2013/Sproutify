@@ -1,8 +1,8 @@
-<div id="user-inbox" class="container">
-  <h3>Inbox</h3>
-  {{#each inbox}}
-  <ul>
-    <a class="inbox-message" href="/message" data-id={{this.id}}>{{this.subject}}</a>
-  </ul>
-  {{/each}}
-</div>
+{{#each inbox}}
+<li>
+  <a class="inbox-message" href="/message" data-id="{{this.id}}">
+    {{this.subject}}
+  </a>
+</li>
+{{/each}}
+

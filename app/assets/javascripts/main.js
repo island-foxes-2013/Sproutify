@@ -15,13 +15,13 @@ function MainManager() {
 
     $(document).on('click', '#messages-nav', function() {
       var inbox = new Inbox();
-      // inbox.show(); //If we wanted a modal
+      $(this).show();
     });
 
     $(document).on('click', '.inbox-message', function(event) {
       event.preventDefault();
-      var message_id = $(this).data('id');
-      self.getMessage(message_id);
+      var message = new Message($(this).data('id'));
+      // message.show(); //MODAL
     });
   });
   this.bindEvents();
@@ -49,25 +49,5 @@ MainManager.prototype.getUserData = function(successCallback) {
     type: 'get'
   }).done(function(user_data) {
     successCallback(user_data);
-  });
-};
-
-// MainManager.prototype.getInbox = function(){
-//   $.ajax({
-//     url: '/inbox',
-//     type: 'get'
-//   }).done(function(response){
-//     $('#connect-with-user').html(HandlebarsTemplates['inbox'](response));
-//   });
-// }
-
-MainManager.prototype.getMessage = function (message_id) {
-  $.ajax({
-    url: '/message',
-    type: 'get',
-    data: {message_id: message_id}
-  }).done(function(response){
-    $('<p>'+response.message[0].body+'</p>').insertAfter('*[data-id='+response.message[0].conversation_id+']')
-    $('*[data-id='+response.message[0].conversation_id+']').remove();
   });
 };
