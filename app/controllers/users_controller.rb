@@ -43,8 +43,6 @@ class UsersController < ApplicationController
   end
 
   def email_user
-    p "*" * 100
-    p params
     recipient = User.find_by_id(params[:id])
     current_user.send_message(recipient, params[:content], params[:title])
     render json: {recipient: recipient}

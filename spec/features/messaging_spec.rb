@@ -1,4 +1,4 @@
-require 'spec-helper'
+require 'spec_helper'
 
 def login(user)
   visit root_path
@@ -15,13 +15,23 @@ describe "main page", js:true do
   before do
     user.create_geocode(lat: 38.024025, lng: -122.290589)
     Sunspot.commit
-    login(user)
     solr_setup
+    login(user)
   end
 
   describe "messaging" do
-    context "messaging" do
-      
+    it "inbox link should load" do
+      page.should have_link 'messages-nav'
+    end
+
+    context "for a new message" do
+      before :each do
+        user.send_message(user, "body", "title")
+      end
+      it "inbox should show dropdown of message" do
+        click_link 'messages-nav'
+        
+      end
     end
   end
 
