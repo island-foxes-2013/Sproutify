@@ -57,7 +57,7 @@ describe "Landing Page", js:true do
         fill_in "zip", with: "94122"
         click_button "Check"
         sleep(2)
-        expect(page).to have_content "corn available"
+        expect(page).to have_content "corns available"
       end
     end
   end

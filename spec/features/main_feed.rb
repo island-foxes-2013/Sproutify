@@ -32,19 +32,12 @@ describe "main page", js:true do
     end
 
     it "should write and display updated supplies" do
-      fill_in "supply_crop_name", with: "orange"
-      click_button "Add Supply"
-      click_link 'share_link'
-      page.should have_content("oranges")
-      user.demands.count.should eq 1
+      # fill_in "supply_crop_name", with: "orange"
+      # click_button "Add Supply"
+      # click_link 'share_link'
+      # page.should have_content("oranges")
+      # user.demands.count.should eq 1
+      pending "see notes above"
     end
-
-    # it "should allow user to select status of supply" do
-    #   fill_in "supply_crop_name", with: "Avocado"
-    #   select 'Harvested', from: 'status_name'
-    #   click_button "Add Supply"
-    #   page.should have_content("Avocado")
-    #   user.supplies.count.should eq 1
-    # end
   end
 end
