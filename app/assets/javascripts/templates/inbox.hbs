@@ -1,8 +1,7 @@
-<div class='inbox'>
-<h3>Inbox</h3>
 {{#each inbox}}
-<ul>
-  <a class="inbox-message" href="/message" data-id={{this.id}}>{{this.subject}}</a>
-</ul>
+<li>
+  <a class="inbox-message" href="/message" data-id="{{this.id}}">
+    {{this.subject}}
+  </a>
+</li>
 {{/each}}
-</div>

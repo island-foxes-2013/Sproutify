@@ -1,6 +1,14 @@
-<form id="contact-gardener-form" class="avgrund-popup" action="/connect" method="post" data-remote="true">
-  <h1>Connect with this Gardener</h1>
-  <input type="text-area" class="title" name="email_title" placeholder="Title"/>
-  <input type="text-area" class="message" name="email_body" placeholder="Content"/>
-  <input type="submit" class="connect" value="Connect" />
-</form>
+<div class="message_container">
+  <form id="contact-gardener-form-initial" class="avgrund-popup" action="/connect" method="post" data-remote="true">
+      <h1>Connect with this Gardener</h1>
+    <div>
+      <input type="text" class="title" name="email_title" placeholder="Title"/>
+    </div>
+    <div>
+      <textarea class="message" rows="10" cols="40" name="email_body" placeholder="Content"></textarea>
+    </div>
+    <div>
+      <button type="submit" class="connect">Connect</button>
+    </div>
+  </form>
+<div>

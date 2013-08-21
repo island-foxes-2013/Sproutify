@@ -21,9 +21,7 @@ MapView.prototype.generate = function() {
     scrollwheel: false
   }
   this.google_map = new google.maps.Map(this.element, mapOptions);
-  this.google_map.info_window = new google.maps.InfoWindow({
-    content: "placeholder"
-  });
+  this.google_map.info_window = new google.maps.InfoWindow();
 
 
   var self = this;
@@ -39,6 +37,6 @@ MapView.prototype.launchInfoWindow = function(marker, content) {
 MapView.prototype.refreshMarkers = function() {
   var bounds = this.google_map.getBounds();
   var boundary = {ulat: bounds.ea.b, ulng: bounds.ia.b, blat: bounds.ea.d, blng: bounds.ia.d}
-
+  // debugger
   this.map.refreshGardens(boundary);
 }

@@ -17,6 +17,7 @@ Browser.prototype = {
     $(this.mySupply).on("updatedData", function() {self.refreshIndices()});
     $(this.myDemand).on("updatedData", function() {self.refreshIndices()});
     $(this.allGardenSet).on("gardenAdded", function() {self.refreshIndices()});
+    $(this.allGardenSet).on("refresh", function() {self.refreshIndices()});
   },
   refreshIndices: function(){
     this.refreshDemandIndices();

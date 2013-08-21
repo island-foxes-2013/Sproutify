@@ -7,8 +7,7 @@ function ContactGardenerModal(user_id) {
     var content = self.modal.find('.message').val();
     self.emailUser(user_id, title, content);
   });
-  this.modal.on('click', '#close', function() {
-    event.preventDefault();
+  this.modal.on('click', '.close', function() {
     self.hide();
   });
 }
@@ -17,8 +16,8 @@ ContactGardenerModal.prototype.generateEmailForm = function() {
   this.modal = $(HandlebarsTemplates['email_form']());
 }
 
-ContactGardenerModal.prototype.show = function() {
-  Avgrund.show('#contact-gardener-form');
+ContactGardenerModal.prototype.show = function(selector) {
+  Avgrund.show(selector);
 }
 
 ContactGardenerModal.prototype.hide = function() {
@@ -32,6 +31,7 @@ ContactGardenerModal.prototype.emailUser = function(id, title, content) {
     type: 'post',
     data: data
   }).done(function(response){
-    $('#contact-gardener-form').html(HandlebarsTemplates['sent_message']());
-  });
+    this.hide();
+    this.show('#sent-confirmation');
+  }.bind(this));
 }

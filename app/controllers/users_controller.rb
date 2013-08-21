@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   skip_before_filter :require_login
+  skip_before_filter :verify_authenticity_token
 
   def create
     @user = User.new(params[:user])
@@ -23,12 +24,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def email_user
-    recipient = User.find_by_id(params[:id])
-    current_user.send_message(recipient, params[:content], params[:title])
-    render json: {recipient: recipient}
-  end
-
   def inbox
     inbox = current_user.mailbox.inbox
     render json: {inbox: inbox}
@@ -38,8 +33,20 @@ class UsersController < ApplicationController
     messages = []
     receipts = Conversation.find_by_id(params[:message_id]).receipts_for current_user
     receipts.each do |receipt|
-      messages << receipt.message
+      conversation = {}
+      conversation[:sender] = receipt.message.sender
+      conversation[:message] = receipt.message
+      messages << conversation
     end
+
     render json: {message: messages}
+  end
+
+  def email_user
+    p "*" * 100
+    p params
+    recipient = User.find_by_id(params[:id])
+    current_user.send_message(recipient, params[:content], params[:title])
+    render json: {recipient: recipient}
   end
 end

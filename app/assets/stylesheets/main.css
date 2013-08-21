@@ -1,4 +1,21 @@
-/*#email-form {
-  visibility: hidden;
+.message{
+  height: 300px;
+  width: 300px;
 }
-*/
+
+.avgrund-popup h1 {
+  text-align: center;
+}
+
+.avgrund-popup p {
+  text-align: center;
+}
+
+.avgrund-popup div{
+  padding: 5px 0 5px 0;
+  text-align: center;
+}
+
+.avgrund-popup button {
+  float: right;
+}
