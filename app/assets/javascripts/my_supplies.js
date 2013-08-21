@@ -1,50 +1,50 @@
-function MySupply(){
-  this.growing = [];
-  this.harvesting = [];
-  this.growingNames = [];
-  this.harvestingNames = [];
-  this.getSupply();
+function MySupplies(){
+  this.mySupplies = [];
+  this.mySuppliesNames = [];
+  this.getSupplies();
 }
 
-MySupply.prototype = {
-  getSupply: function(){
+MySupplies.prototype = {
+  getSupplies: function(){
 
     var self = this;
     $.ajax({
       url: '/supplies',
       type: 'GET'
     }).done(function(response){ 
-      self.growing = response.growing;
-      self.harvest = response.harvesting;
-      self.mapNames();
+      self.refreshSupplies(response.supplies);
       $(self).trigger("updatedData");
     });
   },
-  mapNames: function(){
-    this.growingNames = $.map(this.growing, function(crop){
-      return crop.name;
-    });
-    this.harvestingNames = $.map(this.harvesting, function(crop){
-      return crop.name;
-    });
-  }
-
-};
-
-function MySupplyView(mySupply){
-  this.mySupply = mySupply;
-  this.showForm();
-  this.bindEvents();
-}
-
-MySupplyView.prototype = {
-  showForm: function(){
-    $('#add-supply').html(HandlebarsTemplates['add_supply']);
+  refreshSupplies: function(supplies){
+    for (var i = 0; i < supplies.length; i++){
+      if (!this.mySuppliesNames.includes(supplies[i].crop.name)) {
+        this.addSupply(supplies[i]);
+      } 
+    }
+    this.mapNames();
   },
-  bindEvents: function(){
+  addSupply: function(supply){
+    var newSupply = new MySupply(supply);
+    var newSupplyView = new MySupplyView(newSupply);
+
+    this.mySupplies.push(newSupply);
+
     var self = this;
-    $("body").on('ajax:success', '#add-supplies-form', function(){
-      self.mySupply.getSupply();
+    $(newSupply).on('removed',function(){
+      self.mySupplies.exterminate(this);
+      self.mapNames();
+    });
+    $(newSupply).on('updated',function(){
+      self.mySupplies.exterminate(this);
+      self.mapNames();
+      self.getSupplies();
+    });
+  },
+  mapNames: function(){
+    this.mySuppliesNames = $.map(this.mySupplies, function(supply){
+      return supply.crop.name;
     });
   }
+
 };

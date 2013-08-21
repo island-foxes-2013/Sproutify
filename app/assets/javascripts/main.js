@@ -32,21 +32,27 @@ MainManager.prototype.bindEvents = function(){
       self.getMessage(message_id);
     });
 
-    self.mySupply = new MySupply();
-    self.mySupplyView = new MySupplyView(self.mySupply);
+    self.mySupplies = new MySupplies();
+    self.mySuppliesForm = new MySuppliesForm(self.mySupplies);
 
     self.myDemands = new MyDemands();
     self.myDemandsForm = new MyDemandsForm(self.myDemands);
 
     self.manageDemandsModal = new ManageDemandsModal();
+    self.manageSuppliesModal = new ManageSuppliesModal();
 
     $(document).on('click', '#demand-manager-link', function(event) {
       event.preventDefault();
       self.manageDemandsModal.show();
     });
 
+    $(document).on('click', '#supply-manager-link', function(event) {
+      event.preventDefault();
+      self.manageSuppliesModal.show();
+    });
+
     self.filter = new Filter(self.map.gardens);
-    self.browser = new Browser(self.map.gardens, self.mySupply, self.myDemands);
+    self.browser = new Browser(self.map.gardens, self.mySupplies, self.myDemands);
     self.browserView = new BrowserView(self.browser, self.filter);
   });
 };
