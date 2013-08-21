@@ -16,42 +16,14 @@ describe "main page", js:true do
 
   before do
     user.create_geocode(lat: 38.024025, lng: -122.290589)
-    p crop
-    Supply.create(user: user, crop: crop, status: status)
-    p user.supplies
     Sunspot.commit
     login(user)
     solr_setup
-  end
-
-  context "user supplies" do
-    it "display user supplies" do
-      click_link 'share_link'
-      page.should have_content(crop.name)
-      user.supplies.count.should eq 1
-    end
   end
 
   it "should have load the navigation" do
     page.should have_link('share_link', href: "#")
     page.should have_link('request_link', href: '#')
     page.should have_link('messages-nav', href: '/inbox')
-  end
-
-
-  context "supply/demand control" do
-
-    it "should load" do
-      page.should have_content("What produce do you have available?")
-    end
-
-    context "user supplies" do
-
-      it "display user supplies" do
-        click_link 'share_link'
-        page.should have_content(crop.name)
-        user.supplies.count.should eq 1
-      end
-    end
   end
 end
