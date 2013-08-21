@@ -64,5 +64,11 @@ BrowserView.prototype = {
     $('#browser-share').html(HandlebarsTemplates['browser_sharing'](this.browseData));
     $('#browser-request').html(HandlebarsTemplates['browser_requesting'](this.browseData));
     $('#browser-request').hide();
+    this.recheckBoxes();
+  },
+  recheckBoxes: function() {
+    $.each(this.filter.supplyCropFilter, function() {
+      $('.supply-filter[data-name='+this+']').prop('checked', true);
+    });
   }
 };
