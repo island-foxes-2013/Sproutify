@@ -3,6 +3,7 @@
   // LANDING MANAGER
   function LandingManager() {
     $("#main-body").html(HandlebarsTemplates['landing']());
+    $("#landing #address").focus();
     bindEvents();
   }
 
