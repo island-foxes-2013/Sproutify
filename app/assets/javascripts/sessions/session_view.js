@@ -16,7 +16,7 @@ function SessionView(session){
     link: '.login-link'
   });
 
-  new LogoutView(session, $('#main-body'));
+  new LogoutView(session, $('body'));
 }
 
 
@@ -28,6 +28,7 @@ SessionView.prototype = {
       new MainManager();
     });
     $(this.session).on("loggedOut", function(){
+      debugger
       $(".navbar-right").html(HandlebarsTemplates['nav_loggedout']());
       new LandingManager();
     });

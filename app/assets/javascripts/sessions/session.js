@@ -13,6 +13,7 @@ Session.prototype.refresh = function() {
     if (self.isLoggedIn()) {
       $(self).trigger("loggedIn");
     } else {
+      debugger
       $(self).trigger("loggedOut");
     }
   });
@@ -53,11 +54,13 @@ Session.prototype.logIn = function(data) {
 
 Session.prototype.logOut = function() {
   var self = this;
-  this.sendRequest({
+  debugger
+  return this.sendRequest({
     url: "/sessions",
     method: "DELETE"
   }).done(function() {
-    self.trigger("loggedOut");
+    debugger
+    $(self).trigger("loggedOut");
   });
 }
 

@@ -45,7 +45,7 @@ Modal.prototype.show = function() {
 }
 
 Modal.prototype.close = function() {
-  this.element.modal('close'); 
+  this.element.modal('hide'); 
 }
 
 Modal.prototype.renderErrors = function(errors) {
