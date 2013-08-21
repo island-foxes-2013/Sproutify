@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 require 'spec_helper'
-=======
-require 'spec-helper'
->>>>>>> master
 
 def login(user)
   visit root_path
