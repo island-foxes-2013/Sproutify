@@ -13,7 +13,7 @@ class DemandsController < ApplicationController
       if demand.valid?
         render json: { demand: demand }
       else
-        ap demand.errors.full_messages 
+        ap demand.errors.full_messages
         render json: { errors: demand.errors.full_messages }
       end
     else
