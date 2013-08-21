@@ -55,7 +55,7 @@ describe("SessionView", function(){
 		expect(logoutSpy).toHaveBeenCalledWith(session);
 	});
 
-	// PENDING TESTS
+	// PENDING TESTS START
 	xdescribe("#attachModals", function(){
 		it("does not do anything unless logged in");
 
@@ -71,23 +71,25 @@ describe("SessionView", function(){
 
 		it("changes the navbar when a user logs out");
 	});
+	// PENDING TEST END
 });
 
 
+describe("SignupView", function(){
 
+	it("should set up the properties for a new SignupView", function(){
+		var mysession = "peaches";
+		var mySignupView = new SignupView(mysession);
+		expect(mySignupView.session).toEqual("peaches");
+		expect(mySignupView.linkSelector).toEqual(".signup-link");
+		expect(mySignupView.formSelector).toEqual("#new_user");
+		expect(mySignupView.modalSelector).toEqual("#signup-modal");
+	});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	it("should call bindEvents method", function(){
+		var mysession = "peaches";
+		var a = jasmine.createSpyObj(window, ['bindEvents']);
+		SignupView.call(a, mysession);
+		expect(a.bindEvents).toHaveBeenCalled();
+	});
+});
