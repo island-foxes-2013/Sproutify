@@ -12,7 +12,7 @@
 {{#compare crops_available.length ">" 0}}
   {{#each crops_available}}
     <p>
-      {{this.count}} {{pluralize this.count "person"}} have {{this.name}} available!
+      {{this.count}} {{pluralize this.count "person"}} offering {{this.name}}
     </p>
   {{/each}}
 {{/compare}}
@@ -24,7 +24,7 @@
 {{#compare crops_demanded.length ">" 0}}
   {{#each crops_demanded}}
     <p>
-      {{this.count}} people want {{this.name}}!
+      {{this.count}} requesting {{this.name}}
     </p>
   {{/each}}
 {{/compare}}
