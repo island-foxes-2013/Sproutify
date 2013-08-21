@@ -19,35 +19,32 @@ describe "main page", js:true do
     solr_setup
   end
 
+  it "should have load the navigation" do
+    page.should have_link('share_link', href: "#")
+    page.should have_link('request_link', href: '#')
+    page.should have_link('messages-nav', href: '/inbox')
+  end
+
   context "supply/demand control" do
 
     it "should load" do
-      page.should have_content("What produce are you looking for?")
       page.should have_content("What produce do you have available?")
-      page.should have_css('#add-demands-form')
-      page.should have_css('#add-supplies-form')
     end
 
-    it "should write and display updated demands" do
-      fill_in "demand_crop_name", with: "Apple"
-      click_button "Add Demand"
-      page.should have_content("Apple")
+    it "should write and display updated supplies" do
+      fill_in "supply_crop_name", with: "orange"
+      click_button "Add Supply"
+      click_link 'share_link'
+      page.should have_content("oranges")
       user.demands.count.should eq 1
     end
 
-     it "should write and display updated supplies" do
-      fill_in "supply_crop_name", with: "Orange"
-      click_button "Add Supply"
-      page.should have_content("Orange")
-      user.supplies.count.should eq 1
-    end
-
-    it "should allow user to select status of supply" do
-      fill_in "supply_crop_name", with: "Avocado"
-      select 'Harvested', from: 'status_name'
-      click_button "Add Supply"
-      page.should have_content("Avocado")
-      user.supplies.count.should eq 1
-    end
+    # it "should allow user to select status of supply" do
+    #   fill_in "supply_crop_name", with: "Avocado"
+    #   select 'Harvested', from: 'status_name'
+    #   click_button "Add Supply"
+    #   page.should have_content("Avocado")
+    #   user.supplies.count.should eq 1
+    # end
   end
 end
