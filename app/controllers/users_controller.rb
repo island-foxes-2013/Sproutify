@@ -8,7 +8,7 @@ class UsersController < ApplicationController
       render json: {
         success: false,
         logged_in: false,
-        errors: @user.errors
+        errors: @user.errors.full_messages
       }
     else
       self.current_user = @user

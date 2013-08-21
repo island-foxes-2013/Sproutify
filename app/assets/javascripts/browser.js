@@ -28,7 +28,7 @@ Browser.prototype = {
     this.myDemandIndex = {};
     this.allSupplyIndex = {};
     for (crop in this.allGardenSet.supplyCropIndex){
-      if (this.myDemand.myDemandNames.includes(crop)){
+      if (this.myDemand.myDemandsNames.includes(crop)){
         this.myDemandIndex[crop] = this.allGardenSet.supplyCropIndex[crop];
       } else {
         this.allSupplyIndex[crop] = this.allGardenSet.supplyCropIndex[crop];

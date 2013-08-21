@@ -1,4 +1,6 @@
 %li
+  %a#demand-manager-link{href: "#", rel:"nofollow"} Manage My Requests
+%li
   %a.logout-link{href: "/sessions", "data-method"=>"delete", "data-remote" => "true", rel:"nofollow"} Logout
 %li
   %a{href: "/inbox", "data-method"=>"get", "data-remote" => "true", rel:"nofollow", id:"messages-nav"} Messages
