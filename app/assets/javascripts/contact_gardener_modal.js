@@ -10,16 +10,14 @@ function ContactGardenerModal(user_id) {
   this.modal.on('click', '.close', function() {
     self.hide();
   });
-
-  $(this).on('sent', this.sentMessage);
 }
 
 ContactGardenerModal.prototype.generateEmailForm = function() {
   this.modal = $(HandlebarsTemplates['email_form']());
 }
 
-ContactGardenerModal.prototype.show = function() {
-  Avgrund.show('#contact-gardener-form-initial');
+ContactGardenerModal.prototype.show = function(selector) {
+  Avgrund.show(selector);
 }
 
 ContactGardenerModal.prototype.hide = function() {
@@ -33,12 +31,7 @@ ContactGardenerModal.prototype.emailUser = function(id, title, content) {
     type: 'post',
     data: data
   }).done(function(response){
-    // $('#contact-gardener-form-initial').html(HandlebarsTemplates['sent_message']());
-    $(this).trigger('sent');
+    this.hide();
+    this.show('#sent-confirmation');
   }.bind(this));
-}
-
-ContactGardenerModal.prototype.sentMessage = function() {
-  Avgrund.hide();
-  Avgrund.show('#sent-confirmation');
 }

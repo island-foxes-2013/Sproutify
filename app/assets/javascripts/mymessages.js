@@ -22,7 +22,6 @@ function Message(message_id) {
   $(this).on('retrieved', this.render);
   $(this).on('rendered', this.listen);
   $(this).on('reply', this.reply);
-  $(this).on('sent', this.sentMessage);
 }
 
 Message.prototype.retrieve = function (message_id) {
@@ -54,6 +53,14 @@ Message.prototype.render = function() {
   $(this).trigger('rendered');
 }
 
+Message.prototype.show = function(selector) {
+  Avgrund.show(selector);
+}
+
+Message.prototype.hide = function() {
+  Avgrund.hide();
+}
+
 Message.prototype.listen = function() {
   $('#message-'+ this.id).on('submit', function(event) {
     event.preventDefault();
@@ -72,11 +79,7 @@ Message.prototype.reply = function(ev, replyData) {
     type: 'post',
     data: replyData
   }).done(function(response) {
-    $(this).trigger('sent');
+    this.hide();
+    this.show('#sent-confirmation');
   }.bind(this));
-}
-
-Message.prototype.sentMessage = function() {
-  Avgrund.hide();
-  Avgrund.show('#sent-confirmation');
 }

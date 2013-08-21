@@ -11,7 +11,7 @@ function MainManager() {
     $(document).on('click', '#generate_form', function() {
       var contactGardenerModal = new ContactGardenerModal($(this).data('id'));
       self.element.append(contactGardenerModal.modal);
-      contactGardenerModal.show();
+      contactGardenerModal.show('#contact-gardener-form-initial');
     });
 
     $(document).on('click', '#messages-nav', function() {
