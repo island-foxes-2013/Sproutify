@@ -2,6 +2,12 @@ require 'spec_helper'
 
 describe HomeController do
 
+  describe '#index' do
+    it "should create a new User if not logged in" do
+      get :index
+    end
+  end
+
   describe '#fetch' do
 
     it "should respond to a get request" do
