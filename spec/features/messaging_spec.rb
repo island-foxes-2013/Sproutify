@@ -45,14 +45,14 @@ describe "main page", js:true do
           click_link 'Got any apples?'
         end
 
-        it "should happen" do
+        it "should be successful" do
           fill_in 'email_title', with: "What kind of apples?"
           fill_in 'email_body', with: "I'll trade you apples for oranges."
           click_button 'Connect'
           page.should have_content('Your message has been sent!')
+          expect(Conversation.all.count).to eq 4
         end
       end
     end
   end
-
 end
