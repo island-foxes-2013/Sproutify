@@ -70,5 +70,8 @@ BrowserView.prototype = {
     $.each(this.filter.supplyCropFilter, function() {
       $('.supply-filter[data-name='+this+']').prop('checked', true);
     });
+    $.each(this.filter.demandCropFilter, function() {
+      $('.demand-filter[data-name='+this+']').prop('checked', true);
+    });
   }
 };
