@@ -58,17 +58,12 @@ describe("SessionView", function(){
 	// PENDING TESTS START
 	xdescribe("#attachModals", function(){
 		it("does not do anything unless logged in");
-
 		it("attaches handlebar templates if user is logged in");
 	});
-
 	xdescribe("#bindEvents", function(){
 		it("hides the modal when the body is clicked");
-
 		it("empties the main body when a user logs in");
-
 		it("changes the navbar when a user logs in");
-
 		it("changes the navbar when a user logs out");
 	});
 	// PENDING TEST END
