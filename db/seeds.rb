@@ -59,7 +59,7 @@ end
 
 user = User.create(first_name: "Disco",
             last_name:  "Lumberjack",
-            email: "test@test.com",
+            email: "test@example.com",
             password: "password",
             password_confirmation: "password")
 lat = (max_lat - min_lat) * rand() + min_lat
