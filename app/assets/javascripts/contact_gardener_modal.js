@@ -8,7 +8,6 @@ function ContactGardenerModal(user_id) {
     self.emailUser(user_id, title, content);
   });
   this.modal.on('click', '.close', function() {
-    event.preventDefault();
     self.hide();
   });
 }

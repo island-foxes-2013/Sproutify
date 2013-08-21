@@ -3,5 +3,8 @@
   <p>{{body}}</p>
   <p>-{{sender_name}}</p>
   <form action="/respond" method="post" data-remote="true">
-    
+    <textarea class="message" rows="10" cols="40" name="email_body" placeholder="Content"></textarea>
+    <button type="submit" class="connect">Connect</button>
+    <button class="close">Close</button>
+  </form>
 </div>

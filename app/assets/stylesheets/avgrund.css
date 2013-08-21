@@ -54,8 +54,8 @@
 
 .avgrund-popup {
 	position: absolute;
-	width: 340px;
-	height: 180px;
+	/*width: 340px;*/
+	/*height: 180px;*/
 	left: 50%;
 	top: 50%;
 	margin: -130px 0 0 -190px;

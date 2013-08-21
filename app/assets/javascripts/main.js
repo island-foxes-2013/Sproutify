@@ -22,6 +22,10 @@ function MainManager() {
       event.preventDefault();
       var message = new Message($(this).data('id'));
     });
+
+    $(document).on('click', '.close', function() {
+      Avgrund.hide();
+    });
   });
   this.bindEvents();
 }
