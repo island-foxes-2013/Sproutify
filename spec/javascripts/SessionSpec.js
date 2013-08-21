@@ -55,6 +55,7 @@ describe("SessionView", function(){
 		expect(logoutSpy).toHaveBeenCalledWith(session);
 	});
 
+	// PENDING TESTS
 	xdescribe("#attachModals", function(){
 		it("does not do anything unless logged in");
 
