@@ -22,6 +22,7 @@ function Message(message_id) {
   $(this).on('retrieved', this.render);
   $(this).on('rendered', this.listen);
   $(this).on('reply', this.reply);
+  $(this).on('sent', this.sentMessage);
 }
 
 Message.prototype.retrieve = function (message_id) {
@@ -57,7 +58,7 @@ Message.prototype.listen = function() {
   $('#message-'+ this.id).on('submit', function(event) {
     event.preventDefault();
     event.stopPropagation();
-    var content = $(event.target).find('.message-email-body').val();
+    var content = $(event.target).find('.message').val();
     var title = $(event.target).find('.title').val();
     var replyData = {id: this.sender_id, title: title, content: content};
     $(this).trigger('reply', replyData);
@@ -71,6 +72,11 @@ Message.prototype.reply = function(ev, replyData) {
     type: 'post',
     data: replyData
   }).done(function(response) {
-    $('#message-'+this.id).html(HandlebarsTemplates['sent_message']());
+    $(this).trigger('sent');
   }.bind(this));
+}
+
+Message.prototype.sentMessage = function() {
+  Avgrund.hide();
+  Avgrund.show('#sent-confirmation');
 }

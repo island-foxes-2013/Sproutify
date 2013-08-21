@@ -1,6 +1,7 @@
 function MainManager() {
   this.element = $('#main-body');
   this.element.html(HandlebarsTemplates['main']());
+  this.element.append(HandlebarsTemplates['sent_message']());
   var self = this;
   var user_data = this.getUserData(function(user_data) {
     self.map = new Map(user_data.user_lat, user_data.user_lng);

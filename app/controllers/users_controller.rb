@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   skip_before_filter :require_login
+  skip_before_filter :verify_authenticity_token
 
   def create
     @user = User.new(params[:user])
@@ -42,6 +43,8 @@ class UsersController < ApplicationController
   end
 
   def email_user
+    p "*" * 100
+    p params
     recipient = User.find_by_id(params[:id])
     current_user.send_message(recipient, params[:content], params[:title])
     render json: {recipient: recipient}
