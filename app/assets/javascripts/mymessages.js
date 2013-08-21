@@ -12,7 +12,7 @@ Inbox.prototype.retrieve = function() {
     url: '/inbox',
     type: 'get'
   }).done(function(response){
-    $('#message-list').append($(HandlebarsTemplates['inbox'](response)));
+    $('#message-list').html($(HandlebarsTemplates['inbox'](response)));
   });
 }
 
