@@ -3,6 +3,11 @@ function BrowserView(browser, filter){
   this.filter = filter;
   this.$elem = $("#browser");
 
+  this.$elem.html(HandlebarsTemplates['browser']);
+  $('#browser-share').html(HandlebarsTemplates['browser_sharing']);
+  $('#browser-request').html(HandlebarsTemplates['browser_requesting']);
+  $('#browser-request').hide();
+
   this.updateView();
   this.bindEvents();
 }
@@ -39,13 +44,15 @@ BrowserView.prototype = {
       e.preventDefault();
       $('ul.nav-pills li.active').removeClass('active');
       $(this).closest('li').addClass('active');
-      $('#browser-body').html(HandlebarsTemplates['browser_sharing'](self.browseData));
+      $('#browser-request').hide();
+      $('#browser-share').show();
     });
     $('body').on('click', '#request_link', function(e) {
       e.preventDefault();
       $('ul.nav-pills li.active').removeClass('active');
       $(this).closest('li').addClass('active');
-      $('#browser-body').html(HandlebarsTemplates['browser_requesting'](self.browseData));
+      $('#browser-share').hide();
+      $('#browser-request').show();
     });
   },
   updateView: function(){
@@ -56,6 +63,16 @@ BrowserView.prototype = {
       myHarvesting: this.browser.myHarvestingIndex,
       allDemand: this.browser.allDemandIndex
     };
-    this.$elem.html(HandlebarsTemplates['browser']);
+    $('#browser-share').html(HandlebarsTemplates['browser_sharing'](this.browseData));
+    $('#browser-request').html(HandlebarsTemplates['browser_requesting'](this.browseData));
+    this.recheckBoxes();
+  },
+  recheckBoxes: function() {
+    $.each(this.filter.supplyCropFilter, function() {
+      $('.supply-filter[data-name='+this+']').prop('checked', true);
+    });
+    $.each(this.filter.demandCropFilter, function() {
+      $('.demand-filter[data-name='+this+']').prop('checked', true);
+    });
   }
 };

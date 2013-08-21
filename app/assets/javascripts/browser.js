@@ -17,6 +17,7 @@ Browser.prototype = {
     $(this.mySupply).on("updatedData", function() {self.refreshIndices()});
     $(this.myDemand).on("updatedData", function() {self.refreshIndices()});
     $(this.allGardenSet).on("gardenAdded", function() {self.refreshIndices()});
+    $(this.allGardenSet).on("refresh", function() {self.refreshIndices()});
   },
   refreshIndices: function(){
     this.refreshDemandIndices();
@@ -27,7 +28,7 @@ Browser.prototype = {
     this.myDemandIndex = {};
     this.allSupplyIndex = {};
     for (crop in this.allGardenSet.supplyCropIndex){
-      if (this.myDemand.myDemandNames.includes(crop)){
+      if (this.myDemand.myDemandsNames.includes(crop)){
         this.myDemandIndex[crop] = this.allGardenSet.supplyCropIndex[crop];
       } else {
         this.allSupplyIndex[crop] = this.allGardenSet.supplyCropIndex[crop];

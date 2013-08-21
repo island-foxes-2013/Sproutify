@@ -37,9 +37,9 @@
 		document.addEventListener( 'click', onDocumentClick, false );
 		document.addEventListener( 'touchstart', onDocumentClick, false );
 
-		removeClass( popup, currentState );
+		// removeClass( popup, currentState );
 		addClass( popup, 'no-transition' );
-		addClass( popup, state );
+		// addClass( popup, state );
 
 		setTimeout( function() {
 			removeClass( popup, 'no-transition' );
@@ -55,7 +55,7 @@
 		document.removeEventListener( 'touchstart', onDocumentClick, false );
 
 		removeClass( container, 'avgrund-active' );
-		removeClass( popup, 'avgrund-popup-animate')
+		removeClass( popup, 'avgrund-popup-animate');
 	}
 
 	function disableBlur() {
