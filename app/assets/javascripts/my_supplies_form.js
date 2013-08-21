@@ -1,7 +1,7 @@
-function MyDemandsForm(myDemands){
-  this.myDemands = myDemands;
-
-  this.formSelector = '#new-demand-form';
+function MySuppliesForm(mySupplies){
+  this.mySupplies = mySupplies;
+ 
+  this.formSelector = '#new-supplies-form';
   this.$parent = $("body");
 
   this.appendForm();
@@ -11,9 +11,9 @@ function MyDemandsForm(myDemands){
   this.bindEvents();
 }
 
-MyDemandsForm.prototype = {
+MySuppliesForm.prototype = {
   appendForm: function(){
-    $('#add-demand-form').html(HandlebarsTemplates['add_demand']);
+    $('#add-supply-form').html(HandlebarsTemplates['add_supply']);
   },
   bindEvents: function(){
     var self = this;
@@ -21,8 +21,8 @@ MyDemandsForm.prototype = {
       if (response.hasOwnProperty("errors")){
         self.renderErrors(response);
       }
-      self.myDemands.getDemands();
-      self.$form.find(".demand-field").val("");
+      self.mySupplies.getSupplies();
+      self.$form.find(".supply-field").val("");
     });
   },
   renderErrors: function(response){
