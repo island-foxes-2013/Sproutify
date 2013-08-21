@@ -5,7 +5,7 @@
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
         %h4.modal-title Become a gardener on Sproutify!
 
-      =form_for user, remote: true, html:{role: "form"} do |f|
+      =form_for user, html:{role: "form"} do |f|
         .modal-body
           .form-group=f.text_field :first_name, placeholder: "First Name", class: "form-control"
           .form-group=f.text_field :last_name, placeholder: "Last Name", class: "form-control"

@@ -6,9 +6,8 @@
     =f.submit "Submit", class: "btn btn-primary", id: "submit"
 
 .signup-link
-  =link_to "Signup!", '#', remote: true, class: "btn btn-success signup-link"
-/ %p=link_to "Login", '#', remote: true, class: "btn btn-primary login-link"
-
+  =link_to "Signup!", '#', class: "btn btn-success signup-link"
+  
 %input{type: "hidden", id: "hidden_lat"}
 %input{type: "hidden", id: "hidden_lng"}
 

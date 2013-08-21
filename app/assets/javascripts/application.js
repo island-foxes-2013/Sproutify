@@ -16,6 +16,7 @@
 //= require handlebars.runtime
 //= require_tree ./helpers
 //= require_tree ./hb_helpers
+//= require view
 //= require_tree .
 //= require_tree ./templates
 
@@ -25,22 +26,5 @@
 $(function() {
   Avgrund.initialize();
   $("#content").html(HandlebarsTemplates['static']());
-  // Avgrund.initialize();
-
-  // Begin handlebars
-  $.get('/sessions').done(function(data){
-
-    new SessionManager(data);
-
-    if (data.logged_in === true) {
-      $(".navbar-right").html(HandlebarsTemplates['nav_loggedin'](data));
-      new MainManager();
-    }
-    else {
-      $(".navbar-right").html(HandlebarsTemplates['nav_loggedout']());
-      new LandingManager();
-    }
-
-  });
-
+  new SessionView(new Session());
 });
