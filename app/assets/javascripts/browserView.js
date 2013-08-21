@@ -3,6 +3,11 @@ function BrowserView(browser, filter){
   this.filter = filter;
   this.$elem = $("#browser");
 
+  this.$elem.html(HandlebarsTemplates['browser']);
+  $('#browser-share').html(HandlebarsTemplates['browser_sharing']);
+  $('#browser-request').html(HandlebarsTemplates['browser_requesting']);
+  $('#browser-request').hide();
+
   this.updateView();
   this.bindEvents();
 }
@@ -41,7 +46,6 @@ BrowserView.prototype = {
       $(this).closest('li').addClass('active');
       $('#browser-request').hide();
       $('#browser-share').show();
-      // $('#browser-body').html(HandlebarsTemplates['browser_sharing'](self.browseData));
     });
     $('body').on('click', '#request_link', function(e) {
       e.preventDefault();
@@ -49,7 +53,6 @@ BrowserView.prototype = {
       $(this).closest('li').addClass('active');
       $('#browser-share').hide();
       $('#browser-request').show();
-      // $('#browser-body').html(HandlebarsTemplates['browser_requesting'](self.browseData));
     });
   },
   updateView: function(){
@@ -60,10 +63,8 @@ BrowserView.prototype = {
       myHarvesting: this.browser.myHarvestingIndex,
       allDemand: this.browser.allDemandIndex
     };
-    this.$elem.html(HandlebarsTemplates['browser']);
     $('#browser-share').html(HandlebarsTemplates['browser_sharing'](this.browseData));
     $('#browser-request').html(HandlebarsTemplates['browser_requesting'](this.browseData));
-    $('#browser-request').hide();
     this.recheckBoxes();
   },
   recheckBoxes: function() {
