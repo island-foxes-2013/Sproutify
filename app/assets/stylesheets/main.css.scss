@@ -1,17 +1,36 @@
-#main-container div{
-  display: inline-block;
-  vertical-align: top;
+
+
+#map-canvas{
+  float:left;
 }
 
-#browser {
-  padding-top: 10px;
-  padding-left: 10px;
+#browser{
+  float:right;
 }
 
-.message{
-  height: 300px;
-  width: 300px;
+#map-canvas {
+  height: 100%;
+  width: 50%;
 }
+
+
+.infowindow {
+  width: 200px;
+  height: 200px;
+}
+
+
+
+
+// #browser {
+//   padding-top: 10px;
+//   padding-left: 10px;
+// }
+
+// .message{
+//   height: 300px;
+//   width: 300px;
+// }
 
 .avgrund-popup h1 {
   text-align: center;

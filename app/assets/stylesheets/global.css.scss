@@ -4,11 +4,20 @@ html, body {
   padding: 0px;
 }
 
-
 .navbar{
-  // background-color: #000;
-  // opacity: 0.7;
+  border: none;
+
+  .navbar-brand{
+    padding: 0;
+    img{
+      padding-left: 1em;
+      height: 75px;
+    }
+  }
 }
-// .navbar {
-//   margin-bottom: 0;
-// }
+
+#main-body{
+  padding-top: 75px;
+  height: 100%;
+
+}

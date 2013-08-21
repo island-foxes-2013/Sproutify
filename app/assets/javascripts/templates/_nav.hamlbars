@@ -1,4 +1,4 @@
-%nav.navbar{role: "navigation"}
+%nav.navbar.navbar-fixed-top{role: "navigation"}
   / Brand and toggle get grouped for better mobile display
   .navbar-header
     %button.navbar-toggle{"data-target" => ".navbar-ex1-collapse", "data-toggle" => "collapse", :type => "button"}
@@ -7,8 +7,9 @@
       %span.icon-bar
       %span.icon-bar
     %span.navbar-brand
+      / Sproutify
       %a{href:"#"}
-        %img{src: "assets/sproutify_logo.png", height:"50px"}
+        %img{src: "assets/sproutify_logo.png", height:"48px"}
   / Collect the nav links, forms, and other content for toggling
   .collapse.navbar-collapse.navbar-ex1-collapse
     %ul.nav.navbar-nav.navbar-right
