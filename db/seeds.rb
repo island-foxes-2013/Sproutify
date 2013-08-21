@@ -16,7 +16,7 @@ crops.each do |crop|
   Crop.create(name: crop)
 end
 
-status = ["Growing", "Harvested", "Dead"]
+status = ["growing", "harvested", "dead"]
 
 status.each do |status|
   Status.create(name: status)

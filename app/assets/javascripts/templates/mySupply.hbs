@@ -1,0 +1,10 @@
+<li id="supply-{{id}}">
+  {{crop.name}} 
+  {{#compare status.name "==" "growing"}}
+    <a href="/supplies/{{id}}?status=harvested" data-remote="true" data-method="put" data-status="harvest" id="harvest-supply-{{id}}">harvest!</a> 
+  {{/compare}}
+  {{#compare status.name "==" "harvested"}}
+    <a href="/supplies/{{id}}" data-remote="true" data-method="delete" id="remove-supply-{{id}}">x</a>
+  {{/compare}}
+  
+</li>

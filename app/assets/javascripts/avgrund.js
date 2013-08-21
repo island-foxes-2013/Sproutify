@@ -27,7 +27,7 @@
 	// Deactivate on click outside
 	function onDocumentClick( event ) {
 		if( event.target === cover ) {
-			console.log('DEACTIVATE');
+			// console.log('DEACTIVATE');
 			deactivate();
 		}
 	}

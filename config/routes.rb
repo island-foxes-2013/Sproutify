@@ -7,7 +7,7 @@ Sproutify::Application.routes.draw do
     resources :demands, only: [:index], module: "users"
   end
 
-  resources :supplies, :only => [:index, :create, :destroy]
+  resources :supplies, :only => [:index, :create, :update, :destroy]
   resources :demands, only: [:create, :index, :destroy]
 
 
