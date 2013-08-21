@@ -5,7 +5,7 @@ function AllGardenSet(){
 }
 
 AllGardenSet.prototype.addGarden = function(garden){
-  this.set.push(garden)
+  this.set.push(garden);
 
   this.findDemandedCrops(garden);
   this.findSuppliedCrops(garden);
@@ -16,7 +16,7 @@ AllGardenSet.prototype.addGarden = function(garden){
   $(garden).on('removed', function(e) {
     self.set.exterminate(this);
   });
-}
+};
 
 AllGardenSet.prototype.findDemandedCrops = function(garden) {
   var self = this;
@@ -28,7 +28,7 @@ AllGardenSet.prototype.findDemandedCrops = function(garden) {
       self.demandCropIndex[this.name] = [self.set.indexOf(garden)];
     }
   });
-}
+};
 
 AllGardenSet.prototype.findSuppliedCrops = function(garden) {
   var self = this;
@@ -39,9 +39,9 @@ AllGardenSet.prototype.findSuppliedCrops = function(garden) {
       self.supplyCropIndex[this.name] = [self.set.indexOf(garden)];
     }
   });
-}
+};
 
 AllGardenSet.prototype.clearIndex = function() {
   this.demandCropIndex = {};
   this.supplyCropIndex = {};
-}
+};

@@ -19,13 +19,13 @@ class SuppliesController < ApplicationController
         if supply.valid?
           render json: { supply: supply, crop: crop.name, status: status.name }
         else
-          render json: {errors: supply.errors}
+          render json: {errors: supply.errors.full_messages}
         end
       else
-        render json: {errors: status.errors}
+        render json: {errors: status.errors.full_messages}
       end
     else
-      render json: {errors: crop.errors}
+      render json: {errors: crop.errors.full_messages}
     end
   end
 
