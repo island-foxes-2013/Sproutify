@@ -23,12 +23,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def email_user
-    recipient = User.find_by_id(params[:id])
-    current_user.send_message(recipient, params[:content], params[:title])
-    render json: {recipient: recipient}
-  end
-
   def inbox
     inbox = current_user.mailbox.inbox
     render json: {inbox: inbox}
@@ -41,8 +35,22 @@ class UsersController < ApplicationController
       conversation = {}
       conversation[:sender] = receipt.message.sender
       conversation[:message] = receipt.message
+      conversation[:receipt_id] = receipt.id
       messages << conversation
     end
+
     render json: {message: messages}
+  end
+
+  def email_user
+    recipient = User.find_by_id(params[:id])
+    current_user.send_message(recipient, params[:content], params[:title])
+    render json: {recipient: recipient}
+  end
+
+  def respond_to_user
+    receipt = Receipt.find_by_id(params[:receipt_id].to_i)
+    # current_user.reply_to_sender(receipt, params[:body])
+    # render :nothing => true, :status => 200
   end
 end
