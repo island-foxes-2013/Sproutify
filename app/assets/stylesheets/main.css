@@ -1,31 +1,21 @@
-#contact-gardener-form {
-  height: 500px;
-  width: 50%;
+.message{
+  resize:both;
+  height: 300px;
 }
 
-#contact-gardener-form div{
+.avgrund-popup h1 {
+  text-align: center;
+}
+
+.avgrund-popup p {
+  text-align: center;
+}
+
+.avgrund-popup div{
   padding: 5px 0 5px 0;
   text-align: center;
 }
 
-#contact-gardener-form div button {
-  float:right;
-  margin: 10px;
-}
-
-#contact-gardener-form input {
-  width: 500px;
-}
-
-#contact-gardener-form textarea {
-  width: 500px;
-}
-
-#contact-gardener-form h1 {
-  text-align: center;
-}
-
-.message{
-  resize:both;
-  height: 300px;
+.avgrund-popup button {
+  float: right;
 }

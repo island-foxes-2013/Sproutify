@@ -17,7 +17,7 @@ ContactGardenerModal.prototype.generateEmailForm = function() {
 }
 
 ContactGardenerModal.prototype.show = function() {
-  Avgrund.show('#contact-gardener-form');
+  Avgrund.show('#contact-gardener-form-initial');
 }
 
 ContactGardenerModal.prototype.hide = function() {
@@ -31,6 +31,6 @@ ContactGardenerModal.prototype.emailUser = function(id, title, content) {
     type: 'post',
     data: data
   }).done(function(response){
-    $('#contact-gardener-form').html(HandlebarsTemplates['sent_message']());
+    $('#contact-gardener-form-initial').html(HandlebarsTemplates['sent_message']());
   });
 }

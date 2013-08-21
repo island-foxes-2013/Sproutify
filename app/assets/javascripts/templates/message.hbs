@@ -1,11 +1,18 @@
 <div id="message-{{message_id}}" class="avgrund-popup">
-  <h2>{{subject}}</h2>
+  <h1>{{subject}}</h1>
   <p>{{body}}</p>
   <p>-{{sender_name}}</p>
-  <form action="/respond" method="post" data-remote="true">
-    <input type="text" class="title" name="email_title" placeholder="Title"/>
-    <textarea class="message-email-body" rows="10" cols="40" name="email_body" placeholder="Content"></textarea>
-    <button type="submit" class="connect">Connect</button>
-    <button class="close">Close</button>
-  </form>
+  <div class="message_container">
+    <form id="contact-gardener-form-reply" action="/connect" method="post" data-remote="true">
+      <div>
+        <input type="text" class="title" name="email_title" placeholder="Title"/>
+      </div>
+      <div>
+        <textarea class="message" rows="10" cols="40" name="email_body" placeholder="Content"></textarea>
+      </div>
+      <div>
+        <button type="submit" class="connect">Connect</button>
+      </div>
+    </form>
+  </div>
 </div>
