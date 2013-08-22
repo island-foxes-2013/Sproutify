@@ -4,6 +4,7 @@ describe DemandsController do
   let(:user) {FactoryGirl.create(:user)}
   include SolrSpecHelper
 
+
   describe '#create' do
     let(:crop) {FactoryGirl.build(:crop)}
 
@@ -30,6 +31,19 @@ describe DemandsController do
   end
 
   describe "#destroy" do
-    
+    let(:demand) {FactoryGirl.build(:demand)}
+    let(:crop3) {FactoryGirl.build(:crop)}
+
+    before do
+      demand.user = user
+      demand.crop = crop3
+      demand.save
+    end
+
+    it "should delete demand" do
+      visit demand_path(demand)
+      response.should be_success
+      # expect{delete :destroy, id: demand.id}.to change{Demand.count}.by(1)
+    end
   end
 end

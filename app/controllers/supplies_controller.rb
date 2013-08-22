@@ -32,7 +32,7 @@ class SuppliesController < ApplicationController
   end
 
   def update
-    supply = Supply.find(params[:id])
+    supply = Supply.find_by_id(params[:id])
     if supply
       supply.status = Status.find_or_create_by_name(params[:status])
       supply.save

@@ -44,5 +44,11 @@ describe SuppliesController do
     it "should update status" do
       expect{put :update, id: supply.id, status: "New updated status!"}.to change{Supply.find_by_id(supply.id).status.name}.from("blah blah blah").to("new updated status!")
     end
+
+    it "should return error message if can't be found" do
+      @error = {errors: ["Update error"]}.to_json
+      put :update, id: 99999, status: ""
+      response.body.should == @error
+    end
   end
 end
