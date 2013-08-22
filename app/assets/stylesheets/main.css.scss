@@ -1,18 +1,17 @@
-
-
-#map-canvas{
-  float:left;
-}
-
 #browser{
-  float:right;
+  position: absolute;
+  right: 0px;
+  width: 400px;
 }
 
 #map-canvas {
-  height: 100%;
-  width: 50%;
+  position: absolute;
+  margin-top: 75px;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 400px;
 }
-
 
 .infowindow {
   width: 200px;
@@ -20,17 +19,6 @@
 }
 
 
-
-
-// #browser {
-//   padding-top: 10px;
-//   padding-left: 10px;
-// }
-
-// .message{
-//   height: 300px;
-//   width: 300px;
-// }
 
 .avgrund-popup h1 {
   text-align: center;

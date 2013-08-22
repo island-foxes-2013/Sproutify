@@ -1,4 +1,11 @@
-html, body {
+html {
+  background-color: #000;
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+}
+
+body {
   width: 100%;
   height: 100%;
   padding: 0px;
@@ -18,6 +25,18 @@ html, body {
 
 #main-body{
   padding-top: 75px;
+  // position: absolute;
+  // top: 75px;
+  // left: 0px;
+  // right: 0px;
+  // bottom: 0px;
+  width: 100%;
   height: 100%;
+  min-height: 490px;
+  min-width: 1000px;
+}
 
+#main-container{
+  width: 100%;
+  height: 100%;
 }
