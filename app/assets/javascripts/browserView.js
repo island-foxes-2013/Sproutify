@@ -21,9 +21,11 @@ BrowserView.prototype = {
 
     $("body").on("click",".supply-filter", function(){
       var cropName = $(this).attr("data-name");
-      if ($(this).is(':checked')){
+      if ($(this).hasClass('active')){
+        $(this).removeClass('active');
         self.filter.addSupply(cropName);
       } else {
+        $(this).addClass('active');
         self.filter.removeSupply(cropName);
       }
       self.filter.filter();
@@ -31,9 +33,11 @@ BrowserView.prototype = {
 
     $("body").on("click",".demand-filter", function(){
       var cropName = $(this).attr("data-name");
-      if ($(this).is(':checked')){
+      if ($(this).hasClass('active')){
+        $(this).removeClass('active');
         self.filter.addDemand(cropName);
       } else {
+        $(this).addClass('active');
         self.filter.removeDemand(cropName);
       }
       self.filter.filter();
@@ -42,15 +46,15 @@ BrowserView.prototype = {
     //Nav pills
     $('body').on('click', '#share_link', function(e) {
       e.preventDefault();
-      $('ul.nav-pills li.active').removeClass('active');
-      $(this).closest('li').addClass('active');
+      $(this).parent().find('.btn-primary').removeClass('btn-primary').addClass('btn-default');
+      $(this).removeClass('btn-default').addClass('btn-primary');
       $('#browser-request').hide();
       $('#browser-share').show();
     });
     $('body').on('click', '#request_link', function(e) {
       e.preventDefault();
-      $('ul.nav-pills li.active').removeClass('active');
-      $(this).closest('li').addClass('active');
+      $(this).parent().find('.btn-primary').removeClass('btn-primary').addClass('btn-default');
+      $(this).removeClass('btn-default').addClass('btn-primary');
       $('#browser-share').hide();
       $('#browser-request').show();
     });
