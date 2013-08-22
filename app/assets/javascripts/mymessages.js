@@ -22,6 +22,7 @@ function Message(message_id) {
   $(this).on('retrieved', this.render);
   $(this).on('rendered', this.listen);
   $(this).on('reply', this.reply);
+
 }
 
 Message.prototype.retrieve = function (message_id) {
@@ -80,6 +81,6 @@ Message.prototype.reply = function(ev, replyData) {
     data: replyData
   }).done(function(response) {
     this.hide();
-    this.show('#sent-confirmation');
+    $('a').show();
   }.bind(this));
 }

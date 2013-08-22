@@ -46,7 +46,7 @@ GardenMarker.prototype = {
     this.marker.setMap(null);
   },
   show: function() {
-    this.marker.setIcon('/assets/tree_icon.png');
+    this.marker.setIcon('/assets/leaf_marker.png');
   },
   hide: function() {
     this.marker.setIcon('/assets/small_marker.png');

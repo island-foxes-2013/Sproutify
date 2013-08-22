@@ -7,17 +7,13 @@ class DemandsController < ApplicationController
   end
 
   def create
-    crop = Crop.find_or_create_by_name(params[:demand_crop_name].downcase.pluralize)
-    if crop.valid?
-      demand = current_user.demands.create(crop: crop)
-      if demand.valid?
-        render json: { demand: demand }
-      else
-        ap demand.errors.full_messages
-        render json: { errors: demand.errors.full_messages }
-      end
+  crop = Crop.find_or_create_by_name(params[:demand_crop_name].downcase.pluralize)
+    demand = current_user.demands.create(crop: crop)
+    if demand.valid?
+      render json: { demand: demand }
     else
-      render json: { errors: crop.errors.full_messages }
+      ap demand.errors.full_messages
+      render json: { errors: demand.errors.full_messages }
     end
   end
 
