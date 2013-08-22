@@ -15,7 +15,7 @@ MapView.prototype.placeMarker = function(garden) {
 MapView.prototype.generate = function() {
   var latLng = new google.maps.LatLng(this.map.lat, this.map.lng);
   var mapOptions = {
-    zoom: 13,
+    zoom: 14,
     center: latLng,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     scrollwheel: false

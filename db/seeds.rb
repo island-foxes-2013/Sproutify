@@ -50,7 +50,6 @@ end
   lat = (max_lat - min_lat) * rand() + min_lat
   lng = (max_lng - min_lng) * rand() + min_lng
   user.create_geocode(lat: lat, lng: lng)
-  status = Status.all.sample
   crop = Crop.all.sample
   user.demands.create(crop: crop)
 end
@@ -62,8 +61,8 @@ user = User.create(first_name: "Disco",
             email: "test@example.com",
             password: "password",
             password_confirmation: "password")
-lat = (max_lat - min_lat) * rand() + min_lat
-lng = (max_lng - min_lng) * rand() + min_lng
+lat = 37.769897
+lng = -122.446112
 user.create_geocode(lat: lat, lng: lng)
 
 User.find(25).send_message(user, "I need some peppers like right now!", "Peppers")
