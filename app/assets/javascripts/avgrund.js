@@ -21,7 +21,7 @@
 	function onDocumentKeyUp( event ) {
 		if( event.keyCode === 27 ) {
 			deactivate();
-			$('a').show();
+			// $('a').show();
 		}
 	}
 
@@ -30,7 +30,7 @@
 		if( event.target === cover ) {
 			// console.log('DEACTIVATE');
 			deactivate();
-			$('a').show();
+			// $('a').show();
 		}
 	}
 
@@ -73,7 +73,7 @@
 	}
 
 	function show(selector){
-		$('a').hide();
+		// $('a').hide();
 		popup = document.querySelector( selector );
 		addClass(popup, 'avgrund-popup-animate');
 		activate();
