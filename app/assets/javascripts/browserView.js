@@ -49,7 +49,7 @@ BrowserView.prototype = {
     //Nav pills
     $('body').on('click', '#share_link', function(e) {
       e.preventDefault();
-      self.filter.status = "demand";
+      self.filter.status = "supply";
       self.filter.filter();
       $(this).parent().find('.btn-primary').removeClass('btn-primary').addClass('btn-default');
       $(this).removeClass('btn-default').addClass('btn-primary');
@@ -58,7 +58,7 @@ BrowserView.prototype = {
     });
     $('body').on('click', '#request_link', function(e) {
       e.preventDefault();
-      self.filter.status = "supply";
+      self.filter.status = "demand";
       self.filter.filter();
       $(this).parent().find('.btn-primary').removeClass('btn-primary').addClass('btn-default');
       $(this).removeClass('btn-default').addClass('btn-primary');
