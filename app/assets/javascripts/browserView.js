@@ -4,6 +4,9 @@ function BrowserView(browser, filter){
   this.$elem = $("#browser");
 
   this.$elem.html(HandlebarsTemplates['browser']);
+  this.$elem.animate({
+    "right": "0px"
+  }, 600)
   $('#browser-share').html(HandlebarsTemplates['browser_sharing']);
   $('#browser-request').html(HandlebarsTemplates['browser_requesting']);
   $('#browser-request').hide();
