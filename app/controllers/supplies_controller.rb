@@ -27,10 +27,6 @@ class SuppliesController < ApplicationController
     end
   end
 
-  def show
-  	@supply = Supply.find(params[:id])
-  end
-
   def update
     supply = Supply.find_by_id(params[:id])
     if supply
