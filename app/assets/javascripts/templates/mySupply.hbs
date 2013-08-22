@@ -1,4 +1,4 @@
-<li id="supply-{{id}}">
+<li id="supply-{{id}}" class='list-group-item'>
   {{crop.name}} 
   {{#compare status.name "==" "growing"}}
     <a href="/supplies/{{id}}?status=harvested" data-remote="true" data-method="put" data-status="harvest" id="harvest-supply-{{id}}">harvest!</a> 
