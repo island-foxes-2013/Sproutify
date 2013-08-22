@@ -1,31 +1,30 @@
-<h3>
-  There are {{user_count}} gardeners near you!
-</h3>
-<h4>
-  In your area,
-</h4>
-{{#compare crops_available.length "==" 0}}
-  <p>
-    There are no crops available in your area.
-  </p>
+{{#compare user_count ">" 0}}
+  <h4>
+    There are {{user_count}} gardeners near you!
+  </h4>
 {{/compare}}
+
+{{#compare user_count "==" 0}}
+  <h4>
+    No one in your area has signed up for Sproutify yet. 
+  </h4>
+{{/compare}}
+
 {{#compare crops_available.length ">" 0}}
   {{#each crops_available}}
     <p>
-      {{this.count}} {{pluralize this.count "person"}} offering {{this.name}}
+      {{this.count}} {{pluralize this.count "person"}} requesting <strong>{{this.name}}</strong>
     </p>
   {{/each}}
-{{/compare}}
-{{#compare crops_demanded.length "==" 0}}
-  <p>
-    There are no crops demanded in your area.
-  </p>
 {{/compare}}
 {{#compare crops_demanded.length ">" 0}}
   {{#each crops_demanded}}
     <p>
-      {{this.count}} requesting {{this.name}}
+      {{this.count}} {{pluralize this.count "person"}} requesting <strong>{{this.name}}</strong>
     </p>
   {{/each}}
 {{/compare}}
+<h4>
+  Bring your crops to your community by joining Sproutify.
+</h4>
 <a href="#" class="btn btn-primary signup-link">Signup</a>

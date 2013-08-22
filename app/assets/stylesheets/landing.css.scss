@@ -17,20 +17,24 @@
   }
 }
 
-.signup-link {
-  font-size: 600%;
-  padding: 7.5px 12px 7.5px 12px;
-  border-radius: 20px;
-  text-align: center;
-}
+// .signup-link {
+//   font-size: 600%;
+//   padding: 7.5px 12px 7.5px 12px;
+//   border-radius: 20px;
+//   text-align: center;
+// }
 
 
 
-#hook{
+#local-form{
   strong{
     font-size: 2em;
   }
   margin-top: 200px;
+}
+
+#address{
+  width: 300px;
 }
 
 

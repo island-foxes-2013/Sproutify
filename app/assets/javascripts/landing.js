@@ -10,20 +10,17 @@
   function bindEvents() {
     $('body').on('click', '#submit', function(event) {
       event.preventDefault();
-      var geocoder = new Geocoder();
-      geocoder.fetch(getLocation(), function(location) {
-        clearResults();
-        getLocalInfo(location);
+      $("#local-info").slideUp(function(){
+        var geocoder = new Geocoder();
+        geocoder.fetch(getLocation(), function(location) {
+          getLocalInfo(location);
+        });
       });
+      
     });
   }
 
-  function clearResults() {
-    $('.user_count h3').remove();
-    $('.user_count h4').remove();
-    $('.available p').remove();
-    $('.demanded p').remove();
-  }
+  
 
   function getLocation(){
     return $("#address").val() +', '+ $("#zip").val();
@@ -38,8 +35,18 @@
     locationFetcher.fetch(location, function(localData) {
       $('#hidden_lat').attr("value", location.lat);
       $('#hidden_lng').attr("value", location.lng);
-      $('#hook').html(HandlebarsTemplates['hook'](localData));
+      $('#local-info').html(HandlebarsTemplates['hook'](localData));
+      showResults();
     });
+  }
+
+  function showResults(){
+    if ($('#local-form').css("margin-top") != "0px"){
+      $("#local-form").animate({
+        "margin-top": "0px"
+      });
+    }
+    $("#local-info").slideDown();
   }
 
   window.LandingManager = LandingManager;
