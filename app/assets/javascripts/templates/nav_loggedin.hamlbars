@@ -3,9 +3,9 @@
 %li
   %a#demand-manager-link{href: "#", rel:"nofollow"} Manage My Requests
 %li
-  %a.logout-link{href: "/sessions", rel:"nofollow"} Logout
-%li
   %a.dropdown-toggle{href: "/inbox", "data-toggle"=>"dropdown", "data-method"=>"get", "data-remote" => "true", rel:"nofollow", id:"messages-nav"}
     Messages
     %b.caret
   %ul.dropdown-menu#message-list
+%li
+  %a.logout-link{href: "/sessions", rel:"nofollow"} Logout
