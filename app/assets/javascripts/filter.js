@@ -1,6 +1,7 @@
 function Filter(gardenSet) {
   this.gardenSet = gardenSet;
   this.set = gardenSet.set;
+  this.status = "demand";
   this.demandCropFilter = [];
   this.supplyCropFilter = [];
   this.bindEvents();
@@ -24,11 +25,20 @@ Filter.prototype.validateSupply = function(garden){
 Filter.prototype.filter = function() {
   var self = this;
   $(this.set).each(function() {
-    if (self.validateDemand(this) || self.validateSupply(this)) {
-      $(this).trigger('shown');
-    } else {
-      $(this).trigger('hidden');
+    if (self.status === "demand"){
+      if (self.validateDemand(this)) {
+        $(this).trigger('shown');
+      } else {
+        $(this).trigger('hidden');
+      }
+    } else if (self.status === "supply"){
+      if (self.validateSupply(this)) {
+        $(this).trigger('shown');
+      } else {
+        $(this).trigger('hidden');
+      }
     }
+    
   });
   $(this).trigger("updatedFilter");
 };
