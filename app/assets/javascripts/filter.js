@@ -1,7 +1,7 @@
 function Filter(gardenSet) {
   this.gardenSet = gardenSet;
   this.set = gardenSet.set;
-  this.status = "demand";
+  this.status = "supply";
   this.demandCropFilter = [];
   this.supplyCropFilter = [];
   this.bindEvents();
