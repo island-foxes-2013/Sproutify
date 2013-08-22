@@ -1,14 +1,14 @@
 <div class="infowindow">
   <h3>{{ name }}</h3>
-  <p>Supplies:
+  <p>Sharing:
     {{#each supplies}}
       {{this.name}}
     {{/each}}
   </p>
-  <p>Demands:
+  <p>Requesting:
     {{#each demands}}
       {{this.name}}
     {{/each}}
   </p>
   <input class="btn btn-primary" type="button" id="generate_form", value="Connect" data-id={{ id }}>
-<div>
+</div>
