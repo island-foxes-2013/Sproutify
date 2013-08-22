@@ -1,5 +1,8 @@
+p "x" * 25
 if Rails.env == "production"
+  p "*" * 25
+  p ENV['REDISCLOUD_URL']
   Sidekiq.configure_client do |config|
-    config.redis = { :url => 'pub-redis-15909.us-east-1-4.1.ec2.garantiadata.com:15909', :namespace => 'sproutify' }
+    config.redis = { :url => ENV['REDISCLOUD_URL'], :namespace => 'sproutify' }
   end
 end
