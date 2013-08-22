@@ -81,5 +81,6 @@ Message.prototype.reply = function(ev, replyData) {
     data: replyData
   }).done(function(response) {
     this.hide();
+    $('a').show();
   }.bind(this));
 }
