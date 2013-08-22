@@ -7,8 +7,6 @@ function AllGardenSet(){
 AllGardenSet.prototype.addGarden = function(garden){
   this.set.push(garden);
 
-  // this.findDemandedCrops(garden);
-  // this.findSuppliedCrops(garden);
   this.refreshIndexes();
 
   $(this).trigger('gardenAdded', garden);
@@ -29,7 +27,6 @@ AllGardenSet.prototype.addGarden = function(garden){
 
 AllGardenSet.prototype.findDemandedCrops = function(garden) {
   var self = this;
-  // var blah = garden;
   $(garden.demandedCrops()).each(function() {
     if (self.demandCropIndex.hasOwnProperty(this.name)) {
       self.demandCropIndex[this.name].push(self.set.indexOf(garden));

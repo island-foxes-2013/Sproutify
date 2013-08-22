@@ -1,30 +1,59 @@
-<h4>
-  Your Growing Shares
+<h3 class="text-center">
+  Produce You're Growing
 </h4>
-<ul>
-{{#eachProperty myGrowing}}
-  <p>
-    <input type="checkbox" class="supply-filter" data-name="{{property}}">  {{property}}: {{value.length}}
-  </p>
-{{/eachProperty}}
-</ul>
-<h4>
-  Your Harvested Shares
+<div class="row">
+  <div class="list-group col-md-6">
+    {{#eachPropertyColumn myGrowing 1 2}}
+      <a href="#" class="list-group-item supply-filter active" data-name="{{property}}">
+        {{property}} <span class="badge">{{value.length}}</span>
+      </a>
+    {{/eachPropertyColumn}}
+    </div>
+    <div class="list-group col-md-6">
+    {{#eachPropertyColumn myGrowing 2 2}}
+      <a href="#" class="list-group-item supply-filter active" data-name="{{property}}">
+        {{property}} <span class="badge">{{value.length}}</span>
+      </a>
+    {{/eachPropertyColumn}}
+  </div>
+</div>
+
+<h3 class="text-center">
+  Produce You've Harvested
 </h4>
-<ul>
-{{#eachProperty myHarvesting}}
-  <p>
-    <input type="checkbox" class="supply-filter" data-name="{{property}}">  {{property}}: {{value.length}}
-  </p>
-{{/eachProperty}}
-</ul>
-<h4>
-  All Requests
+<div class="row">
+  <div class="list-group col-md-6">
+    {{#eachPropertyColumn myHarvesting 1 2}}
+      <a href="#" class="list-group-item supply-filter" data-name="{{property}}">
+        {{property}} <span class="badge">{{value.length}}</span>
+      </a>
+    {{/eachPropertyColumn}}
+    </div>
+    <div class="list-group col-md-6">
+    {{#eachPropertyColumn myHarvesting 2 2}}
+      <a href="#" class="list-group-item supply-filter" data-name="{{property}}">
+        {{property}} <span class="badge">{{value.length}}</span>
+      </a>
+    {{/eachPropertyColumn}}
+  </div>
+</div>
+
+<h3 class="text-center">
+  Other Produce Being Requested
 </h4>
-<ul>
-{{#eachProperty allDemand}}
-  <p>
-    <input type="checkbox" class="demand-filter" data-name="{{property}}"> {{property}}: {{value.length}}
-  </p>
-{{/eachProperty}}
-</ul>
+<div class="row">
+  <div class="list-group col-md-6">
+    {{#eachPropertyColumn allDemand 1 2}}
+      <a href="#" class="list-group-item supply-filter" data-name="{{property}}">
+        {{property}} <span class="badge">{{value.length}}</span>
+      </a>
+    {{/eachPropertyColumn}}
+    </div>
+    <div class="list-group col-md-6">
+    {{#eachPropertyColumn allDemand 2 2}}
+      <a href="#" class="list-group-item supply-filter" data-name="{{property}}">
+        {{property}} <span class="badge">{{value.length}}</span>
+      </a>
+    {{/eachPropertyColumn}}
+  </div>
+</div>

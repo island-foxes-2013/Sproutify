@@ -1,20 +1,39 @@
-<h4>
-  Your Requests
+<h3 class="text-center">
+  Produce You've Requested
 </h4>
-<ul>
-{{#eachProperty myDemand}}
-  <p>
-    <input type="checkbox" class="supply-filter" data-name="{{property}}">  {{property}}: {{value.length}}
-  </p>
-{{/eachProperty}}
-</ul>
-<h4>
-  All Shares
+<div class="row">
+  <div class="list-group col-md-6">
+    {{#eachPropertyColumn myDemand 1 2}}
+      <a href="#" class="list-group-item supply-filter active" data-name="{{property}}">
+        {{property}} <span class="badge">{{value.length}}</span>
+      </a>
+    {{/eachPropertyColumn}}
+    </div>
+    <div class="list-group col-md-6">
+    {{#eachPropertyColumn myDemand 2 2}}
+      <a href="#" class="list-group-item supply-filter active" data-name="{{property}}">
+        {{property}} <span class="badge">{{value.length}}</span>
+      </a>
+    {{/eachPropertyColumn}}
+  </div>
+</div>
+
+<h3 class="text-center">
+  Other Produce Being Shared
 </h4>
-<ul>
-{{#eachProperty allSupply}}
-  <p>
-    <input type="checkbox" class="supply-filter" data-name="{{property}}">  {{property}}: {{value.length}}
-  </p>
-{{/eachProperty}}
-</ul>
+<div class="row">
+  <div class="list-group col-md-6">
+    {{#eachPropertyColumn allSupply 1 2}}
+      <a href="#" class="list-group-item supply-filter" data-name="{{property}}">
+        {{property}} <span class="badge">{{value.length}}</span>
+      </a>
+    {{/eachPropertyColumn}}
+    </div>
+    <div class="list-group col-md-6">
+    {{#eachPropertyColumn allSupply 2 2}}
+      <a href="#" class="list-group-item supply-filter" data-name="{{property}}">
+        {{property}} <span class="badge">{{value.length}}</span>
+      </a>
+    {{/eachPropertyColumn}}
+  </div>
+</div>
