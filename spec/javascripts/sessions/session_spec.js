@@ -11,6 +11,30 @@ describe("Session", function(){
 		expect(session.errors()).toEqual({});
 	});
 
+	describe("#user", function(){
+		it("returns the name of the current user", function(){
+			var data = {
+				logged_in: true,
+				user: "dude"
+			};
+			
+			var session = new Session(data);
+			expect(session.user()).toEqual("dude");
+		});
+	});
+
+	describe("#errors", function(){
+		it("returns the errors of the current user", function(){
+			var data = {
+				logged_in: true,
+				user: "guy"
+			};
+			
+			var session = new Session(data);
+			expect(session.errors()).toEqual({});
+		});
+	});
+
 	describe("#logIn", function() {
 		var session, request, loginEventSpy, requestFailSpy;
 		
