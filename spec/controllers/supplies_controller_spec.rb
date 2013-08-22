@@ -51,4 +51,10 @@ describe SuppliesController do
       response.body.should == error
     end
   end
+
+  describe "#destroy" do
+    it "should return delete error" do
+      pending "need to figure out how to connect with demands#destroy"
+    end
+  end
 end

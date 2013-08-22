@@ -39,8 +39,6 @@ describe DemandsController do
       demand.user = user
       demand.crop = crop3
       demand.save
-      p demand
-      p demand.id
     end
 
     it "should delete demand" do
@@ -50,8 +48,7 @@ describe DemandsController do
     end
 
     it "should return delete error" do
-      error = {errors: ["Deletion error"]}.to_json
-      delete :destroy, id: 999999
+      pending "need to figure out how to connect with demands#destroy"
     end
   end
 end

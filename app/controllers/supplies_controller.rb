@@ -47,7 +47,7 @@ class SuppliesController < ApplicationController
   end
 
   def destroy
-    supply = Supply.find(params[:id])
+    supply = Supply.find_by_id(params[:id])
     if supply
       supply.destroy
       render json: {success: true}
