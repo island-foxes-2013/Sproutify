@@ -78,7 +78,6 @@ describe("Session", function(){
 		});
 
 		it("adds errors to the session when the log in fails ", function() {
-			
 			session.logIn({
 				username: "foo",
 				password: "bar"
