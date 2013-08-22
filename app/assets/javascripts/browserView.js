@@ -77,12 +77,12 @@ BrowserView.prototype = {
   recheckBoxes: function() {
     $.each(this.filter.supplyCropFilter, function() {
       if ($('.supply-filter[data-name='+this+']').length) {
-        $('.supply-filter[data-name='+this+']').prop('checked', true);  
+        $('.supply-filter[data-name='+this+']').removeClass('active');  
       }
     });
     $.each(this.filter.demandCropFilter, function() {
       if ($('.demand-filter[data-name='+this+']').length) {
-        $('.demand-filter[data-name='+this+']').prop('checked', true);  
+        $('.demand-filter[data-name='+this+']').removeClass('active'); 
       }
     });
   }
