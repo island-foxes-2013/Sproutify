@@ -35,15 +35,23 @@ describe DemandsController do
     let(:crop3) {FactoryGirl.build(:crop)}
 
     before do
+      demand
       demand.user = user
       demand.crop = crop3
       demand.save
+      p demand
+      p demand.id
     end
 
     it "should delete demand" do
-      visit demand_path(demand)
-      response.should be_success
-      # expect{delete :destroy, id: demand.id}.to change{Demand.count}.by(1)
+      expect do
+        delete :destroy, id: demand.id
+      end.to change{Demand.count}.by(-1)
+    end
+
+    it "should return delete error" do
+      error = {errors: ["Deletion error"]}.to_json
+      delete :destroy, id: 999999
     end
   end
 end

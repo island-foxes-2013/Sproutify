@@ -55,5 +55,4 @@ class SuppliesController < ApplicationController
       render json: {errors: ["Deletion error"]}
     end
   end
-
 end
