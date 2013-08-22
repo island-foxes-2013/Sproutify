@@ -46,9 +46,9 @@ describe SuppliesController do
     end
 
     it "should return error message if can't be found" do
-      @error = {errors: ["Update error"]}.to_json
+      error = {errors: ["Update error"]}.to_json
       put :update, id: 99999, status: ""
-      response.body.should == @error
+      response.body.should == error
     end
   end
 end
