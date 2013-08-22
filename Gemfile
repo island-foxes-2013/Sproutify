@@ -30,16 +30,18 @@ gem 'jquery-rails'
 group :development, :test do
   gem 'annotate'
   gem 'awesome_print'
+  # gem 'capybara-webkit', '~> 1.0.0'
+  
+  
+ end
+ group :test do
+  gem "selenium-webdriver", "~> 2.34.0"
+  gem 'factory_girl_rails' 
   gem 'rspec-rails'
   gem 'capybara'
   gem 'spork'
   gem 'guard'
   gem 'guard-rspec'
-  # gem 'capybara-webkit', '~> 1.0.0'
-  gem "selenium-webdriver", "~> 2.34.0"
-  gem 'factory_girl_rails'
-  gem 'faker'
-  gem 'shoulda-matchers'
   gem 'database_cleaner'
   gem 'launchy'
   gem 'simplecov', require: false
@@ -48,6 +50,8 @@ group :development, :test do
   gem 'jasmine'
 end
 
+gem 'shoulda-matchers'
+gem 'faker'
 gem 'rsolr'
 gem 'sunspot_rails'
 gem 'sunspot_solr'
