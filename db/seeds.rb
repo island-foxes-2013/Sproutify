@@ -65,3 +65,5 @@ user = User.create(first_name: "Disco",
 lat = (max_lat - min_lat) * rand() + min_lat
 lng = (max_lng - min_lng) * rand() + min_lng
 user.create_geocode(lat: lat, lng: lng)
+
+User.find(25).send_message(user, "I need some peppers like right now!", "Peppers")
