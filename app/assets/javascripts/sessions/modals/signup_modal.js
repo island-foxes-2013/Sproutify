@@ -6,6 +6,11 @@ function SignupModal(session) {
   }
   this.render();
   this.bindEvents();
+
+  var self = this;
+  $(this.session).on('loggedIn', function() {
+    self.close();
+  });
 }
 SignupModal.prototype = Object.create(Modal.prototype);
 
