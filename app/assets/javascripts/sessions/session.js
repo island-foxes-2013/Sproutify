@@ -31,6 +31,7 @@ Session.prototype.errors = function() {
 }
 
 Session.prototype.signUp = function(data) {
+  var self = this;
   return this.sendRequest({
     url: "/users",
     method: "post",

@@ -12,7 +12,7 @@ function LoginModal(session) {
   var self = this;
   $(this.session).on('loggedIn', function() {
     self.close();
-  })
+  });
 }
 
 LoginModal.prototype = Object.create(Modal.prototype);
