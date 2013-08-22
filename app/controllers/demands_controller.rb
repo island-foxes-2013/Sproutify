@@ -13,7 +13,7 @@ class DemandsController < ApplicationController
       if demand.valid?
         render json: { demand: demand }
       else
-        ap demand.errors.full_messages 
+        ap demand.errors.full_messages
         render json: { errors: demand.errors.full_messages }
       end
     else
@@ -22,7 +22,7 @@ class DemandsController < ApplicationController
   end
 
   def destroy
-    demand = Demand.find(params[:id])
+    demand = Demand.find_by_id(params[:id])
     if demand
       demand.destroy
       render json: {success: true}

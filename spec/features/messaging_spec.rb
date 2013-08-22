@@ -26,13 +26,33 @@ describe "main page", js:true do
 
     context "for a new message" do
       before :each do
-        user.send_message(user, "body", "title")
-      end
-      it "inbox should show dropdown of message" do
+        user.send_message(user, "Hey bro, I really need apples!", "Got any apples?")
         click_link 'messages-nav'
-        
+      end
+
+      it "inbox should show dropdown of message" do
+        page.should have_content('Got any apples?')
+      end
+
+      it "should show modal of exisiting message when clicked" do
+        click_link 'Got any apples?'
+        page.should have_content('Got any apples?')
+        page.should have_content('Hey bro, I really need apples!')
+      end
+
+      context "replying to a message" do
+        before :each do
+          click_link 'Got any apples?'
+        end
+
+        it "should be successful" do
+          fill_in 'email_title', with: "What kind of apples?"
+          fill_in 'email_body', with: "I'll trade you apples for oranges."
+          click_button 'Connect'
+          page.should have_content('Your message has been sent!')
+          expect(Conversation.all.count).to eq 4
+        end
       end
     end
   end
-
 end
