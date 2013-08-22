@@ -27,12 +27,8 @@ class SuppliesController < ApplicationController
     end
   end
 
-  def show
-  	@supply = Supply.find(params[:id])
-  end
-
   def update
-    supply = Supply.find(params[:id])
+    supply = Supply.find_by_id(params[:id])
     if supply
       supply.status = Status.find_or_create_by_name(params[:status])
       supply.save
@@ -47,7 +43,7 @@ class SuppliesController < ApplicationController
   end
 
   def destroy
-    supply = Supply.find(params[:id])
+    supply = Supply.find_by_id(params[:id])
     if supply
       supply.destroy
       render json: {success: true}
@@ -55,5 +51,4 @@ class SuppliesController < ApplicationController
       render json: {errors: ["Deletion error"]}
     end
   end
-
 end

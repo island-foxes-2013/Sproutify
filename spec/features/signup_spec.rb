@@ -43,7 +43,7 @@ describe "Sign up", js: true do
             end
 
             it "user is shown 'first name can't be blank' error" do
-              expect(page).to have_text "first name can't be blank"
+              expect(page).to have_text "First name can't be blank"
             end
 
           end
@@ -68,7 +68,7 @@ describe "Sign up", js: true do
             end
 
             it "user is shown 'last name can't be blank' error" do
-              expect(page).to have_text "last name can't be blank"
+              expect(page).to have_text "Last name can't be blank"
             end
 
           end
@@ -94,7 +94,7 @@ describe "Sign up", js: true do
             end
 
             it "user is shown 'email is not a properly formatted email address' error" do
-              expect(page).to have_text "5 is not a properly formatted email address"
+              expect(page).to have_text "Email is not properly formatted"
             end
 
           end
@@ -119,7 +119,7 @@ describe "Sign up", js: true do
             end
 
             it "user is shown 'email can't be blank' error" do
-              expect(page).to have_text "email can't be blank"
+              expect(page).to have_text "Email can't be blank"
             end
 
           end
@@ -145,7 +145,7 @@ describe "Sign up", js: true do
             end
 
             it "user is shown 'password is too short' error" do
-              expect(page).to have_text "password is too short"
+              expect(page).to have_text "Password is too short"
             end
 
           end
@@ -171,7 +171,7 @@ describe "Sign up", js: true do
             end
 
             it "user is shown 'passwords don't match' error" do
-              expect(page).to have_text "passwords don't match"
+              expect(page).to have_text "Password doesn't match confirmation"
             end
 
           end
@@ -195,7 +195,7 @@ describe "Sign up", js: true do
             end
 
             it "user is shown 'password can't be blank' error" do
-              expect(page).to have_text "password can't be blank"
+              expect(page).to have_text "Password can't be blank"
             end
 
           end
@@ -214,7 +214,7 @@ describe "Sign up", js: true do
           end
 
           it "redirects to main page" do
-            pending "Need something on the main page to map to"
+            page.should have_link('Logout')
           end
 
         end

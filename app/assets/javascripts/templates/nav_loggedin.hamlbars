@@ -5,4 +5,7 @@
 %li
   %a.logout-link{href: "/sessions", rel:"nofollow"} Logout
 %li
-  %a{href: "/inbox", "data-method"=>"get", "data-remote" => "true", rel:"nofollow", id:"messages-nav"} Messages
+  %a.dropdown-toggle{href: "/inbox", "data-toggle"=>"dropdown", "data-method"=>"get", "data-remote" => "true", rel:"nofollow", id:"messages-nav"}
+    Messages
+    %b.caret
+  %ul.dropdown-menu#message-list

@@ -1,0 +1,38 @@
+#browser{
+  position: absolute;
+  right: 0px;
+  width: 400px;
+}
+
+#map-canvas {
+  position: absolute;
+  margin-top: 75px;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 400px;
+}
+
+.infowindow {
+  width: 200px;
+  height: 200px;
+}
+
+
+
+.avgrund-popup h1 {
+  text-align: center;
+}
+
+.avgrund-popup p {
+  text-align: center;
+}
+
+.avgrund-popup div{
+  padding: 5px 0 5px 0;
+  text-align: center;
+}
+
+.avgrund-popup button {
+  float: right;
+}

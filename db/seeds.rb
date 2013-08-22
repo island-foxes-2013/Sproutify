@@ -8,7 +8,7 @@
 
 require 'faker'
 
-crops = ["Corn", "Cucumber", "Eggplant", "Muskmelon", "Pepper", "Tomatoe", "Watermelon", "Zucchini", "Cilantro", "Basil", "Mint", "Sage", "Blueberry", "Strawberry", "Lemon", "Lettuce", "Radish", "Chard", "Pea", "Kale", "Chicken Nugget", "Orange", ]
+crops = ["Corn", "Cucumber", "Eggplant", "Muskmelon", "Pepper", "Tomatoe", "Watermelon", "Zucchini", "Cilantro", "Basil", "Mint", "Sage", "Blueberry", "Strawberry", "Lemon", "Lettuce", "Radish", "Chard", "Pea", "Kale", "Orange", ]
 
 crops = crops.sort
 
