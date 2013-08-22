@@ -180,6 +180,24 @@ describe("Session", function(){
 			expect(logoutEventSpy).not.toHaveBeenCalled();
 		});
 	});
+
+	describe("#update", function(){
+		var data1 = {
+			logged_in: false,
+			user: "bill"
+		}
+		var data2 = {
+			logged_in: true,
+			user: "ted"
+		}
+		var session = new Session(data1)
+
+		it("should update the appropriate attributes", function(){
+			session.update(data2);
+			expect(session.data.logged_in).toEqual(true);
+			expect(session.data.user).toEqual("ted");
+		});
+	});
 });
 
 
