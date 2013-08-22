@@ -9,11 +9,6 @@ describe("MySupplies", function(){
 		expect(demoSupplies.mySuppliesNames).toEqual([]);
 	});
 
-	// it("should call getSupplies method in constructor", function(){
-	// 	spyOn(MySupplies, 'getSupplies').andCallThrough();
-	// 	// Mysupplies();
-	// 	expect(demoSupplies.getSupplies).toHaveBeenCalled();
-	// });
 });
 
 describe("#getSupplies", function(){
@@ -22,5 +17,24 @@ describe("#getSupplies", function(){
 	beforeEach(function(){
 		demoSupplies = new MySupplies();
 		getSuppliesSpy = jasmine.createSpy();
-	});
+		$(demoSupplies).on('updatedData', getSuppliesSpy);
+		request = {
+			done: function(callback){
+				this.doneCallback = callback;
+			},
+			success: function(){
+				this.doneCallback({
+					mySupplies << 'banana object',
+					mySuppliesNames << 'banana'
+				})
+			},
+			fail: function(){
+				this.doneCallback({
+					errors: { demo: "unsuccessful" }
+				});
+			}
+		}
+	});// end beforeEach
+
+
 });
