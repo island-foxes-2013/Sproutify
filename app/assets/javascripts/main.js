@@ -1,7 +1,7 @@
 function MainManager() {
   this.element = $('#main-body');
   this.element.html(HandlebarsTemplates['main']());
-  this.element.append(HandlebarsTemplates['sent_message']());
+  this.element.append(HandlebarsTemplates['sent_message'](this));
   var self = this;
   var user_data = this.getUserData(function(user_data) {
     self.map = new Map(user_data.user_lat, user_data.user_lng);
@@ -24,7 +24,7 @@ MainManager.prototype.bindEvents = function(){
 
     $(document).on('click', '#messages-nav', function() {
       var inbox = new Inbox();
-      $(this).show();
+      // $(this).show();
     });
 
     $(document).on('click', '.inbox-message', function(event) {
