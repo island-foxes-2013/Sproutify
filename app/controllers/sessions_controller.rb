@@ -34,7 +34,7 @@ class SessionsController < ApplicationController
         }
       end
     else
-      errors = ["Unrecognized eamil"]
+      errors = ["Unrecognized email"]
       render json: {
         logged_in: false,
         errors: errors
