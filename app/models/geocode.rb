@@ -3,6 +3,8 @@ class Geocode < ActiveRecord::Base
   belongs_to :user
   validates_presence_of :user, :lat, :lng
 
+  after_commit :update_search_index
+
   # sunspot search via :location
   searchable do
     double :lat
@@ -24,5 +26,11 @@ class Geocode < ActiveRecord::Base
       paginate :page => 1, :per_page => 100
     end
     search.results.map{|result| result.user}
+  end
+
+  private
+
+  def update_search_index
+    UpdateSearchIndexWorker.perform_async(self.id)
   end
 end

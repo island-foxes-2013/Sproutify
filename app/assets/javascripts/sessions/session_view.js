@@ -28,7 +28,6 @@ SessionView.prototype = {
       new MainManager();
     });
     $(this.session).on("loggedOut", function(){
-      debugger;
       $(".navbar-right").html(HandlebarsTemplates['nav_loggedout']());
       new LandingManager();
     });
