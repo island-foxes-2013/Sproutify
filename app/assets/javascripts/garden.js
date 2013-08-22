@@ -1,11 +1,5 @@
 function Garden(gardenAttributes) {
   this.attrs = gardenAttributes;
-  // this.attrs.demandedCrops = gardenAttributes.demanded_crops.map(function(k, crop){
-  //   return new Crop(crop);
-  // })
-  // this.attrs.suppliedCrops = gardenAttributes.demanded_crops.map(function(k, crop){
-  //   return new Crop(crop);
-  // })
 }
 
 Garden.prototype.lat = function() {

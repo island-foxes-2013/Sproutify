@@ -12,7 +12,7 @@ Map.prototype = {
     this.gardens.addGarden(garden);
   },
   refreshGardens: function(boundary){
-    //remove gardens out of bounds
+    //removes gardens outside of the boundary
     var gardens_to_be_removed = [];
     $.each(this.gardens.set, function(index,garden) {
       if ((garden.attrs.lat < boundary.ulat || garden.attrs.lat > boundary.blat) || (garden.attrs.lng < boundary.ulng || garden.attrs.lng > boundary.blng)) {
@@ -23,9 +23,9 @@ Map.prototype = {
       this.remove();
     });
     
+    // add gardens not already in our set
     var self = this;
     this.searcher.fetch(boundary, function(gardens) {
-      // self.gardens.clearIndex();
       var found_match = false;
       var found_object = false;
       $.each(gardens, function() {
@@ -34,7 +34,6 @@ Map.prototype = {
           if (this.attrs.lat === contender.attrs.lat) {
             found_match = true;
             found_object = this;
-            console.log("found match");
           }
         });
         if (!found_match) {
