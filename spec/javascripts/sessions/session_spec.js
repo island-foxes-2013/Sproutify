@@ -13,6 +13,7 @@ describe("Session", function(){
 
 	describe("#logIn", function() {
 		var session, request, loginEventSpy, requestFailSpy;
+		
 		beforeEach(function() {
 			session = new Session({});
 			loginEventSpy = jasmine.createSpy();
@@ -49,7 +50,6 @@ describe("Session", function(){
 			}).fail(loginFailedSpy);
 
 			request.fail();
-
 			expect(loginFailedSpy).toHaveBeenCalled();
 		});
 
@@ -61,7 +61,6 @@ describe("Session", function(){
 			})
 
 			request.fail();
-
 			expect(session.errors()).toEqual({ username: "Not a cool enough username"})
 		});
 
@@ -70,11 +69,10 @@ describe("Session", function(){
 				username: "foo",
 				password: "bar"
 			});
+			
 			request.succeed();
-
 			expect(session.user()).toEqual("bob");
 			expect(session.isLoggedIn()).toBeTruthy()
-
 		});
 
 		it("triggers a loggedIn event when the log in works", function() {
@@ -84,7 +82,6 @@ describe("Session", function(){
 			});
 
 			request.succeed();
-
 			expect(loginEventSpy).toHaveBeenCalled();
 		});
 
@@ -95,8 +92,88 @@ describe("Session", function(){
 			});
 			
 			request.fail();
-
 			expect(loginEventSpy).not.toHaveBeenCalled();
 		});
 	})
+
+	describe("#logOut", function() {
+		var session, request, logoutEventSpy, requestFailSpy;
+		
+		beforeEach(function() {
+			session = new Session({});
+			logoutEventSpy = jasmine.createSpy();
+			$(session).on('loggedOut', logoutEventSpy);
+			request = {
+				done: function(callback) {
+					this.doneCallback = callback
+				},
+				succeed: function() {
+					this.doneCallback({
+						logged_in: false
+					})
+				},
+				fail: function() {
+					this.doneCallback({
+						logged_in: true,
+						errors: { session_status: "Logout unsuccessful" }
+					});
+				}
+			}
+			session.api.sendRequest = function() { 
+				return request 
+			}
+		});// end beforeEach
+
+		it("triggers a loggedOut event when the log out works", function() {
+			session.logOut({});
+			request.succeed();
+			expect(logoutEventSpy).toHaveBeenCalled();
+		});
+		
+		it("calls any fail callbacks when the log out fails", function() {
+			var logoutEventSpy = jasmine.createSpy();
+			session.logOut({}).fail(logoutEventSpy);
+			request.fail();
+			expect(logoutEventSpy).toHaveBeenCalled();
+		});
+
+		it("adds errors to the session when the log out fails ", function() {
+			session.logOut({})
+			request.fail();
+			expect(session.errors()).toEqual({ session_status: "Logout unsuccessful"})
+		});
+
+		it("sets the user and logged out status from the response", function() {
+			session.logOut({});
+			request.succeed();
+
+			expect(session.user()).toEqual(null);
+			expect(session.isLoggedIn()).toBeFalsy();
+		});
+		
+		it("does not trigger a loggedOut event when the log out fails", function() {
+			session.logOut({});
+			request.fail();
+			expect(logoutEventSpy).not.toHaveBeenCalled();
+		});
+	});
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
