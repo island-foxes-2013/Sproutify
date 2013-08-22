@@ -1,7 +1,24 @@
 #browser{
   position: absolute;
-  right: 0px;
+  margin-top: 75px;
+  top: 0px;
+  right: -400px;
+  bottom: 0px;
   width: 400px;
+  // height: 100%;
+  background-image:url("/assets/grey_wash_wall_@2X.png");
+  background-repeat: repeat;
+
+  .container{
+    position:relative;
+    padding-top: 15px;
+    z-index: 5;
+  }
+
+  h3{
+    color: #FFF;
+  }
+
 }
 
 #map-canvas {

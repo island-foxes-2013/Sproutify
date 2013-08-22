@@ -20,7 +20,7 @@
 	height: 100%;
 	top: 0;
 	left: 0;
-	z-index: 1;
+	z-index: 7;
 	visibility: hidden;
 	opacity: 0;
 	background: rgba( 0, 0, 0, 0.5 );
@@ -60,7 +60,7 @@
 	margin: -130px 0 0 -190px;
 	visibility: hidden;
 	opacity: 0;
-	z-index: 2;
+	z-index: 10;
 	padding: 20px;
 
 	background: white;

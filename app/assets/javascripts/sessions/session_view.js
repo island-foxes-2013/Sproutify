@@ -23,7 +23,6 @@ function SessionView(session){
 SessionView.prototype = {
   bindEvents: function(){
     $(this.session).on("loggedIn", function(){
-      $("#main-body").empty();
       $(".navbar-right").html(HandlebarsTemplates['nav_loggedin']());
       new MainManager();
     });
