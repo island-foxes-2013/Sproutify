@@ -1,8 +1,8 @@
 class SearchController < ApplicationController
   def search
-    upperLeft = {lat: params[:ulat], lng: params[:ulng]}
-    lowerRight = {lat: params[:blat], lng: params[:blng]}
-    users_in_boundary = Geocode.boundary_search(upperLeft, lowerRight)
+    northEast = {lat: params[:NElat], lng: params[:NElng]}
+    southWest = {lat: params[:SWlat], lng: params[:SWlng]}
+    users_in_boundary = Geocode.boundary_search(southWest, northEast)
 
     # TODO:ZS Consider using active_model_serializer or json_builder
     parsed_users = users_in_boundary.map do |user|
