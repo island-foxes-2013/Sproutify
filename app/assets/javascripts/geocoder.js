@@ -6,7 +6,7 @@ function Geocoder() {
 }
 
 Geocoder.prototype.fetch = function(user_location, successCallback) {
-  self = this;
+  var self = this;
   this.geocoder.geocode({'address': user_location}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
       var lat = results[0].geometry.location.lat();
