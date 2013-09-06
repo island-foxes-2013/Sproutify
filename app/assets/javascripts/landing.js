@@ -12,18 +12,15 @@
       event.preventDefault();
       $("#local-info").slideUp(function(){
         var geocoder = new Geocoder();
-        geocoder.fetch(getLocation(), function(location) {
-          getLocalInfo(location);
+        geocoder.fetch(getLocation(), function(location) { getLocalInfo(location);
         });
       });
-      
+
     });
   }
 
-  
-
   function getLocation(){
-    return $("#address").val() +', '+ $("#zip").val();
+    return $("#location").val();
   }
 
   function setLocationFromPlugin(){

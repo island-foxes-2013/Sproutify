@@ -17,3 +17,5 @@
 /solr/data
 /solr/pids
 /app/assets/images/internal
+.DS_Store
+*~
