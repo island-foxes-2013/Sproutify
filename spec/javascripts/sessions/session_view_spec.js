@@ -1,9 +1,8 @@
-
 describe("SessionView", function(){
   beforeEach(function() {
     affix('#main-body');
   });
-  var logoutSpy, loginSpy, signupSpy, sessionView, session; 
+  var logoutSpy, loginSpy, signupSpy, sessionView, session;
   describe('new', function() {
     beforeEach(function() {
       session = "bananas";
@@ -13,9 +12,9 @@ describe("SessionView", function(){
     });
 
     it("should create a new SignupView", function(){
-      expect(authenticationSpy).toHaveBeenCalledWith({ 
-        session: session, 
-        element: $('body'), 
+      expect(authenticationSpy).toHaveBeenCalledWith({
+        session: session,
+        element: $('body'),
         modal: SignupModal,
         link: '.signup-link'
       });
@@ -23,8 +22,8 @@ describe("SessionView", function(){
 
     it("should create a new LoginView", function(){
       expect(authenticationSpy).toHaveBeenCalledWith({
-        session: session, 
-        element: $('body'), 
+        session: session,
+        element: $('body'),
         modal: LoginModal,
         link: '.login-link'
       });
@@ -40,5 +39,3 @@ describe("SessionView", function(){
   xdescribe("when a sessed")
 
 });
-
-

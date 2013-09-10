@@ -26,5 +26,9 @@
 $(function() {
   Avgrund.initialize();
   $("#content").html(HandlebarsTemplates['static']());
+
+  // Open the demo info modal
+  $("#demo-info").modal('show');
+
   new SessionView(new Session());
 });

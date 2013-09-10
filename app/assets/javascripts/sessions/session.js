@@ -6,7 +6,7 @@ function Session(data){
 
 Session.prototype.refresh = function() {
   var self = this;
-  this.sendRequest({ 
+  this.sendRequest({
     url: "/sessions",
     method: "GET"
   }).done(function(response) {
@@ -37,7 +37,7 @@ Session.prototype.signUp = function(data) {
     method: "post",
     data: data
   }).done(function() {
-    $(self).trigger('loggedIn');  
+    $(self).trigger('loggedIn');
   });
 }
 
