@@ -29,7 +29,7 @@ MyDemandView.prototype = {
   },
   bindEvents: function(){
     var self = this;
-    this.$parent.on("ajax:success", this.deleteLinkSelector, function(){
+    this.$parent.on("ajax:success", this.deleteLinkSelector, function(event, response, xhr, element){
       if (response.hasOwnProperty("errors")){
         self.renderErrors(response);
       }

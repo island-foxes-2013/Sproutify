@@ -36,14 +36,15 @@ Browser.prototype = {
     }
   },
   refreshSupplyIndices: function(){
-    this.mySupplyIndex = {};
+    this.myGrowingIndex = {};
+    this.myHarvestingIndex = {};
     this.allDemandIndex = {};
     for (crop in this.allGardenSet.demandCropIndex){
       if (this.mySupply.mySuppliesNames.includes(crop)){
         var cropIndex = this.mySupply.mySuppliesNames.indexOf(crop);
         if (this.mySupply.mySupplies[cropIndex].status.name == "growing"){
           this.myGrowingIndex[crop] = this.allGardenSet.demandCropIndex[crop];
-        } else if (this.mySupply.mySupplies[cropIndex].status.name == "harvesting"){
+        } else if (this.mySupply.mySupplies[cropIndex].status.name == "harvested"){
           this.myHarvestingIndex[crop] = this.allGardenSet.demandCropIndex[crop];
         }
       } else {
