@@ -61,5 +61,6 @@ module Sproutify
 
     # fixes heroku error
     config.assets.initialize_on_precompile = false
+    config.assets.compress = false
   end
 end
