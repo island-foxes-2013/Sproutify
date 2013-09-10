@@ -40,10 +40,5 @@ MapView.prototype.refreshMarkers = function() {
                    NElng: bounds.getNorthEast().lng(),
                    SWlat: bounds.getSouthWest().lat(),
                    SWlng: bounds.getSouthWest().lng() }
-<<<<<<< HEAD
-=======
-  // var boundary = {ulat: bounds.ea.b, ulng: bounds.ia.b, blat: bounds.ea.d, blng: bounds.ia.d}
-  // debugger
->>>>>>> ba930721bd68497274291228aa9c556e1f53fdad
   this.map.refreshGardens(boundary);
 }
