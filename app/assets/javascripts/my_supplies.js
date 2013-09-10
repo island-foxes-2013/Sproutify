@@ -11,7 +11,7 @@ MySupplies.prototype = {
     $.ajax({
       url: '/supplies',
       type: 'GET'
-    }).done(function(response){ 
+    }).done(function(response){
       self.refreshSupplies(response.supplies);
       $(self).trigger("updatedData");
     });
@@ -20,7 +20,7 @@ MySupplies.prototype = {
     for (var i = 0; i < supplies.length; i++){
       if (!this.mySuppliesNames.includes(supplies[i].crop.name)) {
         this.addSupply(supplies[i]);
-      } 
+      }
     }
     this.mapNames();
   },
@@ -34,6 +34,7 @@ MySupplies.prototype = {
     $(newSupply).on('removed',function(){
       self.mySupplies.exterminate(this);
       self.mapNames();
+      self.getSupplies();
     });
     $(newSupply).on('updated',function(){
       self.mySupplies.exterminate(this);

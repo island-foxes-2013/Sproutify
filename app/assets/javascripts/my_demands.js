@@ -33,6 +33,7 @@ MyDemands.prototype = {
     var self = this;
     $(newDemand).on('removed', function(){
       self.myDemands.exterminate(this);
+      self.getDemands();
     });
   },
   mapNames: function(){

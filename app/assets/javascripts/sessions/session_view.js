@@ -3,15 +3,15 @@ function SessionView(session){
   this.bindEvents();
 
   new AuthenticationView({
-    session: session, 
-    element: $('body'), 
-    modal: SignupModal, 
+    session: session,
+    element: $('body'),
+    modal: SignupModal,
     link: '.signup-link'
   });
 
   new AuthenticationView({
-    session: session, 
-    element: $('body'), 
+    session: session,
+    element: $('body'),
     modal: LoginModal,
     link: '.login-link'
   });
