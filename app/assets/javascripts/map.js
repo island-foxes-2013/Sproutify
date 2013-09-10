@@ -15,7 +15,7 @@ Map.prototype = {
     //removes gardens outside of the boundary
     var gardens_to_be_removed = [];
     $.each(this.gardens.set, function(index,garden) {
-      if ((garden.attrs.lat < boundary.ulat || garden.attrs.lat > boundary.blat) || (garden.attrs.lng < boundary.ulng || garden.attrs.lng > boundary.blng)) {
+      if ((garden.attrs.lat > boundary.NElat || garden.attrs.lat < boundary.SWlat) || (garden.attrs.lng > boundary.NElng || garden.attrs.lng < boundary.SWlng)) {
         gardens_to_be_removed.push(garden);
       }
     });

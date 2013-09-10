@@ -8,8 +8,8 @@ GardenSearcher.prototype = {
     $.ajax({
       url: '/search',
       type: 'get',
-      data: {ulat: bounds.ulat, ulng: bounds.ulng,
-             blat: bounds.blat, blng: bounds.blng}
+      data: {NElat: bounds.NElat, NElng: bounds.NElng,
+             SWlat: bounds.SWlat, SWlng: bounds.SWlng}
     }).done(function(gardenData) {
       var gardens = $.map(gardenData, function(garden){
         return new Garden(garden);

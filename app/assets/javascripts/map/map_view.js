@@ -36,7 +36,9 @@ MapView.prototype.launchInfoWindow = function(marker, content) {
 
 MapView.prototype.refreshMarkers = function() {
   var bounds = this.google_map.getBounds();
-  var boundary = {ulat: bounds.ea.b, ulng: bounds.ia.b, blat: bounds.ea.d, blng: bounds.ia.d}
-  // debugger
+  var boundary = { NElat: bounds.getNorthEast().lat(),
+                   NElng: bounds.getNorthEast().lng(),
+                   SWlat: bounds.getSouthWest().lat(),
+                   SWlng: bounds.getSouthWest().lng() }
   this.map.refreshGardens(boundary);
 }
