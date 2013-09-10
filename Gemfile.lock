@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/thomas-mcdonald/bootstrap-sass.git
-  revision: cc5495eaa665a0e919768231c93c6e83c909d837
+  revision: 23c3af675301bbb5e2f52dfe6c28a27036595d42
   branch: 3
   specs:
     bootstrap-sass (3.0.0.0)
@@ -76,8 +76,7 @@ GEM
     debugger-ruby_core_source (1.2.3)
     diff-lcs (1.2.4)
     erubis (2.7.0)
-    execjs (1.4.0)
-      multi_json (~> 1.0)
+    execjs (2.0.0)
     factory_girl (4.2.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.2.1)
