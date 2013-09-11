@@ -1,15 +1,14 @@
 class SuppliesController < ApplicationController
-	skip_before_filter :require_login
 
   respond_to :json
 
-	def index
-		user = !params[:user_id].nil? ? User.find_by_id(params[:user_id]) : current_user
-		render json: { supplies: user.supplying }
-	end
+  def index
+    user = !params[:user_id].nil? ? User.find_by_id(params[:user_id]) : current_user
+    render json: { supplies: user.supplying }
+  end
 
   def create
-  	crop = Crop.find_or_create_by_name(params[:supply_crop_name].downcase.pluralize)
+    crop = Crop.find_or_create_by_name(params[:supply_crop_name].downcase.pluralize)
     status = Status.find_or_create_by_name(params[:status_name])
     if status.valid?
       supply = current_user.supplies.create(crop: crop, status: status)
